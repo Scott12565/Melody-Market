@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background: #81D4FA;
-    background-color: #4bbff5;
-    opacity: .8;
+
+.SignUpSignIn{
+    @apply py-[0.28rem] px-2.5 text-gray-700 rounded-md bg-orange-600 mr-3 text-center text-lg font-semibold hover:bg-orange-400 hover:text-gray-500
 }
