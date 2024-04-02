@@ -6,13 +6,13 @@ const Navbar = () => {
     return ( 
 
         // header start
-        <header className="flex justify-between w-10/12 bg-darkLavender mx-auto py-3.5 " >
+        <header className="flex justify-between w-10/12  mx-auto py-3.5 " >
             {/* brand */}
             <div id="brand" className="pl-2">
                 <h3 className="flex items-center">
-                    <img src={logo} alt="Logo" className="w-[150px] "/>
-                    {/* <LuMusic2 size={30} color="dodgeblue" />
-                    <span className="font-sm font-bold text-black ">MelodyMarket</span> */}
+                    {/* <img src={logo} alt="Logo" className="w-[150px] "/> */}
+                    <LuMusic2 size={30} color="dodgeblue" />
+                    <span className="font-sm font-bold text-yellow-100 ">DeepHouse Space</span>
                 </h3>
             </div>
             {/* search-bar */}
@@ -30,7 +30,8 @@ const Navbar = () => {
                     <a href="" className="SignUpSignIn">Sign Up</a>
                     <a href="" className="SignUpSignIn ">Log In</a>
                     <a href="" className="group">
-                        <span>
+                        <span className="
+                        text-gray-400 ">
                             <HiOutlineShoppingBag size={26} />
                         </span>
                     </a>
