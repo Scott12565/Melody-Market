@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-
-import { LuMusic2, LuSearch } from "react-icons/lu";
-import logo from "../../../assets/Logo/MelodyMarkets.png"
+import { LuSearch } from "react-icons/lu";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 
 const Navbar = () => {
@@ -10,14 +8,12 @@ const Navbar = () => {
         // header start
         <header className="px-2.5 bg-gray-800 flex justify-between items-center mx-auto h-20 w-full " >
             <div className="flex justify-between items-center py-5 w-full md:w-[93%] md:mx-auto lg:w-10/12 lg:mx-auto">
+
                 <div id="brand" className="p1 md:pl-1.5 lg:p-2">
-                    
+                    {/* Brand name */}
                     <h3 className="flex items-center">
-                        {/* <img src={logo} alt="Logo" className="w-[150px] "/> */}
-                        {/* <LuMusic2 size={30} color="dodgerblue" /> */}
-                        <Link to="/home" className=" md:text-[18px] font-bold text-yellow-300 ">
-                            DeepHouse Space
-                        </Link>
+                        <Link to="/home" className=" md:text-[18px] font-bold text-yellow-300 "> DeepHouse Space </Link>
+                            
                     </h3>
                 </div>
                 
@@ -41,14 +37,13 @@ const Navbar = () => {
                                 </div>
                             </Link>
                         </div>
-
+                        {/* SignUpSignIn Links */}
                         <Link to="/signup"  className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">Sign Up</Link>
                         <Link to="/signin" className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">Log In</Link>
                         
                     </div>
                 </nav>
-            </div>
-            
+            </div>           
         </header>
         
      );

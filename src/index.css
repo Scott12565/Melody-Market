@@ -7,6 +7,14 @@
     @apply py-[0.28rem] px-2.5 text-gray-300 rounded-md bg-red-400 mr-3 text-center text-lg font-semibold hover:bg-orange-400 hover:text-gray-600
 }
 
+.hover{
+    @apply text-gray-300 hover:bg-slate-800 md:hover:rounded-lg py-4 pl-2 md:p-1.5 text-lg font-semibold
+}
+
+.create-btn{
+
+}
+
 body{
     background-color: hsl(180, 16%, 20%);
 }
