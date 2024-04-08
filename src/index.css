@@ -15,6 +15,20 @@
 
 }
 
+.input-field, .btn{
+    @apply px-2 text-gray-100 mt-1.5 mb-4 w-full py-2.5 rounded focus:outline-1 focus:outline-gray-500 bg-gray-600
+}
+.btn{
+    @apply mb-1
+}
 body{
     background-color: hsl(180, 16%, 20%);
+}
+
+input{
+    display: block;
+}
+
+label {
+    @apply text-gray-300 text-lg
 }

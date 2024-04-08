@@ -1,8 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { LuSearch } from "react-icons/lu";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { useContext } from "react";
+import { AuthContext } from "../../context/firebaseContext";
 
 const Navbar = () => {
+    const { currentUser } = useContext(AuthContext);
+    const location = useLocation();
+
     return ( 
 
         // header start
@@ -22,24 +27,43 @@ const Navbar = () => {
                     
                     <div className="nav-links justify-between flex items-center space-x-3 md:space-x-5 md:text-lg">
                         {/* search-bar */}
-                        <div className="search-song flex justify-between items-center space-x-3 md:space-x-5">
-                            <div className="flex items-center border border-gray-700 rounded-2xl">
-                                <input type="text" className="hidden md:block text-sm h-full bg-transparent text-gray-300 md:text-lg font-lg px-3 rounded-l-2xl outline-none" placeholder="Search song here..." />
-                                <button className="h-full p-1 text-xl text-gray-300 rounded-r-2xl hover:bg-gray-600 md:text-3xl">
-                                    <LuSearch color="" />
-                                </button>
-                            </div>
 
-                            <Link className="text-2xl relative text-gray-300 hover:bg-slate-700 hover:bg-gray-200 hover:rounded-full md:p-2 md:text-3xl">
-                                <div>
-                                <HiOutlineShoppingBag color="" className="relative"/>
-                                <span className="absolute text-xl -top-3  -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem] ">0</span>
+                        { currentUser ? (
+                            <>
+                                { location.pathname !== "/signup" && location.pathname !== "/signin" && (
+                                    <div className="search-song flex justify-between items-center space-x-3 md:space-x-5">
+                                    <div className="flex items-center border border-gray-700 rounded-2xl">
+                                        <input type="text" className="hidden md:block text-sm h-full bg-transparent text-gray-300 md:text-lg font-lg px-3 rounded-l-2xl outline-none" placeholder="Search song here..." />
+                                        <button className="h-full p-1 text-xl text-gray-300 rounded-r-2xl hover:bg-gray-600 md:text-3xl">
+                                            <LuSearch color="" />
+                                        </button>
+                                    </div>
+        
+                                    <Link to="/cart" className="text-2xl relative text-gray-300 hover:bg-slate-700 hover:bg-gray-200 hover:rounded-full md:p-2 md:text-3xl">
+                                        <div>
+                                        <HiOutlineShoppingBag color="" className="relative"/>
+                                        <span className="absolute text-xl -top-3  -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem] ">0</span>
+                                        </div>
+                                    </Link>
                                 </div>
-                            </Link>
-                        </div>
+                                )}
+                                <button className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">Sign Out</button>
+                            </>
+                            
+                        ) : (
+                            <>
+                                {location.pathname !== "/signup" && (
+                                            <Link to="/signup"  className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">Sign Up</Link>
+                                            )}
+                                            {location.pathname !== "/signin" && (
+                                            <Link to="/signin" className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">Log In</Link>
+                                            )}
+                            </>
+                        )}
+                        
                         {/* SignUpSignIn Links */}
-                        <Link to="/signup"  className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">Sign Up</Link>
-                        <Link to="/signin" className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">Log In</Link>
+                        
+                        
                         
                     </div>
                 </nav>
