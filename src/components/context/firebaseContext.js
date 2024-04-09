@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 export const AuthContext = createContext();
@@ -42,9 +42,20 @@ const AuthContextProvider = ({ children }) => {
             console.log(error);
         });
     };
-    
+
+    const userSignOut = (auth) => {
+
+        signOut(auth)
+        .then(() => {
+            setCurrentUser(null)
+            console.log("successfully signed out");
+        }).catch((error) => {
+            console.log("failed to sign out: ", error);
+        });
+    }
+
     return ( 
-        <AuthContext.Provider value={ {currentUser, signUp, signIn, loading, error} } >
+        <AuthContext.Provider value={ {currentUser, signUp, signIn, userSignOut, loading, error} } >
             {children}
         </AuthContext.Provider>
      );
