@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createContext, useState, useEffect } from "react";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 export const AuthContext = createContext();
@@ -10,52 +10,70 @@ const AuthContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            setCurrentUser(user);
+            setLoading(false);
+        });
 
-    // sign Up
+        return () => unsubscribe();
+    }, []);
+
+    // Sign Up
     const signUp = (email, password) => {
+        setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             const user = userCredential.user;
-            console.log(user)
             setCurrentUser(user);
+            setLoading(false);
           })
           .catch((error) => {
-           
             const errorMessage = error.message;
             setError(errorMessage);
-            console.log(error);
+            setLoading(false);
           });
     };
 
-    // sign In
+    // Sign In
     const signIn = (email, password) => {
-
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        const user = userCredential.user;
-        setCurrentUser(user);
-
-    })
-    .catch((error) => {
-        const errorMessage = error.message;
+        setLoading(true);
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            setCurrentUser(user);
+            setLoading(false);
+        })
+        .catch((error) => {
+            const errorMessage = error.message;
             setError(errorMessage);
-            console.log(error);
+            setLoading(false);
         });
     };
 
-    const userSignOut = (auth) => {
-
+    // Sign Out
+    const userSignOut = () => {
+        setLoading(true);
         signOut(auth)
         .then(() => {
-            setCurrentUser(null)
-            console.log("successfully signed out");
+            setCurrentUser(null);
+            setLoading(false);
+            console.log("Successfully signed out");
         }).catch((error) => {
-            console.log("failed to sign out: ", error);
+            setError(error.message);
+            setLoading(false);
+            console.log("Failed to sign out: ", error);
         });
-    }
+    };
+
+    // Set persistence
+    useEffect(() => {
+        setPersistence(auth, browserLocalPersistence)
+            .catch((error) => console.log("Failed to set persistence: ", error));
+    }, []);
 
     return ( 
-        <AuthContext.Provider value={ {currentUser, signUp, signIn, userSignOut, loading, error} } >
+        <AuthContext.Provider value={{ currentUser, signUp, signIn, userSignOut, loading, error }}>
             {children}
         </AuthContext.Provider>
      );
