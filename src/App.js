@@ -4,6 +4,7 @@ import HomePage from "./components/Pages/Homepage";
 import SignIn from "./components/UserAccounts/SignIn";
 import AuthContextProvider from "./components/context/firebaseContext";
 import Navbar from "./components/Shared/Header/Navbar";
+import PasswordReset from "./components/UserAccounts/PasswordReset";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route path="/signin" >
               <SignIn />
+            </Route>
+            <Route path="/passwordreset" >
+              <PasswordReset />
             </Route>
           </Switch>
         </div>

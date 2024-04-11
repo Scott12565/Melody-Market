@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 export const AuthContext = createContext();
@@ -10,6 +10,7 @@ const AuthContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // observer... for state change.
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
@@ -66,14 +67,28 @@ const AuthContextProvider = ({ children }) => {
         });
     };
 
+    // resetEmail
+    const passwordReset = email => {
+
+        sendPasswordResetEmail(auth, email)
+        .then(() => {
+            console.log('email sent');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+        });
+    }
+
     // Set persistence
-    useEffect(() => {
-        setPersistence(auth, browserLocalPersistence)
-            .catch((error) => console.log("Failed to set persistence: ", error));
-    }, []);
+    // useEffect(() => {
+    //     setPersistence(auth, browserLocalPersistence)
+    //         .catch((error) => console.log("Failed to set persistence: ", error));
+    // }, []);
 
     return ( 
-        <AuthContext.Provider value={{ currentUser, signUp, signIn, userSignOut, loading, error }}>
+        <AuthContext.Provider value={{ currentUser, signUp, signIn, userSignOut, passwordReset, loading, error }}>
             {children}
         </AuthContext.Provider>
      );
