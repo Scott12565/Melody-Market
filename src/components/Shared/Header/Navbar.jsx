@@ -35,7 +35,7 @@ const Navbar = () => {
                 <div id="brand" className="p1 md:pl-1.5 lg:p-2">
                     {/* Brand name */}
                     <h3 className="flex items-center">
-                        <Link to="/home" className=" md:text-[18px] font-bold text-yellow-300 "> DeepHouse Space </Link>
+                        <Link to="/" className=" md:text-[18px] font-bold text-yellow-300 "> DeepHouse Space </Link>
                             
                     </h3>
                 </div>

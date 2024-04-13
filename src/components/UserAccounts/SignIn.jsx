@@ -3,36 +3,35 @@ import { AuthContext } from "../context/firebaseContext";
 import { Link, Redirect } from "react-router-dom";
 
 const SignIn = () => {
-    const { currentUser, signIn } = useContext(AuthContext);
+    const { currentUser, signIn, error } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSignIn = async (e) => {
         e.preventDefault();
         
         try {
-            setError('');
+            setErrorMessage('');
             await signIn(email, password);
+
             } catch (error) {
-                console.error("Error signing up:", error);
-                
-                setError("Failed to sign in. Please check your credentials and try again.");
+
+                console.log(error);
+                setErrorMessage("Failed to sign in. Please check your credentials and try again.");
             }
     };
 
     return ( 
-        <div className="flex flex-col items-center justify-center my-28 ">
+        <div className="flex flex-col items-center justify-center my-16 ">
             
-        <div className="form-group bg-gray-800 shadow-lg rounded-2xl w-[45%] ">
-            <h1 className="text-2xl font-semibold text-gray-300 text-start py-3 pb-1 pt-6 px-9">Sign In</h1>
+        <div className="form-group bg-gray-800 shadow-lg rounded-2xl w-[35%] mx-auto ">
+            <h1 className="text-2xl font-semibold text-gray-300 text-start py-3 pb-0 pt-6 px-9">Sign In</h1>
             
-            {error && <div className="text-red-500 text-xl text-center">{error}</div>}
-            {currentUser && (
-                <div>{console.log(currentUser)}</div>
-            )}
-            <form className="form-control w-11/12 mx-auto my-3 mb-0 px-4 py-3" onSubmit={handleSignIn}>
-                
+            <form className="form-control w-[90%] mx-auto my-3 mb-0 px-4 py-3 pb-1" onSubmit={handleSignIn}>
+                {error && (
+                    <div className="text-red-400 text-[1rem] py-[1px] w-[98%] mx-auto my-1 ">{error}</div>
+                )}
                 <label htmlFor="email" className="">Email</label>
                 <input 
                     type="email" 

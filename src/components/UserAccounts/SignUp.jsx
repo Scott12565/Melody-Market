@@ -3,44 +3,44 @@ import { AuthContext } from "../context/firebaseContext";
 import { Link, Redirect } from "react-router-dom";
 
 const SignUp = () => {
-    const { currentUser, signUp } = useContext(AuthContext);
+    const { currentUser, signUp, error } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSignUp = async (e) => {
         e.preventDefault();
     
         // password check
         if (password !== confirmPassword) {
-            setError("Passwords do not match");
+            setErrorMessage("Passwords do not match");
             return;
+        } else if(password.length < 8){
+            setErrorMessage('Password is too short, it should be 8 characters or long');
+            return;
+        } else {
+            setErrorMessage(null);
         }
     
         try {
-            setError('');
             await signUp(email, password);
         } catch (error) {
-            console.error("Error signing up:", error);
-            setError("Failed to create an account. Please try again.");
+            console.log(error);
         }
     };
     
 
     return ( 
-        <div className="flex flex-col items-center justify-center my-20">
-            <div className="form-group bg-gray-800 shadow-lg rounded-2xl w-[45%]">
-                <h1 className="text-2xl font-semibold text-gray-300 text-start py-3 pb-1 pt-6 px-9">Sign Up</h1>
-                
-                {/* Error message display */}
-                {error && (
-                    <div className="bg-red-500 text-xl text-black p-4 w-11/12 mx-auto my-4">
-                        {error}
-                    </div>
-                )}
+        <div className="flex flex-col items-center justify-center my-16 ">
+            
+            <div className="form-group bg-gray-800 shadow-lg rounded-2xl w-[35%] mx-auto">
+                <h1 className="text-2xl font-semibold text-gray-300 text-start py-3 pb-0 pt-6 px-9">Sign Up</h1>
 
-                <form className="form-control w-11/12 mx-auto my-3 mb-0 px-4 py-3" onSubmit={handleSignUp}>
+                <form className="form-control w-[90%] mx-auto my-3 mb-0 px-4 py-3 pb-1" onSubmit={handleSignUp}>
+                    {error && (
+                        <div className="text-red-400 text-[1rem] py-[1px] w-[98%] mx-auto my-1">{error}</div>
+                    )}
                     <label htmlFor="name">Email</label>
                     <input 
                         type="email" 
@@ -50,6 +50,11 @@ const SignUp = () => {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
+                    {errorMessage && (
+                    <div className="text-red-400 text-[1rem] py-[1px] w-[98%] mx-auto my-1">
+                        {errorMessage}
+                    </div>
+                )}
                     <label htmlFor="password">Password</label>
                     <input 
                         type="password" 

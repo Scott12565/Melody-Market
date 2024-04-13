@@ -6,15 +6,16 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
 
+    // initial states
     const [currentUser, setCurrentUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     // observer... for state change.
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
-            setLoading(false);
+            // setLoading(false);
         });
 
         return () => unsubscribe();
@@ -27,12 +28,12 @@ const AuthContextProvider = ({ children }) => {
           .then((userCredential) => {
             const user = userCredential.user;
             setCurrentUser(user);
-            setLoading(false);
+            // setLoading(false);
           })
           .catch((error) => {
             const errorMessage = error.message;
-            setError(errorMessage);
-            setLoading(false);
+            setError('Email already exist, use different email');
+            // setLoading(false);
           });
     };
 
@@ -46,7 +47,9 @@ const AuthContextProvider = ({ children }) => {
             setLoading(false);
         })
         .catch((error) => {
-            const errorMessage = error.message;
+            let errorMessage = error.message;
+            errorMessage = 'Invalid Email or Password!'
+            console.log(errorMessage)
             setError(errorMessage);
             setLoading(false);
         });
@@ -77,6 +80,7 @@ const AuthContextProvider = ({ children }) => {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            // console.log(errorMessage);
             // ..
         });
     }
