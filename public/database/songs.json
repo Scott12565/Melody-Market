@@ -1,0 +1,42 @@
+{
+    "songData": {
+        "allSongs": {
+            "songid1": {
+                "SongTitle": "song title 1",
+                "Artist": "nicki minaj",
+                "Genre": "Nostaligic",
+                "Duration": "3:40",
+                "ImgUrl": "some image",
+                "SongUrl": "some url",
+                "releaseDate": "2024"
+            },
+            "songid2": {
+                "SongTitle": "song title 1",
+                "Artist": "nicki minaj",
+                "Genre": "Nostaligic",
+                "Duration": "3:40",
+                "ImgUrl": "some image",
+                "SongUrl": "some url",
+                "releaseDate": "2024"
+            },
+            "songid3": {
+                "SongTitle": "song title 1",
+                "Artist": "nicki minaj",
+                "Genre": "Nostaligic",
+                "Duration": "3:40",
+                "ImgUrl": "some image",
+                "SongUrl": "some url",
+                "releaseDate": "2024"
+            },
+            "songid4": {
+                "SongTitle": "song title 1",
+                "Artist": "nicki minaj",
+                "Genre": "Nostaligic",
+                "Duration": "3:40",
+                "ImgUrl": "some image",
+                "SongUrl": "some url",
+                "releaseDate": "2024"
+            }
+        }
+    }
+}
