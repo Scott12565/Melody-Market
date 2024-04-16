@@ -5,9 +5,9 @@ import TopSongs from "../Songs/TopSongs";
 
 const HomePage = () => {
     return ( 
-        <div className="w-full h-screen ">
+        <div className="">
             
-            <div className="flex justify-between items-center w-full md:w-10/12 mx-auto h-full ">
+            <div className="flex justify-between items-start w-full md:w-10/12 mx-auto ">
                 <SideBar />
                 <SongsList />
                 <TopSongs />

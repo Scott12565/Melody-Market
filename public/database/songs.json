@@ -1,46 +1,96 @@
 {
     "songData": {
-        "allSongs": {
-            "songItem1": {
+        "allSongs": [
+            {
                 "songid": "1", 
                 "SongTitle": "song title 1",
-                "Artist": "lofi girl",
+                "Artist": "mr j",
                 "Genre": "Nostaligic",
                 "Duration": "3:40",
-                "ImgUrl": ".././assets/CoverImg/img-1.jpg",
+                "ImgUrl": "../assets/CoverImg/img1.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024"
             },
-            "songItem2": {
-                "songid2": "2",
+            {
+                "songid": "2",
                 "SongTitle": "song title 2",
-                "Artist": "lofi girl",
+                "Artist": "ms k",
                 "Genre": "Pop",
                 "Duration": "3:40",
-                "ImgUrl": "assets/img-2.jpg",
+                "ImgUrl": "/assets/CoverImg/img-2.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024"
             },
-            "songItem3": {
-                "songid3": "3",
+            {
+                "songid": "3",
                 "SongTitle": "song title 3",
-                "Artist": "lofi girl",
+                "Artist": "mr y",
                 "Genre": "Rock",
                 "Duration": "3:40",
-                "ImgUrl": "assets/img-3.jpg",
+                "ImgUrl": "/assets/CoverImg/img-3.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024"
             },
-            "songItem4": {
-                "songid4": "4",
+            {
+                "songid": "4",
+                "SongTitle": "song title 3",
+                "Artist": "mr y",
+                "Genre": "Rock",
+                "Duration": "3:40",
+                "ImgUrl": "/assets/CoverImg/img-3.jpg",
+                "SongUrl": "some url",
+                "releaseDate": "2024"
+            },
+            {
+                "songid": "5",
+                "SongTitle": "song title 3",
+                "Artist": "mr y",
+                "Genre": "Rock",
+                "Duration": "3:40",
+                "ImgUrl": "/assets/CoverImg/img-3.jpg",
+                "SongUrl": "some url",
+                "releaseDate": "2024"
+            },
+            {
+                "songid": "6",
                 "SongTitle": "song title 4",
-                "Artist": "lofi girl",
+                "Artist": "mr j",
                 "Genre": "House",
                 "Duration": "3:40",
-                "ImgUrl": "assets/img-4.jpg",
+                "ImgUrl": "/assets/CoverImg/img-4.jpg",
+                "SongUrl": "some url",
+                "releaseDate": "2024"
+        },
+            {
+                "songid": "6",
+                "SongTitle": "song title 4",
+                "Artist": "mr j",
+                "Genre": "House",
+                "Duration": "3:40",
+                "ImgUrl": "/assets/CoverImg/img-4.jpg",
+                "SongUrl": "some url",
+                "releaseDate": "2024"
+        },
+            {
+                "songid": "6",
+                "SongTitle": "song title 4",
+                "Artist": "mr j",
+                "Genre": "House",
+                "Duration": "3:40",
+                "ImgUrl": "/assets/CoverImg/img-4.jpg",
+                "SongUrl": "some url",
+                "releaseDate": "2024"
+        },
+            {
+                "songid": "6",
+                "SongTitle": "song title 4",
+                "Artist": "mr j",
+                "Genre": "House",
+                "Duration": "3:40",
+                "ImgUrl": "/assets/CoverImg/img-4.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024"
         }
-        }
+    ]
     }
 }
