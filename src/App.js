@@ -28,7 +28,6 @@ function App() {
               <PasswordReset />
             </Route>
           </Switch>
-          <Navbar />
         </div>
       </Router>
     </AuthContextProvider>
