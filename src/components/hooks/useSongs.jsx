@@ -1,14 +1,24 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 function useSong () {
 
     const [allSongs, setAllSongs] = useState([]);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-
-    }, [allSongs])
-    return ( 
-        <div>this is a songs hook</div>
-     );
+        axios.get('database/songs.json')
+        .then(response => {
+            const data = response.data;
+            const musicData = data.songData;
+            console.log(musicData)
+            setAllSongs([...allSongs, musicData.allSongs]);
+            console.log(musicData);
+        }).catch(error => {
+            setError(error.message);
+            // console.log(error.message);
+        })
+    }, [])
+    return {allSongs, error};
 }
 
 export default useSong ;

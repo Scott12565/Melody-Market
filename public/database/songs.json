@@ -1,42 +1,46 @@
 {
     "songData": {
         "allSongs": {
-            "songid1": {
+            "songItem1": {
+                "songid": "1", 
                 "SongTitle": "song title 1",
-                "Artist": "nicki minaj",
+                "Artist": "lofi girl",
                 "Genre": "Nostaligic",
                 "Duration": "3:40",
-                "ImgUrl": "some image",
+                "ImgUrl": ".././assets/CoverImg/img-1.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024"
             },
-            "songid2": {
-                "SongTitle": "song title 1",
-                "Artist": "nicki minaj",
-                "Genre": "Nostaligic",
+            "songItem2": {
+                "songid2": "2",
+                "SongTitle": "song title 2",
+                "Artist": "lofi girl",
+                "Genre": "Pop",
                 "Duration": "3:40",
-                "ImgUrl": "some image",
+                "ImgUrl": "assets/img-2.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024"
             },
-            "songid3": {
-                "SongTitle": "song title 1",
-                "Artist": "nicki minaj",
-                "Genre": "Nostaligic",
+            "songItem3": {
+                "songid3": "3",
+                "SongTitle": "song title 3",
+                "Artist": "lofi girl",
+                "Genre": "Rock",
                 "Duration": "3:40",
-                "ImgUrl": "some image",
+                "ImgUrl": "assets/img-3.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024"
             },
-            "songid4": {
-                "SongTitle": "song title 1",
-                "Artist": "nicki minaj",
-                "Genre": "Nostaligic",
+            "songItem4": {
+                "songid4": "4",
+                "SongTitle": "song title 4",
+                "Artist": "lofi girl",
+                "Genre": "House",
                 "Duration": "3:40",
-                "ImgUrl": "some image",
+                "ImgUrl": "assets/img-4.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024"
-            }
+        }
         }
     }
 }
