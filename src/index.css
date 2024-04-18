@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+*{
+    box-sizing: border-box;
+}
 body{
-    height: 100vh;
+    background-color: hsl(180, 16%, 20%);
+    
 }
 
 .SignUpSignIn{
@@ -24,9 +29,7 @@ body{
 .btn{
     @apply mb-1
 }
-body{
-    background-color: hsl(180, 16%, 20%);
-}
+
 
 input{
     display: block;
