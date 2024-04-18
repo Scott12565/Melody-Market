@@ -12,7 +12,7 @@ function App() {
     <AuthContextProvider >
       <Router >
       
-        <div className="App">
+        <div className="App min-h-full">
         <Navbar />
           <Switch >
             <Route path="/" exact>
