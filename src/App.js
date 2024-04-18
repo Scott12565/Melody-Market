@@ -12,7 +12,7 @@ function App() {
     <AuthContextProvider >
       <Router >
       
-        <div className="App">
+        <div className="App min-h-full">
         <Navbar />
           <Switch >
             <Route path="/" exact>
@@ -28,7 +28,9 @@ function App() {
               <PasswordReset />
             </Route>
           </Switch>
+          <Navbar />
         </div>
+        
       </Router>
     </AuthContextProvider>
     

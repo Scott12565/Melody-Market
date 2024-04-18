@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const SideBar = () => {
     return ( 
-        <div className=" md:w-[200px] border-r border-gray-400 flex flex-col justify-start items-start py-9 px-6 text-gray-300 bg-blue-400">
+        <div className=" md:w-[200px] flex flex-col justify-start items-start py-9 px-6 text-gray-300 bg-blue-400">
             <Link to="/collection" className="hover " >
                 Collection
             </Link>
