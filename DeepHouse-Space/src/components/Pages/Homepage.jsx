@@ -4,7 +4,7 @@ import TopSongs from "../Songs/TopSongs";
 
 const HomePage = () => {
     return ( 
-        <div className="h-full">
+        <div className="">
             
             <div className="flex justify-between items-start md:w-10/12 mx-auto ">
                 <SideBar />

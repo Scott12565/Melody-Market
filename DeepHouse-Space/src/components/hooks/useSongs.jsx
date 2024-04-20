@@ -17,6 +17,7 @@ function useSong() {
                 setError(error.message);
                 console.log(error.message);
             });
+            
     }, []);
 
     return { allSongs, error };
