@@ -9,7 +9,8 @@
                 "Duration": "3:40",
                 "ImgUrl": "../assets/CoverImg/img1.jpg",
                 "SongUrl": "some url",
-                "releaseDate": "2024"
+                "releaseDate": "2024",
+                "latest": false
             },
             {
                 "songid": "2",
@@ -19,7 +20,8 @@
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-2.jpg",
                 "SongUrl": "some url",
-                "releaseDate": "2024"
+                "releaseDate": "2024",
+                "top": true
             },
             {
                 "songid": "3",
@@ -29,7 +31,8 @@
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-3.jpg",
                 "SongUrl": "some url",
-                "releaseDate": "2024"
+                "releaseDate": "2024",
+                "latest": true
             },
             {
                 "songid": "4",
@@ -39,7 +42,8 @@
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-3.jpg",
                 "SongUrl": "some url",
-                "releaseDate": "2024"
+                "releaseDate": "2024",
+                "top": true
             },
             {
                 "songid": "5",
@@ -49,7 +53,8 @@
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-3.jpg",
                 "SongUrl": "some url",
-                "releaseDate": "2024"
+                "releaseDate": "2024",
+                "latest": true
             },
             {
                 "songid": "6",
@@ -59,7 +64,8 @@
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-4.jpg",
                 "SongUrl": "some url",
-                "releaseDate": "2024"
+                "releaseDate": "2024",
+                "top": true
         },
             {
                 "songid": "7",
@@ -69,7 +75,8 @@
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-4.jpg",
                 "SongUrl": "some url",
-                "releaseDate": "2024"
+                "releaseDate": "2024",
+                "latest": true
         },
             {
                 "songid": "8",
@@ -89,7 +96,8 @@
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-4.jpg",
                 "SongUrl": "some url",
-                "releaseDate": "2024"
+                "releaseDate": "2024",
+                "latest": true
         }
     ]
     }

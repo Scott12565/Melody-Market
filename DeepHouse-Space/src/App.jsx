@@ -5,11 +5,14 @@ import SignIn from "./components/UserAccounts/SignIn";
 import AuthContextProvider from "./components/context/firebaseContext";
 import Navbar from "./components/Shared/Header/Navbar";
 import PasswordReset from "./components/UserAccounts/PasswordReset";
+import SongcontextProvider from "./components/context/songContext";
 
 function App() {
   return (
 
     <AuthContextProvider >
+      <SongcontextProvider>
+      
       <Router >
       
         <div className="App">
@@ -28,10 +31,10 @@ function App() {
               <PasswordReset />
             </Route>
           </Switch>
-          <Navbar />
         </div>
-        
       </Router>
+        
+      </SongcontextProvider>
     </AuthContextProvider>
     
     

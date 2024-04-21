@@ -1,17 +1,17 @@
 import SideBar from "../SideBar/SideBar";
-import SongsList from "../Songs/SongsList";
+import LatestSongs from "../Songs/LatestSongs";
 import TopSongs from "../Songs/TopSongs";
 
 const HomePage = () => {
     return ( 
-        <div className="">
+        <section className="h-dvh pb-5">
             
-            <div className="flex justify-between items-start md:w-10/12 mx-auto ">
+            <div className="flex justify-between items-start md:w-10/12 mx-auto h-full ">
                 <SideBar />
-                <SongsList />
+                <LatestSongs />
                 <TopSongs />
             </div>
-        </div>
+        </section>
      );
 }
  
