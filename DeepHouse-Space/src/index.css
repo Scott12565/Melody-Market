@@ -3,11 +3,14 @@
 @tailwind utilities;
 
 
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+
 *{
     box-sizing: border-box;
 }
 body{
     background-color: hsl(180, 16%, 20%);
+    font-family: 'Ubuntu';
     
 }
 

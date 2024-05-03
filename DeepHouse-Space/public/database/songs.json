@@ -10,7 +10,7 @@
                 "ImgUrl": "../assets/CoverImg/img1.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": false
+                "latest": true
             },
             {
                 "songid": "2",
@@ -94,7 +94,7 @@
                 "Artist": "mr j",
                 "Genre": "House",
                 "Duration": "3:40",
-                "ImgUrl": "/assets/CoverImg/img-4.jpg",
+                "ImgUrl": "/assets/CoverImg/img-6.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "latest": true

@@ -6,7 +6,7 @@ const TopSongs = () => {
      const { topSongs } = useContext(SongContext);
      console.log(topSongs)
      return ( 
-         <div className="w-[300px] h-full">
+         <div className="w-full h-full">
               <h3 className="text-gray-300 font-semibold text-xl my-9 mx-5">Top Songs</h3>
 
               <div className="flex flex-col justify-start items-start w-[95%] mx-auto">
