@@ -1,12 +1,18 @@
+import AllSongs from "../Songs/AllSongs";
 import LatestSongs from "../Songs/LatestSongs";
+import Recommendedsongs from "../Songs/RecommendeSongs";
 import TopSongs from "../Songs/TopSongs";
 import SideBar from "../components/SideBar/SideBar";
 const Home = () => {
     return ( 
-        <section className="h-screen pb-5">
-            <div>
-                <h1>the home pages</h1>
+        <section className="pb-5">
+            <div className="">
+                <LatestSongs />
             </div>
+            <div>
+                <AllSongs />
+            </div>
+        
         </section>
      );
 }

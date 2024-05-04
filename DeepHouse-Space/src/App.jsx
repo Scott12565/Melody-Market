@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Pages/Homepage";
 import AuthContextProvider from "./context/firebaseContext";
-import Navbar from "./components/Shared/Header/Navbar";
 import PasswordReset from "./UserAccounts/PasswordReset";
 import SongcontextProvider from "./context/songContext";
 import SignIn from "./UserAccounts/SignIn";
@@ -9,25 +8,24 @@ import SignUp from "./UserAccounts/SignUp";
 import SideBar from "./components/SideBar/SideBar";
 import AllSongs from "./Songs/AllSongs";
 import TopSongs from "./Songs/TopSongs";
+import Navbar from "./components/Shared/Header/Navbar";
 
 function App() {
   return (
 
     <AuthContextProvider >
       <SongcontextProvider>
-      
       <Router >
-      
         <div className="App flex flex-col">
           <Navbar />
 
-          <div className="flex h-[cal(100vh - 80px)] gap-5 " >
+          <div className="flex flex-1 h-[cal(100vh - 80px)] gap-5" >
             <div className="">
               <SideBar />
             </div>
 
-            <div className="flex w-full bg-blue-200 gap-5">
-              <div className="bg-orange-300 w-[70%] mx-auto ">
+            <div className="flex w-full gap-5">
+              <div className=" w-[73%] mx-auto ">
               <Switch >
                 <Route path="/" exact>
                   <Home />
@@ -37,7 +35,7 @@ function App() {
                 </Route>
               </Switch>
               </div>
-              <div className="bg-green-200 w-[30%]">
+              <div className="border-l w-[27%]">
                 <TopSongs />
               </div>
             </div>

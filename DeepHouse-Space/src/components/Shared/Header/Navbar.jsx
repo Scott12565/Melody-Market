@@ -2,9 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 import { LuSearch } from "react-icons/lu";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useContext, useState } from "react";
-import { auth } from "../../../firebase/firebase";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/firebaseContext";
+import { auth } from "../../../firebase/firebase";
 
 const Navbar = () => {
     const { currentUser, userSignOut } = useContext(AuthContext);

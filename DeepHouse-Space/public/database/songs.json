@@ -18,7 +18,7 @@
                 "Artist": "ms k",
                 "Genre": "Pop",
                 "Duration": "3:40",
-                "ImgUrl": "/assets/CoverImg/img-2.jpg",
+                "ImgUrl": "/assets/CoverImg/img-6.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "top": true
@@ -29,7 +29,7 @@
                 "Artist": "mr y",
                 "Genre": "Rock",
                 "Duration": "3:40",
-                "ImgUrl": "/assets/CoverImg/img-3.jpg",
+                "ImgUrl": "/assets/CoverImg/img-7.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "latest": true
@@ -40,7 +40,7 @@
                 "Artist": "mr y",
                 "Genre": "Rock",
                 "Duration": "3:40",
-                "ImgUrl": "/assets/CoverImg/img-3.jpg",
+                "ImgUrl": "/assets/CoverImg/img-8.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "top": true
@@ -51,7 +51,7 @@
                 "Artist": "mr y",
                 "Genre": "Rock",
                 "Duration": "3:40",
-                "ImgUrl": "/assets/CoverImg/img-3.jpg",
+                "ImgUrl": "/assets/CoverImg/img-9.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "latest": true
@@ -62,7 +62,7 @@
                 "Artist": "mr j",
                 "Genre": "House",
                 "Duration": "3:40",
-                "ImgUrl": "/assets/CoverImg/img-4.jpg",
+                "ImgUrl": "/assets/CoverImg/img-7.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "top": true
@@ -73,7 +73,7 @@
                 "Artist": "mr j",
                 "Genre": "House",
                 "Duration": "3:40",
-                "ImgUrl": "/assets/CoverImg/img-4.jpg",
+                "ImgUrl": "/assets/CoverImg/img-6.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "latest": true
@@ -84,7 +84,7 @@
                 "Artist": "mr j",
                 "Genre": "House",
                 "Duration": "3:40",
-                "ImgUrl": "/assets/CoverImg/img-4.jpg",
+                "ImgUrl": "/assets/CoverImg/img-8.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024"
         },
@@ -95,6 +95,50 @@
                 "Genre": "House",
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-6.jpg",
+                "SongUrl": "some url",
+                "releaseDate": "2024",
+                "latest": true
+        },
+            {
+                "songid": "45",
+                "SongTitle": "song title 5",
+                "Artist": "mr j",
+                "Genre": "House",
+                "Duration": "3:40",
+                "ImgUrl": "/assets/CoverImg/img-9.jpg",
+                "SongUrl": "some url",
+                "releaseDate": "2024",
+                "latest": true
+        },
+            {
+                "songid": "140",
+                "SongTitle": "song title 5",
+                "Artist": "mr j",
+                "Genre": "House",
+                "Duration": "3:40",
+                "ImgUrl": "/assets/CoverImg/img-6.jpg",
+                "SongUrl": "some url",
+                "releaseDate": "2024",
+                "latest": true
+        },
+            {
+                "songid": "1045",
+                "SongTitle": "song title 5",
+                "Artist": "mr j",
+                "Genre": "House",
+                "Duration": "3:40",
+                "ImgUrl": "/assets/CoverImg/img-8.jpg",
+                "SongUrl": "some url",
+                "releaseDate": "2024",
+                "latest": true
+        },
+            {
+                "songid": "154",
+                "SongTitle": "song title 5",
+                "Artist": "mr j",
+                "Genre": "House",
+                "Duration": "3:40",
+                "ImgUrl": "/assets/CoverImg/img1.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "latest": true
