@@ -1,10 +1,13 @@
+import ReactDOM from 'react-dom'; // Correct import statement
+import App from './App.jsx';
+import './index.css';
+import SongcontextProvider from './context/songContext';
 
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SongcontextProvider>
+      <App />
+    </SongcontextProvider>
   </React.StrictMode>,
-)
+  document.getElementById('root')
+);

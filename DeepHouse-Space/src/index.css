@@ -34,7 +34,7 @@ body{
 }
 
 .hover{
-    @apply text-gray-300 hover:bg-slate-800 md:hover:rounded-lg py-4 pl-2 md:p-1.5 text-lg font-semibold
+    @apply text-gray-300 hover:bg-slate-800 md:hover:rounded-lg py-4 p-2 md:p-1.5 text-sm font-medium lg:text-lg 
 }
 
 .create-btn{

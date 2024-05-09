@@ -10,7 +10,8 @@
                 "ImgUrl": "../assets/CoverImg/img1.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": true
+                "latest": true,
+                "Price": "R20.50"
             },
             {
                 "songid": "2",
@@ -21,7 +22,8 @@
                 "ImgUrl": "/assets/CoverImg/img-6.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "top": true
+                "top": true,
+                "Price": "R20.50"
             },
             {
                 "songid": "3",
@@ -32,7 +34,8 @@
                 "ImgUrl": "/assets/CoverImg/img-7.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": true
+                "latest": true,
+                "Price": "R20.50"
             },
             {
                 "songid": "4",
@@ -43,7 +46,8 @@
                 "ImgUrl": "/assets/CoverImg/img-8.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "top": true
+                "top": true,
+                "Price": "R20.50"
             },
             {
                 "songid": "5",
@@ -54,7 +58,8 @@
                 "ImgUrl": "/assets/CoverImg/img-9.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": true
+                "latest": true,
+                "Price": "R20.50"
             },
             {
                 "songid": "6",
@@ -65,7 +70,8 @@
                 "ImgUrl": "/assets/CoverImg/img-7.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "top": true
+                "top": true,
+                "Price": "R20.50"
         },
             {
                 "songid": "7",
@@ -76,7 +82,8 @@
                 "ImgUrl": "/assets/CoverImg/img-6.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": true
+                "latest": true,
+                "Price": "R20.50"
         },
             {
                 "songid": "8",
@@ -86,7 +93,8 @@
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-8.jpg",
                 "SongUrl": "some url",
-                "releaseDate": "2024"
+                "releaseDate": "2024",
+                "Price": "R20.50"
         },
             {
                 "songid": "9",
@@ -97,7 +105,8 @@
                 "ImgUrl": "/assets/CoverImg/img-6.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": true
+                "latest": true,
+                "Price": "R20.50"
         },
             {
                 "songid": "45",
@@ -108,7 +117,8 @@
                 "ImgUrl": "/assets/CoverImg/img-9.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": true
+                "latest": true,
+                "Price": "R20.50"
         },
             {
                 "songid": "140",
@@ -119,7 +129,8 @@
                 "ImgUrl": "/assets/CoverImg/img-6.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": true
+                "latest": true,
+                "Price": "R20.50"
         },
             {
                 "songid": "1045",
@@ -130,7 +141,8 @@
                 "ImgUrl": "/assets/CoverImg/img-8.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": true
+                "latest": true,
+                "Price": "R20.50"
         },
             {
                 "songid": "154",
@@ -141,7 +153,8 @@
                 "ImgUrl": "/assets/CoverImg/img1.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
-                "latest": true
+                "latest": true,
+                "Price": "R20.50"
         }
     ]
     }

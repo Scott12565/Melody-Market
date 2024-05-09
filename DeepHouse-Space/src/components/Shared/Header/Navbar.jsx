@@ -1,13 +1,20 @@
 import { Link, useLocation } from "react-router-dom";
 import { LuSearch } from "react-icons/lu";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { IoLogOutOutline } from "react-icons/io5";
+import { AiOutlineMenuUnfold } from "react-icons/ai";
+import { VscSignOut } from "react-icons/vsc";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/firebaseContext";
 import { auth } from "../../../firebase/firebase";
+import SideBar from "../../SideBar/SideBar";
+import { SongContext } from "../../../context/songContext";
+
 
 const Navbar = () => {
     const { currentUser, userSignOut } = useContext(AuthContext);
+    const { showSideBar, handleSideBar } = useContext(SongContext);
     const location = useLocation();
     const [error, setError] = useState(null);
     const history = useHistory();
@@ -23,26 +30,31 @@ const Navbar = () => {
         }
     }
 
-
+    
     return ( 
 
     // header start
-    <header className="px-2.5 bg-gray-800 flex justify-between items-center mx-auto h-20 w-full sticky top-0 z-50 " >
+    <header className="px-2.5 bg-gray-800 flex justify-between items-center mx-auto h-20 w-full sticky top-0 z-50 lg:z-[100] " >
         {error && <div>{error}</div>}
         <div className="flex justify-between items-center py-5 w-full md:w-[93%] md:mx-auto lg:w-10/12 lg:mx-auto">
 
-            <div id="brand" className="p1 md:pl-1.5 lg:p-2">
+            <div id="brand" className="hidden lg:block p1 md:pl-1.5 lg:p-2">
                 {/* Brand name */}
                 <h3 className="flex items-center">
                     <Link to="/" className=" md:text-[18px] font-bold text-yellow-300 "> DeepHouse Space </Link>
-                        
                 </h3>
+
             </div>
             
+            {/* sidebar */}
+            <div className="lg:hidden text-gray-300">
+                {showSideBar ? '' : (<AiOutlineMenuUnfold size={30} onClick={handleSideBar} />)}
+            </div>
+
             {/* navigations */}
             <nav className="flex items-center">
                 
-            <div className="nav-links justify-between flex items-center space-x-3 md:space-x-5 md:text-lg">
+            <div className="nav-links justify-between flex items-center space-x-4 md:space-x-5 md:text-lg">
                 {/* search-bar */}
 
                 { currentUser ? (
@@ -63,8 +75,15 @@ const Navbar = () => {
                                 </div>
                             </Link>
                         </div>
+                        
                         )}
-                        <button onClick={handleSignOut} className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">Sign Out</button>
+
+                        <button onClick={handleSignOut} className=" text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">
+                            <div className="hidden inline lg:block">
+                                Sign Out
+                            </div>
+                            <VscSignOut className="text-3xl lg:hidden" />
+                        </button>
                     </>
                     
                 ) : (
@@ -79,9 +98,7 @@ const Navbar = () => {
                 )}
                 
                 {/* SignUpSignIn Links */}
-                    
-                    
-                    
+   
                 </div>
             </nav>
         </div>           

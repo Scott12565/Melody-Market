@@ -1,15 +1,20 @@
-import axios from "axios";
-import { useState, useEffect, createContext } from "react";
+import { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const SongContext = createContext();
 
-function SongcontextProvider({children}) {
-
+const SongcontextProvider = ({ children }) => {
     const [allSongs, setAllSongs] = useState([]);
     const [latestSongs, setLatestSongs] = useState([]);
     const [topSongs, setTopSongs] = useState([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [showSideBar, setShowSideBar] = useState(false);
+
+    const handleSideBar = () => {
+        setShowSideBar(!showSideBar);
+        console.log(showSideBar)
+    };
 
     useEffect(() => {
         axios.get('/database/songs.json')
@@ -18,27 +23,38 @@ function SongcontextProvider({children}) {
                 const musicData = data.songData.allSongs;
 
                 const latestSong = musicData.filter(song => {
-                    return song.latest ? song : setError("couldn't load song");
+                    return song.latest ? song : setError("Couldn't load latest songs");
                 });
                 const topSong = musicData.filter(song => {
-                    return song.top ? song : error;
+                    return song.top ? song : setError("Couldn't load top songs");
                 });
-                setTopSongs(topSong)
+
+                setTopSongs(topSong);
                 setLatestSongs(latestSong);
-                setAllSongs(musicData); 
+                setAllSongs(musicData);
+                setIsLoading(false);
             })
             .catch(error => {
                 setError(error.message);
-                console.log(error.message);
+                setIsLoading(false);
             });
-            
     }, []);
 
-    return ( 
-<SongContext.Provider value={{allSongs, latestSongs, topSongs, error, isLoading}} >
-    {children}
-</SongContext.Provider>
-     );
-}
+    const contextValue = {
+        allSongs,
+        latestSongs,
+        topSongs,
+        error,
+        isLoading,
+        showSideBar,
+        handleSideBar
+    };
+
+    return (
+        <SongContext.Provider value={contextValue}>
+            {children}
+        </SongContext.Provider>
+    );
+};
 
 export default SongcontextProvider;
