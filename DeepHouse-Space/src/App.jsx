@@ -10,6 +10,7 @@ import AllSongs from "./Songs/AllSongs";
 import TopSongs from "./Songs/TopSongs";
 import Navbar from "./components/Shared/Header/Navbar";
 import { useContext } from "react";
+import CartPage from "./Pages/cart/CartPage";
 
 function App() {
   const { handleSideBar, showSideBar } = useContext(SongContext);
@@ -33,13 +34,26 @@ function App() {
                     <Route path="/allsongs" >
                       <AllSongs />
                     </Route>
+                    <Route path="/cart" >
+                      <CartPage />
+                    </Route>
                   </Switch>
                 </div>
                 <div className=" w-[90%] mx-auto lg:w-[40%] xl:w-[27%]">
                   <TopSongs />
                 </div>
               </div>
+
+              
+              
             </div>
+            {/* <div className="absolute z-[200] w-full h-full bg-orange-200 opacity-50">
+                <Switch >
+                  <Route path="/signup">
+                    <SignUp className="absolute " />
+                  </Route>
+                </Switch>
+              </div> */}
           </div>
         </Router>
     </AuthContextProvider>

@@ -10,6 +10,7 @@ import { AuthContext } from "../../../context/firebaseContext";
 import { auth } from "../../../firebase/firebase";
 import SideBar from "../../SideBar/SideBar";
 import { SongContext } from "../../../context/songContext";
+import HoverCart from "../../../Pages/cart/HoverCart";
 
 
 const Navbar = () => {
@@ -68,12 +69,17 @@ const Navbar = () => {
                                 </button>
                             </div>
 
-                            <Link to="/cart" className="text-2xl relative text-gray-300 hover:bg-slate-700 hover:bg-gray-200 hover:rounded-full md:p-2 md:text-3xl">
-                                <div>
-                                <HiOutlineShoppingBag color="" className="relative"/>
-                                <span className="absolute text-xl -top-3  -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem] ">0</span>
+                            <div className="hover-cart group text-2xl relative text-gray-300 hover:bg-slate-700 hover:bg-gray-200 relative hover:rounded-full md:p-2 md:text-3xl">
+                                <Link to="/cart" >
+                                    <div>
+                                    <HiOutlineShoppingBag color="" className="relative"/>
+                                    <span className="absolute text-xl -top-3  -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem] ">0</span>
+                                    </div>
+                                </Link>
+                                <div className="cart-hover w-60 h-[250px] my-7 bg-gray-800 opacity-0 transition- duration-300 transform absolute translate-x-5 invisible rounded-md shadow-xl group-hover:opacity-95 group-hover:translate-x-0 group-hover:visible group-hover:delay-300">
+                                    <HoverCart />
                                 </div>
-                            </Link>
+                            </div>
                         </div>
                         
                         )}

@@ -13,7 +13,7 @@ const SongcontextProvider = ({ children }) => {
 
     const handleSideBar = () => {
         setShowSideBar(!showSideBar);
-        console.log(showSideBar)
+        // console.log(showSideBar);
     };
 
     useEffect(() => {
