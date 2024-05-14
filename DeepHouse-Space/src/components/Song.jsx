@@ -1,8 +1,11 @@
 import { LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
+import { useContext } from "react";
+import { cartContext } from "../context/CartContext";
 
 const Song = ({ song }) => {
-    console.log(song)
+    const {addSongToCart } = useContext(cartContext);
+    // console.log(addItem)
     return ( 
         <div className="song-card flex w-[99%] mx-auto my-1  shadow-transparent pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-52 md:bg-gray-700 md:border-0 md:shadow-2xl md:rounded-lg">
             
@@ -18,7 +21,7 @@ const Song = ({ song }) => {
                         <LuPlay size={30} />
                     </h1>
                     <h1 className="text-orange-400 hover:text-orange-600">
-                        <BsCart3 size={30} />
+                        <BsCart3 size={30} onClick={() => addSongToCart(song) } />
                     </h1>
                 </div>
             </div>

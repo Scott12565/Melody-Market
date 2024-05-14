@@ -11,11 +11,14 @@ import { auth } from "../../../firebase/firebase";
 import SideBar from "../../SideBar/SideBar";
 import { SongContext } from "../../../context/songContext";
 import HoverCart from "../../../Pages/cart/HoverCart";
+import { cartContext } from "../../../context/CartContext";
 
 
 const Navbar = () => {
     const { currentUser, userSignOut } = useContext(AuthContext);
     const { showSideBar, handleSideBar } = useContext(SongContext);
+    const { musicItems } = useContext(cartContext);
+
     const location = useLocation();
     const [error, setError] = useState(null);
     const history = useHistory();
@@ -73,7 +76,7 @@ const Navbar = () => {
                                 <Link to="/cart" >
                                     <div>
                                     <HiOutlineShoppingBag color="" className="relative"/>
-                                    <span className="absolute text-xl -top-3  -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem] ">0</span>
+                                    <span className="absolute text-xl -top-3  -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem] ">{musicItems.length}</span>
                                     </div>
                                 </Link>
                                 <div className="cart-hover w-60 h-[250px] my-7 bg-gray-800 opacity-0 transition- duration-300 transform absolute translate-x-5 invisible rounded-md shadow-xl group-hover:opacity-95 group-hover:translate-x-0 group-hover:visible group-hover:delay-300">

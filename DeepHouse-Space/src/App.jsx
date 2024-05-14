@@ -11,11 +11,13 @@ import TopSongs from "./Songs/TopSongs";
 import Navbar from "./components/Shared/Header/Navbar";
 import { useContext } from "react";
 import CartPage from "./Pages/cart/CartPage";
+import CartContextProvider from "./context/CartContext";
 
 function App() {
   const { handleSideBar, showSideBar } = useContext(SongContext);
   return (
     <AuthContextProvider>
+      <CartContextProvider>
         <Router>
           <div className="App flex flex-col">
             <Navbar />
@@ -56,6 +58,8 @@ function App() {
               </div> */}
           </div>
         </Router>
+              
+      </CartContextProvider>
     </AuthContextProvider>
   );
 }
