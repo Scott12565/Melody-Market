@@ -1,14 +1,16 @@
+import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { cartContext } from "../../context/CartContext";
 
 const HoverCart = () => {
-
+    const { musicItems } = useContext(cartContext);
     return ( 
         <div className="my-1 text-lg flex flex-col">
             <h2 className="text-center py-1.5 text-xl">Cart Summary</h2>
             <div className="p-3 space-y-3">
                 <h2 className="flex justify-between items-center">
                     <p>Total Songs</p>
-                    <span>7</span>
+                    <span>{musicItems.length} </span>
                 </h2>
                 <h2 className="flex justify-between items-center">
                     <p>Total Amount</p>

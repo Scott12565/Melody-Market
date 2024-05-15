@@ -8,30 +8,31 @@ const CartContextProvider = ({children}) => {
     const [musicItems, setMusicItems] = useState([]);
     
     const addSongToCart = (song) => {
-       let isSongInCart = false;
-       musicItems.forEach(songItem => {
-        if(songItem.id === song.songid){
-            isSongInCart = true
-            console.log('song already in cart', musicItems)
+        // Check if the song is already in the cart based on its id       
+        let isSongInCart = false;
+        musicItems.forEach(songItem => {
+         if(songItem.songid === song.songid){
+             isSongInCart = true;
+             console.log('song already in cart', songItem);
+             return;
+         }
+        });
+ 
+        if(!isSongInCart){
+            setMusicItems([...musicItems, song]);
+            console.log(musicItems)
         }
-       });
-
-       setMusicItems([...musicItems, song]);
-        console.log(musicItems)
-       
-    //     const isSongInCart = musicItems.some(songItem => songItem.id === song.songid);
+    };
     
-    //     if (isSongInCart) {
-    //         console.log('Song already in cart');
+    // if(musicItems.find(songItem => songItem.songid === song.songid)){
+    //        console.log('song already in cart');
+    //        return;
     //     } else {
-            
+    //         // Add the song to the cart
     //         setMusicItems(prevItems => [...prevItems, song]);
     //         console.log('Song added to cart:', song);
+    //         console.log('Current music items:', musicItems);
     //     }
-};
-    
-    
-    
 
     const contextValue = {
         addSongToCart,

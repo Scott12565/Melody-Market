@@ -6,7 +6,7 @@ import { BsCart3 } from "react-icons/bs";
 const TopSongs = () => {
 
      const { topSongs } = useContext(SongContext);
-     console.log(topSongs)
+     // console.log(topSongs)
      return ( 
          <div className="w-full h-full">
               <h3 className="text-gray-300 text-lg font-medium text-xl my-5 mx-5 md:my-9">
