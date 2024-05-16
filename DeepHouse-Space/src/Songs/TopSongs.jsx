@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { SongContext } from "../context/songContext";
 import { LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
+import { cartContext } from "../context/CartContext";
 
 const TopSongs = () => {
 
      const { topSongs } = useContext(SongContext);
+     const { addSongToCart } = useContext(cartContext);
      // console.log(topSongs)
      return ( 
          <div className="w-full h-full">
@@ -32,7 +34,7 @@ const TopSongs = () => {
                                         <span className="cursor-pointer">
                                              <LuPlay size={20} />
                                         </span>
-                                        <span className="cursor-pointer">
+                                        <span className="cursor-pointer" onClick={() => addSongToCart(song)}>
                                              <BsCart3 size={20} />
                                         </span>
                                    </div>

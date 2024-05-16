@@ -17,13 +17,19 @@ const CartContextProvider = ({children}) => {
              return;
          }
         });
- 
+        
         if(!isSongInCart){
             setMusicItems([...musicItems, song]);
             console.log(musicItems)
         }
     };
+
+    const removeSongFromCart = (id) => {
+        setMusicItems(musicItems.filter(song => song.songid !== id));
+        console.log('song removed from cart');
+    }
     
+    // Check if the song is already in the cart based on its id  
     // if(musicItems.find(songItem => songItem.songid === song.songid)){
     //        console.log('song already in cart');
     //        return;
@@ -34,12 +40,14 @@ const CartContextProvider = ({children}) => {
     //         console.log('Current music items:', musicItems);
     //     }
 
+
+
     const contextValue = {
         addSongToCart,
     }
 
     return (
-        <cartContext.Provider value={{ addSongToCart, musicItems }} >
+        <cartContext.Provider value={{ addSongToCart, musicItems, removeSongFromCart }} >
             {children}
         </cartContext.Provider>
     );
