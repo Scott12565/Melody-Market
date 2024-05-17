@@ -3,6 +3,7 @@ import { SongContext } from "../context/songContext";
 import { LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
 import { cartContext } from "../context/CartContext";
+import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 
 const TopSongs = () => {
 

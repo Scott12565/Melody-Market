@@ -2,8 +2,11 @@ import { useContext } from "react";
 import Song from "../components/Song";
 import { Link } from "react-router-dom";
 import { SongContext } from "../context/songContext";
+import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 
 function AllSongs() {
+
+    const isPlaying = true;
 
     const { allSongs } = useContext(SongContext);
     // console.log(allSongs)
@@ -20,7 +23,7 @@ function AllSongs() {
             <div className="flex flex-col flex-wrap justify-between gap-2.5 py-1 md:flex-row">
                 {
                     allSongs?.map(song => (
-                        <Song key={song?.songid} song={song} />
+                        <Song key={song?.songid} song={song} isPlaying={isPlaying} />
                     ))
                 }
             </div>

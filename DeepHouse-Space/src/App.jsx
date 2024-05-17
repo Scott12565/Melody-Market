@@ -12,12 +12,15 @@ import Navbar from "./components/Shared/Header/Navbar";
 import { useContext } from "react";
 import CartPage from "./Pages/cart/CartPage";
 import CartContextProvider from "./context/CartContext";
+import MusicPlayerContextProvider from "./context/musicPlayerContext";
 
 function App() {
   const { handleSideBar, showSideBar } = useContext(SongContext);
   return (
     <AuthContextProvider>
+
       <CartContextProvider>
+        <MusicPlayerContextProvider>
         <Router>
           <div className="App flex flex-col">
             <Navbar />
@@ -58,7 +61,7 @@ function App() {
               </div> */}
           </div>
         </Router>
-              
+        </MusicPlayerContextProvider>
       </CartContextProvider>
     </AuthContextProvider>
   );

@@ -1,10 +1,13 @@
-import { LuPlay } from "react-icons/lu";
+import { LuPause, LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
+import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 import { useContext } from "react";
 import { cartContext } from "../context/CartContext";
+import { musicPlayerContext } from "../context/musicPlayerContext";
 
 const Song = ({ song }) => {
     const {addSongToCart } = useContext(cartContext);
+    const { isPlaying, playpuase, isInCart, addToRemoveFromCart } = useContext(musicPlayerContext);
     // console.log(addItem)
     return ( 
         <div className="song-card flex w-[99%] mx-auto my-1  shadow-transparent pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-52 md:bg-gray-700 md:border-0 md:shadow-2xl md:rounded-lg">
@@ -18,10 +21,17 @@ const Song = ({ song }) => {
 
                 <div className=" transition-transform ease-in-out duration-300 transform scale-0 bg-gray-900 text-gray-100 opacity-35 w-full h-full flex space-x-5 justify-center items-center absolute top-0 left-0 rounded-lg group-hover:scale-100">
                     <h1 className="text-yellow-200 hover:text-yellow-100">
-                        <LuPlay size={30} />
+                        {
+                            isPlaying ? <LuPause size={30} onClick={playpuase} className={`transition duration-300 ease-in-out`}/>  : <LuPlay size={30} onClick={playpuase} />
+                        }
                     </h1>
                     <h1 className="text-orange-400 hover:text-orange-600">
-                        <BsCart3 size={30} onClick={() => addSongToCart(song) } />
+                        {
+                            isInCart ? <MdDeleteSweep size={30} onClick={addToRemoveFromCart} /> : <BsCart3 size={30} onClick={() => {
+                                addSongToCart(song);
+                                isInCart(song)
+                            }} />
+                        }  
                     </h1>
                 </div>
             </div>

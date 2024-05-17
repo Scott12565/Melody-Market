@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import {Link} from "react-router-dom";
 import { SongContext } from "../../context/songContext";
 import { cartContext } from "../../context/CartContext";
-import { LuDoorClosed, LuPlay } from "react-icons/lu";
+import { LuPlay } from "react-icons/lu";
 import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 
 const CartPage = () => {const { allSongs } = useContext(SongContext);
@@ -22,7 +22,7 @@ const CartPage = () => {const { allSongs } = useContext(SongContext);
            <div className="w-full ">
             {
                 musicItems?.map((song, index) => (
-                    <div key={song.songid} className="flex flex-1 justify-start items-center bg-blue-20 w-[98%] mx-auto space-x-3.5 text-gray-300 w-[95%] mx-auto border-b py-4 transition-all transform scale-100 hover:scale-105 cursor-pointer " >
+                    <div key={song.songid} className="flex flex-1 justify-start items-center bg-blue-20 w-[98%] mx-auto space-x-3.5 text-gray-300 w-[95%] mx-auto border-b py-4 transition-all transform scale-95 hover:scale-100 cursor-pointer " >
                         <span className="text-2xl">{index += 1}.</span>
                         <img src={song.ImgUrl} alt={`song ${index += 1}`} className="w-[150px] rounded-sm" />
                         <div className="flex items-center justify-start w-full ">

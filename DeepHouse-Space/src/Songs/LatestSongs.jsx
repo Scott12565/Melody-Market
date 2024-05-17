@@ -6,6 +6,7 @@ import { BsCart3 } from "react-icons/bs";
 import { RiPlayListLine } from "react-icons/ri";
 import { GrFormPreviousLink } from "react-icons/gr";
 import { GrFormNextLink } from "react-icons/gr";
+import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 
 const LatestSongs = () => {
     const { latestSongs } = useContext(SongContext);
