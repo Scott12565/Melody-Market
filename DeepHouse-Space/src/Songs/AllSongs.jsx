@@ -14,7 +14,7 @@ function AllSongs() {
         <div className="text-white text-2xl py-5 px-4 flex flex-col my-2 lg:py-10">
 
             <div className="flex justify-between">
-                <h3 className="text-gray-300 font-semibold text-[19px]">All Songs</h3>
+                <h3 className="text-gray-300 text-lg lg:text-xl font-medium">All Songs</h3>
                 <Link to="/allsongs" className="text-gray-300 text-lg hover:text-blue-500 hover:underline" >
                     see all
                 </Link>

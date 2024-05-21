@@ -5,43 +5,41 @@ import { cartContext } from "../../context/CartContext";
 import { LuPlay } from "react-icons/lu";
 import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 
-const CartPage = () => {const { allSongs } = useContext(SongContext);
+const CartPage = () => {
     const { musicItems, removeSongFromCart } = useContext(cartContext);
-    // const [countSong, setCountSong] = useState(0);
-    // console.log(musicItems);
 
     return ( 
         <div className="">
-           <div className="text-gray-300 text-lg font-medium text-xl my-5 mx-5 p-2 md:my-9 flex justify-between items-center">
-            <h3 className="text-3xl">Music Cart</h3>
-            <Link to="/checkout" className="transition-all duration-300 transform scale-95 text-[1.4rem] text-gray-900 bg-gray-300 rounded-md py-1.5 px-2 hover:bg-slate-400 hover:scale-100">
+           <div className="text-gray-300 text-lg font-medium my-1 mx-4 p-2 md:my-9 flex justify-between items-center md:text-xl lg:my-5 lg:mx-5">
+            <h3 className="text-xl md:text-2xl lg:text-3xl">Music Cart</h3>
+            <Link to="/checkout" className="transition-all duration-300 transform scale-95 text-lg text-gray-900 bg-gray-300 rounded-md py-1.5 px-2 hover:bg-slate-400 hover:scale-100 md:text-[1.4rem]">
                     <button>CheckOut</button>
                 </Link>
            </div>
 
-           <div className="w-full ">
+           <div className="w-full">
             {
                 musicItems?.map((song, index) => (
-                    <div key={song.songid} className="flex flex-1 justify-start items-center bg-blue-20 w-[98%] mx-auto space-x-3.5 text-gray-300 w-[95%] mx-auto border-b py-4 transition-all transform scale-95 hover:scale-100 cursor-pointer " >
+                    <div key={song.songid} className="flex flex-1 justify-start items-center bg-blue-20 w-[98%] mx-auto space-x-2.5 text-gray-300 w-[95%] mx-auto border-b py-4 transition-all transform scale-95 hover:scale-100 cursor-pointer md:space-x-3.5 " >
                         <span className="text-2xl">{index += 1}.</span>
-                        <img src={song.ImgUrl} alt={`song ${index += 1}`} className="w-[150px] rounded-sm" />
+                        <img src={song.ImgUrl} alt={`song ${index += 1}`} className="hidden md:block w-[150px] rounded-sm" />
                         <div className="flex items-center justify-start w-full ">
                             <div className="flex flex-1 items-center justify-between py-2 px-1.5">
                                 <div>
-                                    <h2>
+                                    <h2 className="text-[1.1rem]">
                                         {song.SongTitle}
                                     </h2>
-                                    <h3 >
+                                    <h3 className="text-[1.1rem]">
                                         {song.Artist}
                                     </h3>
                                 </div>
 
-                                <div className="flex flex-col">
+                                <div className="flex flex-col text-[1rem]">
                                     <p>{song.Genre}</p>
                                     <p>{song.Price}</p>
                                 </div>
 
-                                <div className="flex items-center space-x-3">
+                                <div className="flex items-start space-x-3">
                                     <i className="cursor-pointer">
                                         <LuPlay size={20} />
                                     </i>
