@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { SongContext } from "../context/songContext";
 import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 
-function AllSongs() {
+const  AllSongs = () => {
 
     const isPlaying = true;
 

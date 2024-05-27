@@ -11,6 +11,7 @@
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "latest": true,
+                "top":true,
                 "Price": "R20.50"
             },
             {
@@ -83,6 +84,7 @@
                 "SongUrl": "some url",
                 "releaseDate": "2024",
                 "latest": true,
+                "top":true,
                 "Price": "R20.50"
         },
             {
@@ -94,6 +96,7 @@
                 "ImgUrl": "/assets/CoverImg/img-8.jpg",
                 "SongUrl": "some url",
                 "releaseDate": "2024",
+                "top":true,
                 "Price": "R20.50"
         },
             {
