@@ -30,6 +30,7 @@ const SongcontextProvider = ({ children }) => {
                 });
 
                 setTopSongs(topSong);
+                
                 setLatestSongs(latestSong);
                 setAllSongs(musicData);
                 setIsLoading(false);

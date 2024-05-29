@@ -9,7 +9,7 @@ const  AllSongs = () => {
     const isPlaying = true;
 
     const { allSongs } = useContext(SongContext);
-    // console.log(allSongs)
+    console.log(allSongs?.SongUrl)
     return ( 
         <div className="text-white text-2xl py-5 px-4 flex flex-col my-2 lg:py-10">
 

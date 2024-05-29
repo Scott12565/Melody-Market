@@ -8,7 +8,7 @@
                 "Genre": "Nostaligic",
                 "Duration": "3:40",
                 "ImgUrl": "../assets/CoverImg/img1.jpg",
-                "SongUrl": "some url",
+                "SongUrl": "./music/kudasai_the_girl_i_haven_t_met.mp3",
                 "releaseDate": "2024",
                 "latest": true,
                 "top":true,
@@ -21,7 +21,7 @@
                 "Genre": "Pop",
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-6.jpg",
-                "SongUrl": "some url",
+                "SongUrl": "lofi_girl_Higher.mp3",
                 "releaseDate": "2024",
                 "top": true,
                 "Price": "R20.50"

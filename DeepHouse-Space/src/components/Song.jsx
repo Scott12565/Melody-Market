@@ -9,7 +9,7 @@ const Song = ({ song }) => {
     const { addSongToCart, removeSongFromCart, musicItems } = useContext(cartContext);
     const { playingSongId, playPause } = useContext(musicPlayerContext);
     const [isInCart, setIsInCart] = useState(false);
-
+    const the_song = song.SongUrl;
     const isPlaying = playingSongId === song.songid;
 
     useEffect(() => {

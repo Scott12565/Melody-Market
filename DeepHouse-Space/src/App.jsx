@@ -13,6 +13,7 @@ import { useContext } from "react";
 import CartPage from "./Pages/cart/CartPage";
 import CartContextProvider from "./context/CartContext";
 import MusicPlayerContextProvider from "./context/musicPlayerContext";
+import Player from "./Music-Player/Player";
 
 function App() {
   const { handleSideBar, showSideBar } = useContext(SongContext);
@@ -52,13 +53,7 @@ function App() {
               
               
             </div>
-            {/* <div className="absolute z-[200] w-full h-full bg-orange-200 opacity-50">
-                <Switch >
-                  <Route path="/signup">
-                    <SignUp className="absolute " />
-                  </Route>
-                </Switch>
-              </div> */}
+            <Player />
           </div>
         </Router>
         </MusicPlayerContextProvider>
