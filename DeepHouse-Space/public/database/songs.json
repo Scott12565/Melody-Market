@@ -21,7 +21,7 @@
                 "Genre": "Pop",
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-6.jpg",
-                "SongUrl": "lofi_girl_Higher.mp3",
+                "SongUrl": "./music/lofi_girl_Higher.mp3",
                 "releaseDate": "2024",
                 "top": true,
                 "Price": "R20.50"
@@ -33,7 +33,7 @@
                 "Genre": "Rock",
                 "Duration": "3:40",
                 "ImgUrl": "/assets/CoverImg/img-7.jpg",
-                "SongUrl": "some url",
+                "SongUrl": "./music/lofi_girl_snowman_music.mp3",
                 "releaseDate": "2024",
                 "latest": true,
                 "Price": "R20.50"
