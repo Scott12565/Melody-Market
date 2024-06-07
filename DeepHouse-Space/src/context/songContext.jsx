@@ -9,7 +9,7 @@ const SongcontextProvider = ({ children }) => {
     const [topSongs, setTopSongs] = useState([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-    const [showSideBar, setShowSideBar] = useState(false);
+    const [showSideBar, setShowSideBar] = useState(false);45
 
     const handleSideBar = () => {
         setShowSideBar(!showSideBar);
