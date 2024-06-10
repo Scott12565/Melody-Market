@@ -56,20 +56,28 @@ const Song = ({ song }) => {
 
                 <div className="card-body flex justify-between items-center w-full my-2 py-0 px-1.5 text-[17px] mx-auto md:w-[95%] md:block md:py-1.5">
                     <div>
-                        <h1 className="px-1 text-gray-300 font-200">{song?.SongTitle}</h1>
-                        <h2 className="px-1 text-gray-300 font-200">By: {song?.Artist}</h2>
+                        <h1 className="px-1 text-gray-300 font-200 text-sm">{song?.SongTitle}</h1>
+                        <h2 className="px-1 text-gray-300 font-200 text-sm">By: {song?.Artist}</h2>
                     </div>
-                    <h3 className="px-1.5 text-gray-300 font-200">{song?.Genre}</h3>
+                    <h3 className="px-1.5 text-gray-300 font-200 text-[12px]">{song?.Genre}</h3>
                     <span className="hidden text-sm px-1 text-gray-300 font-200 md:block">
                         {song?.releaseDate}
                     </span>
 
                     <div className="bg-gray-900 text-gray-100 flex space-x-2 justify-center items-center text-[25px] md:hidden">
-                        <h1 className="text-yellow-200 hover:text-yellow-100">
-                            <LuPlay />
+                    <h1 className="text-yellow-200 hover:text-yellow-100">
+                            {currentSong?.songid === song.songid && isPlaying ? (
+                                <LuPause size={30} onClick={handlePlayPause} className="cursor-pointer" />
+                            ) : (
+                                <LuPlay size={30} onClick={handlePlayPause} className="cursor-pointer" />
+                            )}
                         </h1>
                         <h1 className="text-orange-400 hover:text-orange-600">
-                            <BsCart3 />
+                            {isInCart ? (
+                                <MdDeleteSweep size={30} onClick={handleCart} className="cursor-pointer" />
+                            ) : (
+                                <BsCart3 size={30} onClick={handleCart} className="cursor-pointer" />
+                            )}
                         </h1>
                     </div>
                 </div>

@@ -88,7 +88,7 @@ const progressBar = e => {
   audioRef.current.currentTime = e.target.value;
 }
 
- console.log(currentSong?.SongUrl);
+//  console.log(currentSong?.SongUrl);
   // const playPause = (song) => {
   //   const songId = song.songid
   //   if(playingSongId === songId){
