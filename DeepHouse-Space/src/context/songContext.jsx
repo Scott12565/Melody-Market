@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { collection, doc, getDocs } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
 
 export const SongContext = createContext();
 
@@ -16,30 +18,34 @@ const SongcontextProvider = ({ children }) => {
         // console.log(showSideBar);
     };
 
+    const getSongs = async () => {
+        try {
+            const querySnapShot = await getDocs(collection(db, 'songsData'));
+        const musicData = querySnapShot.docs.map(song => {
+            return {
+                id: song.id,
+                ...song.data()
+            }
+        })
+        setAllSongs(musicData);
+        console.log(musicData);
+        const latestSong = musicData.filter(song => {
+            return song.latest ? song : setError("Couldn't load latest songs");
+        });
+        const topSong = musicData.filter(song => {
+            return song.top ? song : setError("Couldn't load top songs");
+        })
+        setTopSongs(topSong);
+        setLatestSongs(latestSong);
+        setIsLoading(false);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
     useEffect(() => {
-        axios.get('/database/songs.json')
-            .then(response => {
-                const data = response.data;
-                const musicData = data.songData.allSongs;
-
-                const latestSong = musicData.filter(song => {
-                    return song.latest ? song : setError("Couldn't load latest songs");
-                });
-                const topSong = musicData.filter(song => {
-                    return song.top ? song : setError("Couldn't load top songs");
-                });
-
-                setTopSongs(topSong);
-                
-                setLatestSongs(latestSong);
-                setAllSongs(musicData);
-                setIsLoading(false);
-            })
-            .catch(error => {
-                setError(error.message);
-                setIsLoading(false);
-            });
-    }, []);
+        getSongs();
+    }, [])
 
     const contextValue = {
         allSongs,

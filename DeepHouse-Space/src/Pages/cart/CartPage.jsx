@@ -2,11 +2,19 @@ import { useContext, useState } from "react";
 import {Link} from "react-router-dom";
 import { SongContext } from "../../context/songContext";
 import { cartContext } from "../../context/CartContext";
-import { LuPlay } from "react-icons/lu";
+import { LuPause, LuPlay } from "react-icons/lu";
 import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
+import { musicPlayerContext } from "../../context/musicPlayerContext";
 
 const CartPage = () => {
     const { musicItems, removeSongFromCart } = useContext(cartContext);
+    const {currentSong, playPause, isPlaying} = useContext(musicPlayerContext);
+
+    const handlePlayPause = () => {
+        musicItems?.map(songItem => {
+            playPause(songItem);
+        });
+    };
 
     return ( 
         <div className="">
@@ -40,15 +48,19 @@ const CartPage = () => {
                                 </div>
 
                                 <div className="flex items-start space-x-3">
-                                    <i className="cursor-pointer">
-                                        <LuPlay size={20} />
-                                    </i>
-                                    <i className="cursor-pointer">
+                                <h1 className="text-yellow-200 hover:text-yellow-100">
+                                    {currentSong?.songid === song.songid && isPlaying ? (
+                                        <LuPause size={30} onClick={handlePlayPause} className="cursor-pointer" />
+                                    ) : (
+                                        <LuPlay size={30} onClick={handlePlayPause} className="cursor-pointer" />
+                                    )}
+                                </h1>
+                                    <h1 className="cursor-pointer">
                                         <MdPlaylistAdd size={30} />
-                                    </i>
-                                    <i className="cursor-pointer" onClick={() => removeSongFromCart(song.songid)}>
+                                    </h1>
+                                    <h1 className="cursor-pointer" onClick={() => removeSongFromCart(song.songid)}>
                                         <MdDeleteSweep size={30} />
-                                    </i>
+                                    </h1>
                                 </div>
                             </div>
                         </div>

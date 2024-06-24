@@ -25,7 +25,7 @@ const CartIitem = () => {
      };
     return ( 
         <>
-        <h1>hellow</h1></>
+        <h1>hello world</h1></>
      );
 }
  

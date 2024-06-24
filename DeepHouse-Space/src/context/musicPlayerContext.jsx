@@ -88,18 +88,6 @@ const progressBar = e => {
   audioRef.current.currentTime = e.target.value;
 }
 
-//  console.log(currentSong?.SongUrl);
-  // const playPause = (song) => {
-  //   const songId = song.songid
-  //   if(playingSongId === songId){
-  //     setIsPlaying(!isPlaying);
-  //     setPlayingSongId(null)
-  //   } else {
-  //     setPlayingSongId(songId);
-  //     setIsPlaying(true);
-  //   }
-  // };
-
   return (
     <musicPlayerContext.Provider value={{currentSong, playPause, isPlaying, setCurrentTime, currentTime, audioRef, progressBar, nextSong, prevSong}}>
       <audio src={currentSong?.SongUrl} ref={audioRef} />

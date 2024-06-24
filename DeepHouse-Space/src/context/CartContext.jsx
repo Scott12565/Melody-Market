@@ -20,7 +20,7 @@ const CartContextProvider = ({children}) => {
         
         if(!isSongInCart){
             setMusicItems([...musicItems, song]);
-            console.log(musicItems)
+            console.log(musicItems);
         }
     };
 

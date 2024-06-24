@@ -3,10 +3,12 @@ import { LuPause, LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
 import { MdDeleteSweep } from "react-icons/md";
 import { cartContext } from "../context/CartContext";
+import { musicPlayerContext } from "../context/musicPlayerContext";
 
 const TopSong = ({ topSong, index }) => {
     const { addSongToCart, removeSongFromCart, musicItems } = useContext(cartContext);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const { currentSong, playPause, isPlaying} = useContext(musicPlayerContext);
+    // const [isPlaying, setIsPlaying] = useState(false);
     const [isInCart, setIsInCart] = useState(false);
 
     useEffect(() => {
@@ -14,7 +16,7 @@ const TopSong = ({ topSong, index }) => {
     }, [musicItems, topSong.songid]);
 
     const handlePlayPause = () => {
-        setIsPlaying(!isPlaying);
+        playPause(topSong)
     };
 
     const handleCart = () => {
@@ -34,12 +36,12 @@ const TopSong = ({ topSong, index }) => {
             <img src={topSong.ImgUrl} alt={`song ${topSong.songid}`} className="w-[95px] rounded-sm" />
             <div className="flex justify-between items-start text-gray-300 text-sm space-y-2 lg:flex-col w-full">
                 <div>
-                    <h4 className="text-sm font-medium">{topSong.SongTitle}</h4>
+                    <h4 className="text-[16px] font-medium">{topSong.SongTitle}</h4>
                     <p>{topSong.Artist}</p>
                 </div>
                 <div className="flex justify-start items-center space-x-2">
                     <h1 className="">
-                        {isPlaying ? (
+                        {currentSong?.songid === topSong.songid && isPlaying ? (
                             <LuPause size={25} onClick={handlePlayPause} className="cursor-pointer" />
                         ) : (
                             <LuPlay size={25} onClick={handlePlayPause} className="cursor-pointer" />
