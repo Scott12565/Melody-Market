@@ -6,7 +6,8 @@ import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
 
 const Song = ({ song }) => {
-    const { addSongToCart, removeSongFromCart, musicItems } = useContext(cartContext);
+    
+    const { addSongToCarto, removeSongFromCart, musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
     const [isInCart, setIsInCart] = useState(false);
 
@@ -20,7 +21,7 @@ const Song = ({ song }) => {
 
     const handleCart = () => {
         if (!isInCart) {
-            addSongToCart(song);
+            addSongToCarto(song);
         } else {
             removeSongFromCart(song.songid);
         }

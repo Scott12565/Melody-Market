@@ -80,16 +80,8 @@ const AuthContextProvider = ({ children }) => {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            // console.log(errorMessage);
-            // ..
         });
     }
-
-    // Set persistence
-    // useEffect(() => {
-    //     setPersistence(auth, browserLocalPersistence)
-    //         .catch((error) => console.log("Failed to set persistence: ", error));
-    // }, []);
 
     return ( 
         <AuthContext.Provider value={{ currentUser, signUp, signIn, userSignOut, passwordReset, loading, error }}>

@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
 import { collection, doc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
@@ -11,30 +10,26 @@ const SongcontextProvider = ({ children }) => {
     const [topSongs, setTopSongs] = useState([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-    const [showSideBar, setShowSideBar] = useState(false);45
+    const [showSideBar, setShowSideBar] = useState(false);
 
     const handleSideBar = () => {
         setShowSideBar(!showSideBar);
-        // console.log(showSideBar);
     };
 
     const getSongs = async () => {
         try {
             const querySnapShot = await getDocs(collection(db, 'songsData'));
-        const musicData = querySnapShot.docs.map(song => {
+            const musicData = querySnapShot.docs.map(song => {
             return {
                 id: song.id,
                 ...song.data()
             }
         })
         setAllSongs(musicData);
-        console.log(musicData);
-        const latestSong = musicData.filter(song => {
-            return song.latest ? song : setError("Couldn't load latest songs");
-        });
-        const topSong = musicData.filter(song => {
-            return song.top ? song : setError("Couldn't load top songs");
-        })
+        // console.log(musicData);
+        const latestSong = musicData.filter(song => song.latest ? song : setError("Couldn't load latest songs"));
+        const topSong = musicData.filter(song => song.top ? song : setError("Couldn't load top songs")
+        )
         setTopSongs(topSong);
         setLatestSongs(latestSong);
         setIsLoading(false);
