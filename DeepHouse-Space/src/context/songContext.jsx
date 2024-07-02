@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { collection, doc, getDocs } from 'firebase/firestore';
+import { collection, doc, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
 export const SongContext = createContext();
@@ -17,27 +17,34 @@ const SongcontextProvider = ({ children }) => {
     };
 
     const getSongs = async () => {
+
         try {
-            const querySnapShot = await getDocs(collection(db, 'songsData'));
-            const musicData = querySnapShot.docs.map(song => {
-            return {
-                id: song.id,
-                ...song.data()
-            }
-        })
-        setAllSongs(musicData);
+            const collectionRef = collection(db, 'songsData');
+
+            const unsubscribe = onSnapshot(collectionRef, (snapShot) => {
+                const musicData = snapShot.docs.map(songDoc => ({
+                    id: songDoc.id,
+                    ...songDoc.data()
+                }));
+
+                setAllSongs(musicData);
+                const latestSong = musicData.filter(song => song.latest ? song : setError("Couldn't load latest songs"));
+                const topSong = musicData.filter(song => song.top ? song : setError("Couldn't load top songs")
+                )
+                setTopSongs(topSong);
+                setLatestSongs(latestSong);
+                setIsLoading(false);
+            });
+
+            
         // console.log(musicData);
-        const latestSong = musicData.filter(song => song.latest ? song : setError("Couldn't load latest songs"));
-        const topSong = musicData.filter(song => song.top ? song : setError("Couldn't load top songs")
-        )
-        setTopSongs(topSong);
-        setLatestSongs(latestSong);
-        setIsLoading(false);
+       
+        return () => unsubscribe();
+
         } catch (err) {
             console.log(err.message);
         }
     }
-
     useEffect(() => {
         getSongs();
     }, [])

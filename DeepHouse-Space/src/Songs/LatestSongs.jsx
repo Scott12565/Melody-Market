@@ -7,9 +7,12 @@ import { RiPlayListLine } from "react-icons/ri";
 import { GrFormPreviousLink } from "react-icons/gr";
 import { GrFormNextLink } from "react-icons/gr";
 import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
+import { playlistContext } from "../context/PlayListContext";
 
 const LatestSongs = () => {
     const { latestSongs } = useContext(SongContext);
+    const { addToPlayList } = useContext(playlistContext);
+    
     // console.log(allSongs);
     return ( 
         <div className="my-1">
@@ -49,7 +52,7 @@ const LatestSongs = () => {
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover'
                         }}>
-                            <p>title and artist</p>
+                            <p>{song.SongTitle} by {song.Artist}</p>
                         </div>
                     </div>
                     ))

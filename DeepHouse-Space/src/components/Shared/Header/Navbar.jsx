@@ -98,13 +98,13 @@ const Navbar = () => {
                                         </div>
 
                                         <div className="hover-cart group text-2xl relative text-gray-300 hover:bg-slate-700 hover:bg-gray-200 relative hover:rounded-full md:p-2 md:text-3xl">
-                                            <Link to="/cart" >
+                                            <Link to="/collection" >
                                                 <div>
                                                     <HiOutlineShoppingBag color="" className="relative"/>
                                                     <span className="absolute text-xl -top-3 -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem]">{musicItems.length}</span>
                                                 </div>
                                             </Link>
-                                            <div className="cart-hover hidden w-60 h-[250px] my-7 bg-gray-800 opacity-0 transition duration-300 transform absolute translate-x-5 invisible rounded-md shadow-xl group-hover:opacity-95 group-hover:-translate-x-2 group-hover:visible group-hover:delay-300 lg:block">
+                                            <div className="cart-hover hidden w-60 h-[250px] my-7 bg-gray-800 opacity-0 transition duration-700 transform absolute translate-x-5 invisible rounded-md shadow-xl group-hover:opacity-95 group-hover:-translate-x-2 group-hover:visible group-hover:delay-300 lg:block hover:bg-gray-800">
                                                 <HoverCart />
                                             </div>
                                         </div>
