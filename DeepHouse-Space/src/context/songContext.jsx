@@ -3,11 +3,11 @@ import { collection, doc, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
 export const SongContext = createContext();
-
 const SongcontextProvider = ({ children }) => {
     const [allSongs, setAllSongs] = useState([]);
     const [latestSongs, setLatestSongs] = useState([]);
     const [topSongs, setTopSongs] = useState([]);
+    const [filteredSongs, setFilteredSongs] = useState([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [showSideBar, setShowSideBar] = useState(false);
@@ -17,10 +17,8 @@ const SongcontextProvider = ({ children }) => {
     };
 
     const getSongs = async () => {
-
         try {
             const collectionRef = collection(db, 'songsData');
-
             const unsubscribe = onSnapshot(collectionRef, (snapShot) => {
                 const musicData = snapShot.docs.map(songDoc => ({
                     id: songDoc.id,
@@ -36,26 +34,37 @@ const SongcontextProvider = ({ children }) => {
                 setIsLoading(false);
             });
 
-            
-        // console.log(musicData);
-       
         return () => unsubscribe();
-
         } catch (err) {
             console.log(err.message);
         }
-    }
+    };
+
+    const searchSongs = (songInput) => {
+        if(songInput !== ''){
+            const filteredData = allSongs?.filter(filteredItem => {
+                return Object.values(filteredItem).join('').toLowerCase().includes(songInput.toLowerCase());
+            });
+            setFilteredSongs(filteredData);
+            console.log(filteredSongs);
+        } else {
+            setFilteredSongs(null);
+        };
+    };
+
     useEffect(() => {
         getSongs();
-    }, [])
+    }, []);
 
     const contextValue = {
         allSongs,
         latestSongs,
         topSongs,
+        filteredSongs,
         error,
         isLoading,
         showSideBar,
+        searchSongs,
         handleSideBar
     };
 

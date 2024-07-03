@@ -18,7 +18,7 @@ import { cartContext } from "../../../context/CartContext";
 
 const Navbar = () => {
     const { currentUser, userSignOut } = useContext(AuthContext);
-    const { showSideBar, handleSideBar } = useContext(SongContext);
+    const { showSideBar, searchSongs, handleSideBar } = useContext(SongContext);
     const { musicItems } = useContext(cartContext);
 
     const location = useLocation();
@@ -26,8 +26,13 @@ const Navbar = () => {
     const [showSignUp, setShowSignUp] = useState(false);
     const [showSignIn, setShowSignIn] = useState(false);
     const [showResetPassword, setShowResetPassword] = useState(false);
+    const [searchInput, setSearchInput] = useState('');
     const history = useHistory();
 
+    const handleSearch = (e) => {
+        setSearchInput(e.target.value);
+        searchSongs(searchInput);
+    };
     const handleSignOut = async () => {
         try {
             await userSignOut(auth);
@@ -91,7 +96,7 @@ const Navbar = () => {
                                     { location.pathname !== "/signup" && location.pathname !== "/signin" && (
                                     <div className="search-song flex justify-between items-center space-x-3 md:space-x-5">
                                         <div className="flex items-center border border-gray-700 rounded-2xl">
-                                            <input type="text" className="hidden md:block text-sm h-full bg-transparent text-gray-300 md:text-lg font-lg px-3 rounded-l-2xl outline-none" placeholder="Search song here..." />
+                                            <input type="text" className="hidden md:block text-sm h-full bg-transparent text-gray-300 md:text-lg font-lg px-3 rounded-l-2xl outline-none" value={searchInput} placeholder="Search song here..." onChange={handleSearch} />
                                             <button className="h-full p-1 text-xl text-gray-300 rounded-r-2xl hover:bg-gray-600 md:text-3xl">
                                                 <LuSearch color="" />
                                             </button>
