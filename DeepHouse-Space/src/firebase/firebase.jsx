@@ -16,3 +16,14 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+
+
+export const loadAuth = async () => {
+  const { getAuth } = await import('firebase/auth');
+  return getAuth(app);
+}
+
+export const loadFirestore = async () => {
+  const { getFirestore } = await import('firebase/firestore');
+  return getFirestore(app);
+}

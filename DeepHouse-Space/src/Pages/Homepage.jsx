@@ -7,7 +7,6 @@ import FilteredSongs from "../components/FilteredSoongs";
 
 const Home = () => {
     const { filteredSongs } = useContext(SongContext);
-    console.log(filteredSongs);
     return ( 
         <section className="pb-5">
             

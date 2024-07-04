@@ -1,5 +1,16 @@
 {
   "projects": {
     "default": "auth-demo-8d963"
-  }
+  },
+  "targets": {
+    "auth-demo-8d963": {
+      "hosting": {
+        "user": [
+          "deephouse-space"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

@@ -1,22 +1,23 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./Pages/Homepage";
+import { Suspense, lazy, useContext } from "react";
 import AuthContextProvider from "./context/firebaseContext";
-import PasswordReset from "./UserAccounts/PasswordReset";
-import SongcontextProvider, { SongContext } from "./context/songContext";
-import SignIn from "./UserAccounts/SignIn";
-import SignUp from "./UserAccounts/SignUp";
-import SideBar from "./components/SideBar/SideBar";
-import AllSongs from "./Songs/AllSongs";
-import TopSongs from "./Songs/TopSongs";
-import Navbar from "./components/Shared/Header/Navbar";
-import { useContext } from "react";
-import CartPage from "./Pages/cart/CartPage";
 import CartContextProvider from "./context/CartContext";
 import MusicPlayerContextProvider from "./context/musicPlayerContext";
-import Player from "./Music-Player/Player";
-import PlayList from "./Pages/PlayList";
 import PlayListContextProvider from "./context/PlayListContext";
-import Collections from "./Pages/Colections";
+import { SongContext } from "./context/songContext";
+import SideBar from "./components/SideBar/SideBar";
+import Navbar from "./components/Shared/Header/Navbar";
+import Player from "./Music-Player/Player";
+import Loaders from "./components/Loaders";
+
+const Home = lazy(() => import("./Pages/Homepage"));
+const SignIn = lazy(() => import("./UserAccounts/SignIn"));
+const SignUp = lazy(() => import("./UserAccounts/SignUp"));
+const PasswordReset = lazy(() => import("./UserAccounts/PasswordReset"));
+const AllSongs = lazy(() => import("./Songs/AllSongs"));
+const TopSongs = lazy(() => import("./Songs/TopSongs"));
+const PlayList = lazy(() => import("./Pages/PlayList"));
+const Collections = lazy(() => import("./Pages/Colections"));
 
 function App() {
   const { handleSideBar, showSideBar } = useContext(SongContext);
@@ -28,6 +29,8 @@ function App() {
         <CartContextProvider>
           <MusicPlayerContextProvider>
             <Router>
+              <Suspense fallback={<Loaders />} >
+              
               <div className="App flex flex-col">
                 <Navbar />
                 <div className="flex flex-1 h-[calc(100vh - 80px)] gap-5">
@@ -68,6 +71,7 @@ function App() {
                 </div>
                 <Player />
               </div>
+              </Suspense>
             </Router>
           </MusicPlayerContextProvider>
         </CartContextProvider>

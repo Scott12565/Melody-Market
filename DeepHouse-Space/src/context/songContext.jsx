@@ -18,6 +18,7 @@ const SongcontextProvider = ({ children }) => {
 
     const getSongs = async () => {
         try {
+            
             const collectionRef = collection(db, 'songsData');
             const unsubscribe = onSnapshot(collectionRef, (snapShot) => {
                 const musicData = snapShot.docs.map(songDoc => ({
