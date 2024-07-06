@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import loader from "../../public/assets/Loader/loading.gif"
+import loader from "/assets/Loader/loading.gif"
 const Loaders = () => {
   const [showLoader, setShowLoader] = useState(true);
 

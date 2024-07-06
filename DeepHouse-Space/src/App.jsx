@@ -4,11 +4,12 @@ import AuthContextProvider from "./context/firebaseContext";
 import CartContextProvider from "./context/CartContext";
 import MusicPlayerContextProvider from "./context/musicPlayerContext";
 import PlayListContextProvider from "./context/PlayListContext";
-import { SongContext } from "./context/songContext";
+// import { songContext } from "./context/songContext";
 import SideBar from "./components/SideBar/SideBar";
 import Navbar from "./components/Shared/Header/Navbar";
 import Player from "./Music-Player/Player";
 import Loaders from "./components/Loaders";
+import { SongContext } from "./context/songContext";
 
 const Home = lazy(() => import("./Pages/Homepage"));
 const SignIn = lazy(() => import("./UserAccounts/SignIn"));

@@ -84,3 +84,63 @@ label {
 .audio-player{
     /* width: 250px; */
 }
+
+.song-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.song-card {
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.song-card:hover {
+    transform: scale(1.02);
+}
+
+.song-img {
+    position: relative;
+}
+
+.song-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.song-info {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.song-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.play-icon,
+.cart-icon {
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.play-icon:hover,
+.cart-icon:hover {
+    transform: scale(1.1);
+}
+
+.no-results {
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+}

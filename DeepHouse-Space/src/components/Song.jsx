@@ -52,12 +52,12 @@ const Song = ({ song }) => {
                 </div>
             </div>
 
-            <div className="card-body flex justify-between items-center w-full my-2 py-0 px-1.5 text-[17px] mx-auto md:w-[95%] md:block md:py-1.5">
+            <div className="card-body flex justify-between items-center w-full my-2 py-0 px-1.5 text-[16px] mx-auto md:w-[95%] md:block md:py-1.5"> {/* Changed text-[17px] to text-[16px] */}
                 <div>
-                    <h1 className="px-1 text-gray-300 font-200 text-lg">{song?.SongTitle}</h1>
-                    <h2 className="px-1 text-gray-300 font-200 text-lg">By: {song?.Artist}</h2>
+                    <h1 className="px-1 text-gray-300 font-200 text-lg">{song?.SongTitle}</h1> {/* No change needed here */}
+                    <h2 className="px-1 text-gray-300 font-200 text-lg">By: {song?.Artist}</h2> {/* No change needed here */}
                 </div>
-                <h3 className="px-1.5 text-gray-300 font-200 text-[17px]">{song?.Genre}</h3>
+                <h3 className="px-1.5 text-gray-300 font-200 text-[16px]">{song?.Genre}</h3> {/* Changed text-[17px] to text-[16px] */}
                 <span className="hidden text-[16px] px-1 text-gray-300 font-200 md:block">
                     {song?.releaseDate}
                 </span>

@@ -42,16 +42,20 @@ const SongcontextProvider = ({ children }) => {
     };
 
     const searchSongs = (songInput) => {
-        if(songInput !== ''){
-            const filteredData = allSongs?.filter(filteredItem => {
-                return Object.values(filteredItem).join('').toLowerCase().includes(songInput.toLowerCase());
+        if (songInput.trim() !== '') {
+            const filteredData = allSongs.filter(filteredItem => {
+                // Check if any value in the song object contains the search input
+                return Object.values(filteredItem).some(value =>
+                    String(value).toLowerCase().includes(songInput.toLowerCase())
+                );
             });
             setFilteredSongs(filteredData);
-            console.log(filteredSongs);
         } else {
-            setFilteredSongs(null);
-        };
+            // If input is empty, clear filtered songs
+            setFilteredSongs([]);
+        }
     };
+    
 
     useEffect(() => {
         getSongs();

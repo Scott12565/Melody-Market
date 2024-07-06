@@ -1,9 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { LuSearch } from "react-icons/lu";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import { IoLogOutOutline } from "react-icons/io5";
-import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { VscSignOut } from "react-icons/vsc";
+import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/firebaseContext";
@@ -14,7 +13,6 @@ import PasswordReset from "../../../UserAccounts/PasswordReset";
 import { SongContext } from "../../../context/songContext";
 import HoverCart from "../../../Pages/cart/HoverCart";
 import { cartContext } from "../../../context/CartContext";
-
 
 const Navbar = () => {
     const { currentUser, userSignOut } = useContext(AuthContext);
@@ -27,12 +25,14 @@ const Navbar = () => {
     const [showSignIn, setShowSignIn] = useState(false);
     const [showResetPassword, setShowResetPassword] = useState(false);
     const [searchInput, setSearchInput] = useState('');
+    const [isSearchExpanded, setIsSearchExpanded] = useState(false); // State to manage search expansion
     const history = useHistory();
 
     const handleSearch = (e) => {
         setSearchInput(e.target.value);
-        searchSongs(searchInput);
+        searchSongs(e.target.value);
     };
+    
     const handleSignOut = async () => {
         try {
             await userSignOut(auth);
@@ -73,6 +73,10 @@ const Navbar = () => {
         setShowResetPassword(false);
     }
 
+    const toggleSearch = () => {
+        setIsSearchExpanded(!isSearchExpanded);
+    }
+
     return ( 
         <>
             {/* header */}
@@ -94,27 +98,27 @@ const Navbar = () => {
                             { currentUser ? (
                                 <>
                                     { location.pathname !== "/signup" && location.pathname !== "/signin" && (
-                                    <div className="search-song flex justify-between items-center space-x-3 md:space-x-5">
-                                        <div className="flex items-center border border-gray-700 rounded-2xl">
-                                            <input type="text" className="hidden md:block text-sm h-full bg-transparent text-gray-300 md:text-lg font-lg px-3 rounded-l-2xl outline-none" value={searchInput} placeholder="Search song here..." onChange={handleSearch} />
-                                            <button className="h-full p-1 text-xl text-gray-300 rounded-r-2xl hover:bg-gray-600 md:text-3xl">
-                                                <LuSearch color="" />
-                                            </button>
-                                        </div>
-
-                                        <div className="hover-cart group text-2xl relative text-gray-300 hover:bg-slate-700 hover:bg-gray-200 relative hover:rounded-full md:p-2 md:text-3xl">
-                                            <Link to="/collection" >
-                                                <div>
-                                                    <HiOutlineShoppingBag color="" className="relative"/>
-                                                    <span className="absolute text-xl -top-3 -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem]">{musicItems.length}</span>
-                                                </div>
-                                            </Link>
-                                            <div className="cart-hover hidden w-60 h-[250px] my-7 bg-gray-800 opacity-0 transition duration-700 transform absolute translate-x-5 invisible rounded-md shadow-xl group-hover:opacity-95 group-hover:-translate-x-2 group-hover:visible group-hover:delay-300 lg:block hover:bg-gray-800">
-                                                <HoverCart />
+                                        <div className="relative h-full">
+                                            <div className={`flex items-center justify-end border border-gray-700 rounded-2xl ${isSearchExpanded ? 'w-[190px]' : ''} h-full text-lg overflow-hidden transition-width duration-500`}>
+                                                <input type="text" className={`text-sm text-gray-300 w-full h-8 bg-transparent md:text-lg font-lg px-3 rounded-l-2xl outline-none ${isSearchExpanded ? 'block' : 'hidden lg:block'}`} value={searchInput} placeholder="Search song here..." onChange={handleSearch} />
+                                                <button className="h-full p-1 text-xl text-gray-300 rounded-r-2xl hover:bg-gray-600 md:text-3xl" onClick={toggleSearch}>
+                                                    <LuSearch size={25} color="" />
+                                                </button>
                                             </div>
                                         </div>
-                                    </div>
                                     )}
+
+                                    <div className="hover-cart group text-2xl relative text-gray-300 hover:bg-slate-700 hover:bg-gray-200 relative hover:rounded-full md:p-2 md:text-3xl">
+                                        <Link to="/collection" >
+                                            <div>
+                                                <HiOutlineShoppingBag color="" className="relative"/>
+                                                <span className="absolute text-xl -top-3 -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem]">{musicItems.length}</span>
+                                            </div>
+                                        </Link>
+                                        <div className="cart-hover hidden w-60 h-[250px] my-7 bg-gray-800 opacity-0 transition duration-700 transform absolute translate-x-5 invisible rounded-md shadow-xl group-hover:opacity-95 group-hover:-translate-x-2 group-hover:visible group-hover:delay-300 lg:block hover:bg-gray-800">
+                                            <HoverCart />
+                                        </div>
+                                    </div>
 
                                     <button onClick={handleSignOut} className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5">
                                         <div className="hidden inline lg:block">
