@@ -60,6 +60,13 @@ const SongcontextProvider = ({ children }) => {
         getSongs();
     }, []);
 
+    const handleDownload = (downloadLink) => {
+        const link = document.createElement('a');
+        link.href = downloadLink;
+        link.download = "";
+        link.click();
+    };
+
     const contextValue = {
         allSongs,
         latestSongs,
@@ -69,7 +76,8 @@ const SongcontextProvider = ({ children }) => {
         isLoading,
         showSideBar,
         searchSongs,
-        handleSideBar
+        handleSideBar,
+        handleDownload
     };
 
     return (

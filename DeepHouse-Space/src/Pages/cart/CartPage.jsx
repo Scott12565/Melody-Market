@@ -53,20 +53,20 @@ const CartPage = () => {
                                     <div className="flex items-start space-x-3">
                                         <h1>
                                             {isSongInPlaylist(song.songid) ? (
-                                                <MdPlaylistRemove size={30} onClick={() => removeFromPlayList(song.songid)} className="text-red-600" />
+                                                <MdPlaylistRemove size={27} onClick={() => removeFromPlayList(song.songid)} className="text-red-600" />
                                             ) : (
-                                                <MdPlaylistAdd size={30} onClick={() => addToPlayList(song)} className="text-yellow-200 hover:text-yellow-100" />
+                                                <MdPlaylistAdd size={27} onClick={() => addToPlayList(song)} className="text-yellow-200 hover:text-yellow-100" />
                                             )}
                                         </h1>
                                         <h1 className="text-yellow-200 hover:text-yellow-100">
                                             {currentSong?.songid === song?.songid && isPlaying ? (
-                                                <LuPause size={30} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
+                                                <LuPause size={27} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                             ) : (
-                                                <LuPlay size={30} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
+                                                <LuPlay size={27} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                             )}
                                         </h1>
                                         <h1 className="cursor-pointer" onClick={() => removeSongFromCart(song?.songid)}>
-                                            <MdDeleteSweep size={30} className="text-red-600" />
+                                            <MdDeleteSweep size={27} className="text-red-600" />
                                         </h1>
                                     </div>
                                 </div>

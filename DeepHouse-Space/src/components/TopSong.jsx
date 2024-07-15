@@ -1,11 +1,14 @@
 import { useState, useContext, useEffect } from "react";
 import { LuPause, LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
-import { MdDeleteSweep } from "react-icons/md";
+import { MdDeleteSweep, MdOutlineFileDownload } from "react-icons/md";
 import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
+import { SongContext } from "../context/songContext";
+import Song from "./Song";
 
 const TopSong = ({ topSong, index }) => {
+    const { handleDownload } = useContext(SongContext);
     const { addSongToCart, removeSongFromCart, musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying} = useContext(musicPlayerContext);
     const [isInCart, setIsInCart] = useState(false);
@@ -39,19 +42,22 @@ const TopSong = ({ topSong, index }) => {
                     <p>{topSong.Artist}</p>
                 </div>
                 <div className="flex justify-start items-center space-x-2">
-                    <h1 className="">
+                    <span className="">
                         {currentSong?.songid === topSong.songid && isPlaying ? (
-                            <LuPause size={25} onClick={handlePlayPause} className="cursor-pointer" />
+                            <LuPause size={23} onClick={handlePlayPause} className="cursor-pointer" />
                         ) : (
-                            <LuPlay size={25} onClick={handlePlayPause} className="cursor-pointer" />
+                            <LuPlay size={23} onClick={handlePlayPause} className="cursor-pointer" />
                         )}
-                    </h1>
+                    </span>
                     <span className="">
                         {isInCart ? (
-                            <MdDeleteSweep size={30} onClick={handleCart} className="cursor-pointer" />
+                            <MdDeleteSweep size={23} onClick={handleCart} className="cursor-pointer" />
                         ) : (
-                            <BsCart3 size={30} onClick={handleCart} className="cursor-pointer" />
+                            <BsCart3 size={23} onClick={handleCart} className="cursor-pointer" />
                         )}
+                    </span>
+                    <span className=""onClick={() => handleDownload(topSong.SongUrl)} >
+                        <MdOutlineFileDownload size={23} />
                     </span>
                 </div>
             </div>

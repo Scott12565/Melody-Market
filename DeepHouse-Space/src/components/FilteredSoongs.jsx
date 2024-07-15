@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { LuPause, LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
-import { MdDeleteSweep } from "react-icons/md";
+import { MdDeleteSweep, MdOutlineFileDownload } from "react-icons/md";
 import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
 import { SongContext } from "../context/songContext";
 
 const FilteredSongs = () => {
+    const { handleDownload } = useContext(SongContext);
     const { filteredSongs } = useContext(SongContext);
     const { addSongToCarto, removeSongFromCart, musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
@@ -40,25 +41,28 @@ const FilteredSongs = () => {
                         <div className="transition-transform ease-in-out duration-300 transform scale-0 bg-blue-900 text-gray-100 opacity-50 w-full h-full flex space-x-5 justify-center items-center absolute top-0 left-0 rounded-lg group-hover:scale-100">
                             <h1 className="text-yellow-200 hover:text-yellow-100">
                                 {currentSong?.songid === song.songid && isPlaying ? (
-                                    <LuPause size={30} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
+                                    <LuPause size={27} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                 ) : (
-                                    <LuPlay size={30} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
+                                    <LuPlay size={27} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                 )}
                             </h1>
                             <h1 className="text-orange-400 hover:text-orange-600">
                                 {isInCart(song) ? (
-                                    <MdDeleteSweep size={30} onClick={() => handleCart(song)} className="cursor-pointer" />
+                                    <MdDeleteSweep size={27} onClick={() => handleCart(song)} className="cursor-pointer" />
                                 ) : (
-                                    <BsCart3 size={30} onClick={() => handleCart(song)} className="cursor-pointer" />
+                                    <BsCart3 size={27} onClick={() => handleCart(song)} className="cursor-pointer" />
                                 )}
+                            </h1>
+                            <h1>
+                                <MdOutlineFileDownload size={27} />
                             </h1>
                         </div>
                     </div>
 
-                    <div className="card-body flex justify-between items-center w-full my-2 py-0 px-1.5 text-17 mx-auto md:w-95 md:block md:py-1.5">
+                    <div className="card-body flex justify-between items-end w-full my-2 py-0 px-1.5 text-17 mx-auto md:w-95 md:block md:py-1.5 space-x-2">
                         <div>
-                            <h1 className="px-1 text-gray-300 font-200 text-lg">{song?.SongTitle}</h1>
-                            <h2 className="px-1 text-gray-300 font-200 text-lg">By: {song?.Artist}</h2>
+                            <h1 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.SongTitle}</h1>
+                            <h2 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.Artist}</h2>
                         </div>
                         <h3 className="px-1.5 text-gray-300 font-200 text-17">{song?.Genre}</h3>
                         <span className="hidden text-16 px-1 text-gray-300 font-200 md:block">
@@ -68,17 +72,20 @@ const FilteredSongs = () => {
                         <div className="bg-gray-900 text-gray-100 flex space-x-2 justify-center items-center text-25 md:hidden">
                             <h1 className="text-yellow-200 hover:text-yellow-100">
                                 {currentSong?.songid === song.songid && isPlaying ? (
-                                    <LuPause size={30} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
+                                    <LuPause size={20} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                 ) : (
-                                    <LuPlay size={30} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
+                                    <LuPlay size={20} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                 )}
                             </h1>
                             <h1 className="text-orange-400 hover:text-orange-600">
                                 {isInCart(song) ? (
-                                    <MdDeleteSweep size={30} onClick={() => handleCart(song)} className="cursor-pointer" />
+                                    <MdDeleteSweep size={20} onClick={() => handleCart(song)} className="cursor-pointer" />
                                 ) : (
-                                    <BsCart3 size={30} onClick={() => handleCart(song)} className="cursor-pointer" />
+                                    <BsCart3 size={20} onClick={() => handleCart(song)} className="cursor-pointer" />
                                 )}
+                            </h1>
+                            <h1>
+                                <MdOutlineFileDownload size={22} onClick={() => handleDownload(song.SongUrl)} />
                             </h1>
                         </div>
                     </div>

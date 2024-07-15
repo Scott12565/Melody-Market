@@ -6,12 +6,13 @@ const Loaders = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoader(false);
-    }, 240000);
+    }, 80000);
     return () => clearTimeout(timer);
+    
   }, [showLoader]);
 
   return (
-    <div className={`loader-container ${showLoader ? 'visible' : 'hidden'}absolute top-0 left-0 w-full h-full flex justify-center items-center bg-gray-300`}>
+    <div className={`loader-container ${showLoader ? 'visible' : 'hidden'} absolute top-0 left-0 w-full h-full flex justify-center items-center bg-gray-300`}>
       <img src={loader} alt="Loading..." className={`${showLoader ? 'visible' : 'hidden'}`} />
     </div>
   );
