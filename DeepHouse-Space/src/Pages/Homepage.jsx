@@ -2,8 +2,7 @@ import { useContext } from "react";
 import AllSongs from "../Songs/AllSongs";
 import LatestSongs from "../Songs/LatestSongs";
 import { SongContext } from "../context/songContext";
-import FilteredSongs from "../components/FilteredSoongs"; // Check the import path here, correct it if needed
-
+import FilteredSongs from "../components/FilteredSoongs";
 const Home = () => {
     const { filteredSongs } = useContext(SongContext);
 

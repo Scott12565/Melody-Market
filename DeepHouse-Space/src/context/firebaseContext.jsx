@@ -6,7 +6,6 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
 
-    // initial states
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -15,7 +14,7 @@ const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
-            // setLoading(false);
+
         });
 
         return () => unsubscribe();
@@ -26,14 +25,14 @@ const AuthContextProvider = ({ children }) => {
         setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
+
+
+
             const user = userCredential.user;
             setCurrentUser(user);
-            // setLoading(false);
-          })
-          .catch((error) => {
+          }).catch((error) => {
             const errorMessage = error.message;
-            setError('Email already exist, use different email');
-            // setLoading(false);
+            setError('Email already exist, use different email', errorMessage);
           });
     };
 
@@ -72,7 +71,6 @@ const AuthContextProvider = ({ children }) => {
 
     // resetEmail
     const passwordReset = email => {
-
         sendPasswordResetEmail(auth, email)
         .then(() => {
             console.log('email sent');

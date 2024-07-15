@@ -4,7 +4,6 @@ import AuthContextProvider from "./context/firebaseContext";
 import CartContextProvider from "./context/CartContext";
 import MusicPlayerContextProvider from "./context/musicPlayerContext";
 import PlayListContextProvider from "./context/PlayListContext";
-// import { songContext } from "./context/songContext";
 import SideBar from "./components/SideBar/SideBar";
 import Navbar from "./components/Shared/Header/Navbar";
 import Player from "./Music-Player/Player";
@@ -21,19 +20,19 @@ const PlayList = lazy(() => import("./Pages/PlayList"));
 const Collections = lazy(() => import("./Pages/Colections"));
 
 function App() {
-  const { handleSideBar, showSideBar } = useContext(SongContext);
+  const { showSideBar } = useContext(SongContext);
   
   return (
     <AuthContextProvider>
-
       <PlayListContextProvider >
         <CartContextProvider>
           <MusicPlayerContextProvider>
+          
             <Router>
-              <Suspense fallback={<Loaders />} >
-              
+            <Suspense fallback={<Loaders />} >
               <div className="App flex flex-col">
                 <Navbar />
+                
                 <div className="flex flex-1 h-[calc(100vh - 80px)] gap-5">
                   <div className={`sidebar fixed top-0 left-0 z-50 h-full transition-all duration-200 ease-in-out transform ${showSideBar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} lg:static lg:h-[auto]`}>
                     <SideBar />
@@ -71,9 +70,11 @@ function App() {
                   </div>
                 </div>
                 <Player />
+                
               </div>
-              </Suspense>
+            </Suspense>
             </Router>
+
           </MusicPlayerContextProvider>
         </CartContextProvider>
       </PlayListContextProvider>

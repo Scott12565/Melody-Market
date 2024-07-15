@@ -2,13 +2,11 @@ import { useContext } from "react";
 import Song from "../components/Song";
 import { Link } from "react-router-dom";
 import { SongContext } from "../context/songContext";
-import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 
 const  AllSongs = () => {
 
     const isPlaying = true;
     const { allSongs } = useContext(SongContext);
-    // console.log(allSongs?.SongUrl);
     
     return ( 
         <div className="text-white text-2xl py-5 px-4 flex flex-col my-2 lg:py-10">

@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import { musicPlayerContext } from "../context/musicPlayerContext";
-import { LuPause, LuPlay, LuVolume } from "react-icons/lu";
+import { LuPause, LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
-import { MdDeleteSweep, MdPlaylistAdd, MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { TbPlayerPlay, TbPlayerTrackNext, TbPlayerTrackPrev } from "react-icons/tb";
+import { MdPlaylistAdd, MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { TbPlayerTrackNext, TbPlayerTrackPrev } from "react-icons/tb";
 
 const Player = () => {
   const {

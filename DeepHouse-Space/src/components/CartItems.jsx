@@ -1,8 +1,5 @@
 import { useState, useContext } from "react";
 import { useState, useContext } from "react";
-import { LuPause, LuPlay } from "react-icons/lu";
-import { BsCart3 } from "react-icons/bs";
-import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 import { cartContext } from "../context/CartContext";
 
 const CartIitem = () => {

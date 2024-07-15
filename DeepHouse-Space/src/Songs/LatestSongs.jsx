@@ -6,14 +6,12 @@ import { BsCart3 } from "react-icons/bs";
 import { RiPlayListLine } from "react-icons/ri";
 import { GrFormPreviousLink } from "react-icons/gr";
 import { GrFormNextLink } from "react-icons/gr";
-import { MdDeleteSweep, MdPlaylistAdd } from "react-icons/md";
 import { playlistContext } from "../context/PlayListContext";
 
 const LatestSongs = () => {
     const { latestSongs } = useContext(SongContext);
     const { addToPlayList } = useContext(playlistContext);
     
-    // console.log(allSongs);
     return ( 
         <div className="my-1">
             <div className="flex justify-between py-9 px-7">

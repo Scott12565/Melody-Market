@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { collection, doc, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
 export const SongContext = createContext();
@@ -56,7 +56,6 @@ const SongcontextProvider = ({ children }) => {
         }
     };
     
-
     useEffect(() => {
         getSongs();
     }, []);

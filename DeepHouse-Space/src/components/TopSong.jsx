@@ -8,7 +8,6 @@ import { musicPlayerContext } from "../context/musicPlayerContext";
 const TopSong = ({ topSong, index }) => {
     const { addSongToCart, removeSongFromCart, musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying} = useContext(musicPlayerContext);
-    // const [isPlaying, setIsPlaying] = useState(false);
     const [isInCart, setIsInCart] = useState(false);
 
     useEffect(() => {
