@@ -7,9 +7,9 @@ import { musicPlayerContext } from "../../context/musicPlayerContext";
 import { playlistContext } from "../../context/PlayListContext";
 
 const CartPage = () => {
-    const { musicItems, removeSongFromCart } = useContext(cartContext);
+    const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
-    const { playlist, addToPlayList, removeFromPlayList } = useContext(playlistContext);
+    const { playlist } = useContext(playlistContext);
 
     const handlePlayPause = (song) => {
         playPause(song);
@@ -18,6 +18,24 @@ const CartPage = () => {
     const isSongInPlaylist = (songId) => {
         return playlist.some(song => song.songid === songId);
     };
+
+    const handleAddToPlayList = async (song) => {
+        try {
+            const { addToPlayList } = await import('../playlist/index')
+            addToPlayList(song)
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const handleRemoveFromPlayList = async (songid) => {
+        try {
+            const { removeFromPlayList } = await import("../playlist/index");
+            removeFromPlayList(songid)
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     return (
         <div className="">
@@ -53,9 +71,9 @@ const CartPage = () => {
                                     <div className="flex items-start space-x-3">
                                         <h1>
                                             {isSongInPlaylist(song.songid) ? (
-                                                <MdPlaylistRemove size={27} onClick={() => removeFromPlayList(song.songid)} className="text-red-600" />
+                                                <MdPlaylistRemove size={27} onClick={() => handleRemoveFromPlayList(song.songid)} className="text-red-600" />
                                             ) : (
-                                                <MdPlaylistAdd size={27} onClick={() => addToPlayList(song)} className="text-yellow-200 hover:text-yellow-100" />
+                                                <MdPlaylistAdd size={27} onClick={() => handleAddToPlayList(song)} className="text-yellow-200 hover:text-yellow-100" />
                                             )}
                                         </h1>
                                         <h1 className="text-yellow-200 hover:text-yellow-100">
@@ -65,7 +83,7 @@ const CartPage = () => {
                                                 <LuPlay size={27} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                             )}
                                         </h1>
-                                        <h1 className="cursor-pointer" onClick={() => removeSongFromCart(song?.songid)}>
+                                        <h1 className="cursor-pointer" onClick={() => handleRemoveFromPlayList(song.songid)}>
                                             <MdDeleteSweep size={27} className="text-red-600" />
                                         </h1>
                                     </div>

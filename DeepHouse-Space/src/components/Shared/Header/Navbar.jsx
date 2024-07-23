@@ -15,8 +15,8 @@ import HoverCart from "../../../Pages/cart/HoverCart";
 import { cartContext } from "../../../context/CartContext";
 
 const Navbar = () => {
-    const { currentUser, userSignOut } = useContext(AuthContext);
-    const { showSideBar, searchSongs, handleSideBar } = useContext(SongContext);
+    const { currentUser, setCurrentUser } = useContext(AuthContext);
+    const { showSideBar, allSongs, setFilteredSongs, handleSideBar } = useContext(SongContext);
     const { musicItems } = useContext(cartContext);
 
     const location = useLocation();
@@ -25,17 +25,23 @@ const Navbar = () => {
     const [showSignIn, setShowSignIn] = useState(false);
     const [showResetPassword, setShowResetPassword] = useState(false);
     const [searchInput, setSearchInput] = useState('');
-    const [isSearchExpanded, setIsSearchExpanded] = useState(false); // State to manage search expansion
+    const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const history = useHistory();
 
-    const handleSearch = (e) => {
-        setSearchInput(e.target.value);
-        searchSongs(e.target.value);
+    const handleSearch = async (e) => {
+        try {
+            setSearchInput(e.target.value);
+            const { searchSongs } = await import('../../../index')
+            searchSongs(allSongs, setFilteredSongs, e.target.value);
+        } catch (error) {
+            console.log(error.message);
+        }
     };
     
     const handleSignOut = async () => {
         try {
-            await userSignOut(auth);
+            const { userSignOut } = await import('../../../UserAccounts/index');
+            userSignOut(auth, setCurrentUser);
             history.push("/signin");
         } catch (error) {
             setError(`Failed to sign out: ${error}`);
@@ -43,18 +49,21 @@ const Navbar = () => {
         }
     }
 
+    // create a use reducer to manage state
     const signInSignUp = () => {
         setShowSignUp(true);
         setShowSignIn(false);
         setShowResetPassword(false);
     }
 
+    // create use reducer functions
     const logInSignIn = () => {
         setShowSignIn(true);
         setShowSignUp(false);
         setShowResetPassword(false);
     }
 
+    
     const forgotPassword = () => {
         setShowResetPassword(true);
         setShowSignIn(false);

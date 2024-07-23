@@ -18,7 +18,7 @@ const Player = () => {
     prevSong,
   } = useContext(musicPlayerContext);
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   useEffect(() => {
     const audio = audioRef.current;

@@ -1,16 +1,26 @@
 import { useContext } from "react";
 import { LuPause, LuPlay } from "react-icons/lu";
-import { MdDeleteSweep, MdPlaylistAdd, MdPlaylistRemove } from "react-icons/md";
-import { musicPlayerContext } from "../context/musicPlayerContext";
-import { playlistContext } from "../context/PlayListContext";
+import { MdDeleteSweep } from "react-icons/md";
+import { musicPlayerContext } from "../../context/musicPlayerContext";
+import { playlistContext } from "../../context/PlayListContext";
 
 const PlayList = () => {
-    const { playlist, removeFromPlayList } = useContext(playlistContext);
+    const { playlist } = useContext(playlistContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
 
     const handlePlayPause = (song) => {
         playPause(song);
     };
+
+    const handleRemoveFromPlaylist = async (songid) => {
+        try {
+            // Adjust the path to the correct relative path
+            const { removeFromPlayList } = await import('./index');
+            removeFromPlayList(songid);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
 
     return (
         <div className="playlist">
@@ -25,7 +35,7 @@ const PlayList = () => {
             ) : (
                 <div className="w-full">
                     {playlist.map((song, index) => (
-                        <div key={song.songid} className="flex flex-1 justify-start items-center bg-blue-20 w-[98%] mx-auto space-x-2.5 text-gray-300 border-b py-4 transition-all transform scale-95 hover:scale-100 cursor-pointer md:space-x-3.5">
+                        <div key={song.songid} className="flex flex-1 justify-start items-center bg-blue-20 w-[98%] mx-auto space-x-1 text-gray-300 border-b py-4 transition-all transform scale-95 hover:scale-100 cursor-pointer md:space-x-3.5">
                             <span className="text-2xl">{index + 1}.</span>
                             <img src={song?.ImgUrl} alt={`song ${index + 1}`} className="hidden md:block w-[150px] rounded-sm" />
                             <div className="flex items-center justify-start w-full">
@@ -44,16 +54,16 @@ const PlayList = () => {
                                         <p>{song?.Price}</p>
                                     </div>
 
-                                    <div className="flex items-start space-x-3">
+                                    <div className="flex items-start space-x-1">
                                         <h1 className="text-yellow-200 hover:text-yellow-100">
                                             {currentSong?.songid === song.songid && isPlaying ? (
-                                                <LuPause size={30} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
+                                                <LuPause size={22} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                             ) : (
-                                                <LuPlay size={30} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
+                                                <LuPlay size={22} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                             )}
                                         </h1>
                                         <h1 className="text-orange-400 hover:text-orange-600">
-                                            <MdDeleteSweep size={30} onClick={() => removeFromPlayList(song.songid)} className="cursor-pointer" />
+                                            <MdDeleteSweep size={30} onClick={() => handleRemoveFromPlaylist(song.songid) } className="cursor-pointer" />
                                         </h1>
                                     </div>
                                 </div>

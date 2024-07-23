@@ -16,7 +16,7 @@ const SignUp = lazy(() => import("./UserAccounts/SignUp"));
 const PasswordReset = lazy(() => import("./UserAccounts/PasswordReset"));
 const AllSongs = lazy(() => import("./Songs/AllSongs"));
 const TopSongs = lazy(() => import("./Songs/TopSongs"));
-const PlayList = lazy(() => import("./Pages/PlayList"));
+const PlayList = lazy(() => import("./Pages/playlist/PlayList"));
 const Collections = lazy(() => import("./Pages/Colections"));
 
 function App() {

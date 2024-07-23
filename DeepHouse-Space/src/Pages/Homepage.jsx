@@ -8,7 +8,7 @@ const Home = () => {
 
     return ( 
         <section className="pb-5">
-            {filteredSongs?.length > 0 ? (
+            { filteredSongs?.length > 0 ? (
                 <FilteredSongs />
             ) : (
                 <>

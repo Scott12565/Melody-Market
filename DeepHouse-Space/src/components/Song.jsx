@@ -5,10 +5,11 @@ import { MdDeleteSweep, MdOutlineFileDownload } from "react-icons/md";
 import { SongContext } from "../context/songContext";
 import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
+// import { addSongToCarto, removeSongFromCart } from "../Pages/cart";
 
 const Song = ({ song }) => {
-    const { handleDownload } = useContext(SongContext);
-    const { addSongToCarto, removeSongFromCart, musicItems } = useContext(cartContext);
+    // const { handleDownload } = useContext(SongContext);
+    const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
     const [isInCart, setIsInCart] = useState(false);
 
@@ -20,7 +21,8 @@ const Song = ({ song }) => {
         playPause(song);
     };
 
-    const handleCart = () => {
+    const handleCart = async () => {
+        const { addSongToCarto, removeSongFromCart } = await import('../Pages/cart/index');
         if (!isInCart) {
             addSongToCarto(song);
         } else {
@@ -28,12 +30,20 @@ const Song = ({ song }) => {
         }
     };
 
+    const handleDownload = async (downloadLink) => {
+        try {
+            const { downloadSong} = await import('../index');
+            downloadSong(downloadLink);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
    
 
     return (
-        <div className="song-card flex w-[99%] mx-auto my-1 shadow-sm pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-52 bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
+        <div className="song-card flex w-[99%] mx-auto my-1 shadow-md pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-52 bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
             <div className="hidden song-img w-[95%] mx-auto rounded-lg relative group md:block relative">
-                <div className="absolute top-1 right-1 text-sm bg-yellow-300 text-gray-800 p-1 rounded-md">
+                <div className="absolute top-1 right-1 text-sm bg-yellow-300 text-gray-600 p-1 rounded-sm">
                     {song.Price}
                 </div>
                 <img src={song?.ImgUrl} alt={`song ${song?.songid}`} className="h-full bg-orange-400 rounded-lg" />
@@ -64,7 +74,7 @@ const Song = ({ song }) => {
                     <h1 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.SongTitle}</h1>
                     <h2 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.Artist}</h2>
                 </div>
-                <h3 className="px-1.5 text-gray-300 font-200 text-[16px]">{song?.Genre}</h3>
+                <h3 className="px-1.5 text-gray-300 font-200 text-[14px]">{song?.Genre}</h3>
                 <span className="hidden text-[16px] px-1 text-gray-300 font-200 md:block">
                     {song?.releaseDate}
                 </span>

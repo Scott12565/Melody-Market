@@ -2,14 +2,14 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../context/firebaseContext";
 
 const PasswordReset = ({ closePasswordReset }) => {
-    const { passwordReset, error } = useContext(AuthContext);
+    const { error } = useContext(AuthContext);
     const [email, setEmail] = useState('');
 
     const handleReset = async (e) => {
         e.preventDefault();
-
         try {
-            await passwordReset(email);
+            const { passwordReset } = await import('../UserAccounts/index');
+            passwordReset(email);
             setEmail('');
             closePasswordReset();
         } catch (error) {

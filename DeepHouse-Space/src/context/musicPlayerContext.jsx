@@ -6,7 +6,6 @@ export const musicPlayerContext = createContext();
 const MusicPlayerContextProvider = ({ children }) => {
 
   const {allSongs} = useContext(SongContext);
-  // const [playingSongId, setPlayingSongId] = useState(false);
   const audioRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentSong, setCurrentSong] = useState(null);

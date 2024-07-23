@@ -7,7 +7,6 @@ import { musicPlayerContext } from "../context/musicPlayerContext";
 import { SongContext } from "../context/songContext";
 
 const FilteredSongs = () => {
-    const { handleDownload } = useContext(SongContext);
     const { filteredSongs } = useContext(SongContext);
     const { addSongToCarto, removeSongFromCart, musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
@@ -27,6 +26,15 @@ const FilteredSongs = () => {
             removeSongFromCart(song.songid);
         }
     };
+
+    const handleDownload = async (downloadLink) => {
+        try {
+            const { downloadSong} = await import('../index');
+            downloadSong(downloadLink);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     return (
         <div className="flex flex-wrap justify-center">

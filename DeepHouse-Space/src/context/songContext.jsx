@@ -40,44 +40,21 @@ const SongcontextProvider = ({ children }) => {
             console.log(err.message);
         }
     };
-
-    const searchSongs = (songInput) => {
-        if (songInput.trim() !== '') {
-            const filteredData = allSongs.filter(filteredItem => {
-                // Check if any value in the song object contains the search input
-                return Object.values(filteredItem).some(value =>
-                    String(value).toLowerCase().includes(songInput.toLowerCase())
-                );
-            });
-            setFilteredSongs(filteredData);
-        } else {
-            // If input is empty, clear filtered songs
-            setFilteredSongs([]);
-        }
-    };
     
     useEffect(() => {
         getSongs();
     }, []);
-
-    const handleDownload = (downloadLink) => {
-        const link = document.createElement('a');
-        link.href = downloadLink;
-        link.download = "";
-        link.click();
-    };
 
     const contextValue = {
         allSongs,
         latestSongs,
         topSongs,
         filteredSongs,
+        setFilteredSongs,
         error,
         isLoading,
         showSideBar,
-        searchSongs,
-        handleSideBar,
-        handleDownload
+        handleSideBar
     };
 
     return (

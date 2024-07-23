@@ -3,7 +3,7 @@ import { AuthContext } from "../context/firebaseContext";
 import { Link, Redirect } from "react-router-dom";
 
 const SignIn = ({ closeSignIn }) => {
-    const { currentUser, signIn, error } = useContext(AuthContext);
+    const { currentUser, setCurrentUser, error } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -13,7 +13,8 @@ const SignIn = ({ closeSignIn }) => {
         
         try {
             setErrorMessage('');
-            await signIn(email, password);
+            const { signIn } = await import('../UserAccounts/index');
+            signIn(setCurrentUser, email, password);
             closeSignIn();
         } catch (error) {
             console.log(error);
