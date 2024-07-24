@@ -8,7 +8,7 @@ import { SongContext } from "../context/songContext";
 
 const FilteredSongs = () => {
     const { filteredSongs } = useContext(SongContext);
-    const { addSongToCarto, removeSongFromCart, musicItems } = useContext(cartContext);
+    const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
 
     const isInCart = (song) => {
@@ -19,8 +19,9 @@ const FilteredSongs = () => {
         playPause(song);
     };
 
-    const handleCart = (song) => {
-        if (!isInCart(song)) {
+    const handleCart = async () => {
+        const { addSongToCarto, removeSongFromCart } = await import('../index');
+        if (!isInCart) {
             addSongToCarto(song);
         } else {
             removeSongFromCart(song.songid);
@@ -29,7 +30,7 @@ const FilteredSongs = () => {
 
     const handleDownload = async (downloadLink) => {
         try {
-            const { downloadSong} = await import('../index');
+            const { downloadSong } = await import('../index');
             downloadSong(downloadLink);
         } catch (error) {
             console.log(error.message);

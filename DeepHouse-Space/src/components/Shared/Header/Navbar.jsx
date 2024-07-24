@@ -1,15 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { LuSearch } from "react-icons/lu";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { VscSignOut } from "react-icons/vsc";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/firebaseContext";
 import { auth } from "../../../firebase/firebase";
-import SignUp from "../../../UserAccounts/SignUp";
-import SignIn from "../../../UserAccounts/SignIn";
-import PasswordReset from "../../../UserAccounts/PasswordReset";
 import { SongContext } from "../../../context/songContext";
 import HoverCart from "../../../Pages/cart/HoverCart";
 import { cartContext } from "../../../context/CartContext";
@@ -20,73 +16,45 @@ const Navbar = () => {
     const { musicItems } = useContext(cartContext);
 
     const location = useLocation();
+    const history = useHistory();
     const [error, setError] = useState(null);
-    const [showSignUp, setShowSignUp] = useState(false);
-    const [showSignIn, setShowSignIn] = useState(false);
-    const [showResetPassword, setShowResetPassword] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-    const history = useHistory();
 
     const handleSearch = async (e) => {
         try {
             setSearchInput(e.target.value);
-            const { searchSongs } = await import('../../../index')
+            const { searchSongs } = await import('../../../index');
             searchSongs(allSongs, setFilteredSongs, e.target.value);
         } catch (error) {
             console.log(error.message);
         }
     };
-    
+
     const handleSignOut = async () => {
         try {
             const { userSignOut } = await import('../../../UserAccounts/index');
-            userSignOut(auth, setCurrentUser);
+            await userSignOut(auth, setCurrentUser);
             history.push("/signin");
         } catch (error) {
             setError(`Failed to sign out: ${error}`);
             console.log(error);
         }
-    }
+    };
 
-    // create a use reducer to manage state
-    const signInSignUp = () => {
-        setShowSignUp(true);
-        setShowSignIn(false);
-        setShowResetPassword(false);
-    }
+    const handleSignUp = () => {
+        history.push("/signup");
+    };
 
-    // create use reducer functions
-    const logInSignIn = () => {
-        setShowSignIn(true);
-        setShowSignUp(false);
-        setShowResetPassword(false);
-    }
-
-    
-    const forgotPassword = () => {
-        setShowResetPassword(true);
-        setShowSignIn(false);
-        setShowSignUp(false);
-    }
-
-    const closeSignUp = () => {
-        setShowSignUp(false);
-    }
-
-    const closeSignIn = () => {
-        setShowSignIn(false);
-    }
-
-    const closeResetPassword = () => {
-        setShowResetPassword(false);
-    }
+    const handleSignIn = () => {
+        history.push("/signin");
+    };
 
     const toggleSearch = () => {
         setIsSearchExpanded(!isSearchExpanded);
-    }
+    };
 
-    return ( 
+    return (
         <>
             {/* header */}
             <header className="px-2.5 bg-gray-800 flex justify-between items-center mx-auto h-20 w-full sticky top-0 z-50 lg:z-[100]">
@@ -104,9 +72,9 @@ const Navbar = () => {
 
                     <nav className="flex items-center">
                         <div className="nav-links justify-between flex items-center space-x-4 md:space-x-5 md:text-lg">
-                            { currentUser ? (
+                            {currentUser ? (
                                 <>
-                                    { location.pathname !== "/signup" && location.pathname !== "/signin" && (
+                                    {location.pathname !== "/signup" && location.pathname !== "/signin" && (
                                         <div className="relative h-full">
                                             <div className={`flex items-center justify-end border border-gray-700 rounded-2xl ${isSearchExpanded ? 'w-[190px]' : ''} h-full text-lg overflow-hidden transition-width duration-500`}>
                                                 <input type="text" className={`text-sm text-gray-300 w-full h-8 bg-transparent md:text-lg font-lg px-3 rounded-l-2xl outline-none ${isSearchExpanded ? 'block' : 'hidden lg:block'}`} value={searchInput} placeholder="Search song here..." onChange={handleSearch} />
@@ -118,7 +86,7 @@ const Navbar = () => {
                                     )}
 
                                     <div className="hover-cart group text-2xl relative text-gray-300 hover:bg-slate-700 hover:bg-gray-200 relative hover:rounded-full md:p-2 md:text-3xl">
-                                        <Link to="/collection" >
+                                        <Link to="/collection">
                                             <div>
                                                 <HiOutlineShoppingBag color="" className="relative"/>
                                                 <span className="absolute text-xl -top-3 -right-[.20rem] p-[.15rem] rounded-full text-yellow-300 md:-top-1 md:-right-[0.001rem]">{musicItems.length}</span>
@@ -139,10 +107,10 @@ const Navbar = () => {
                             ) : (
                                 <>
                                     {location.pathname !== "/signup" && (
-                                        <span onClick={signInSignUp} className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5 cursor-pointer">Sign Up</span>
+                                        <span onClick={handleSignUp} className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5 cursor-pointer">Sign Up</span>
                                     )}
                                     {location.pathname !== "/signin" && (
-                                        <span onClick={logInSignIn} className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5 cursor-pointer">Log In</span>
+                                        <span onClick={handleSignIn} className="text-gray-300 hover:bg-slate-700 hover:bg-gray-200 md:hover:rounded-lg md:p-1.5 cursor-pointer">Log In</span>
                                     )}
                                 </>
                             )}
@@ -150,11 +118,8 @@ const Navbar = () => {
                     </nav>
                 </div>
             </header>
-            {showSignUp && <SignUp closeSignUp={closeSignUp} />}
-            {showSignIn && <SignIn closeSignIn={closeSignIn} forgotPassword={forgotPassword} />}
-            {showResetPassword && <PasswordReset closeResetPassword={closeResetPassword} />}
         </>
     );
-}
+};
 
 export default Navbar;

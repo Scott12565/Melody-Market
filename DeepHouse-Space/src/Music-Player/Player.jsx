@@ -10,7 +10,6 @@ const Player = () => {
     currentSong,
     isPlaying,
     playPause,
-    setCurrentTime,
     currentTime,
     audioRef,
     progressBar,

@@ -6,11 +6,9 @@ import { BsCart3 } from "react-icons/bs";
 import { RiPlayListLine } from "react-icons/ri";
 import { GrFormPreviousLink } from "react-icons/gr";
 import { GrFormNextLink } from "react-icons/gr";
-import { playlistContext } from "../context/PlayListContext";
 
 const LatestSongs = () => {
     const { latestSongs } = useContext(SongContext);
-    const { addToPlayList } = useContext(playlistContext);
     
     return ( 
         <div className="my-1">

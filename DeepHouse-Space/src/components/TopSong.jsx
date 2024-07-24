@@ -5,11 +5,10 @@ import { MdDeleteSweep, MdOutlineFileDownload } from "react-icons/md";
 import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
 import { SongContext } from "../context/songContext";
-import Song from "./Song";
 
 const TopSong = ({ topSong, index }) => {
     const { handleDownload } = useContext(SongContext);
-    const { addSongToCart, removeSongFromCart, musicItems } = useContext(cartContext);
+    const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying} = useContext(musicPlayerContext);
     const [isInCart, setIsInCart] = useState(false);
 
@@ -21,13 +20,13 @@ const TopSong = ({ topSong, index }) => {
         playPause(topSong)
     };
 
-    const handleCart = () => {
+    const handleCart = async (song) => {
+        const { addSongToCarto, removeSongFromCart } = await import('../Pages/cart/index');
         if (!isInCart) {
-            addSongToCart(topSong);
+            addSongToCarto(song);
         } else {
-            removeSongFromCart(topSong.songid);
+            removeSongFromCart(song.songid);
         }
-        setIsInCart(!isInCart);
     };
 
     return (
@@ -51,9 +50,9 @@ const TopSong = ({ topSong, index }) => {
                     </span>
                     <span className="">
                         {isInCart ? (
-                            <MdDeleteSweep size={23} onClick={handleCart} className="cursor-pointer" />
+                            <MdDeleteSweep size={23} onClick={() => handleCart(topSong)} className="cursor-pointer" />
                         ) : (
-                            <BsCart3 size={23} onClick={handleCart} className="cursor-pointer" />
+                            <BsCart3 size={23} onClick={() => handleCart(topSong)} className="cursor-pointer" />
                         )}
                     </span>
                     <span className=""onClick={() => handleDownload(topSong.SongUrl)} >

@@ -2,13 +2,10 @@ import { useContext, useState, useEffect } from "react";
 import { LuPause, LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
 import { MdDeleteSweep, MdOutlineFileDownload } from "react-icons/md";
-import { SongContext } from "../context/songContext";
 import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
-// import { addSongToCarto, removeSongFromCart } from "../Pages/cart";
 
 const Song = ({ song }) => {
-    // const { handleDownload } = useContext(SongContext);
     const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
     const [isInCart, setIsInCart] = useState(false);
@@ -39,7 +36,6 @@ const Song = ({ song }) => {
         }
     }
    
-
     return (
         <div className="song-card flex w-[99%] mx-auto my-1 shadow-md pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-52 bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
             <div className="hidden song-img w-[95%] mx-auto rounded-lg relative group md:block relative">

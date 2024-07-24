@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { SongContext } from "../context/songContext";
 
 const  AllSongs = () => {
-
     const isPlaying = true;
     const { allSongs } = useContext(SongContext);
     
@@ -25,7 +24,7 @@ const  AllSongs = () => {
                     ))
                 }
             </div>
-            
+
         </div>
      );
 }
