@@ -6,7 +6,6 @@ import { SongContext } from "../context/songContext";
 const  AllSongs = () => {
     const isPlaying = true;
     const { allSongs } = useContext(SongContext);
-    
     return ( 
         <div className="text-white text-2xl py-5 px-4 flex flex-col my-2 lg:py-10">
 
@@ -16,7 +15,6 @@ const  AllSongs = () => {
                     see all
                 </Link>
             </div>
-
             <div className="flex flex-col flex-wrap justify-between gap-2.5 py-1 md:flex-row">
                 {
                     allSongs?.map(song => (
@@ -24,7 +22,6 @@ const  AllSongs = () => {
                     ))
                 }
             </div>
-
         </div>
      );
 }

@@ -4,22 +4,11 @@ import { SongContext } from "./songContext";
 export const musicPlayerContext = createContext();
 
 const MusicPlayerContextProvider = ({ children }) => {
-
   const {allSongs} = useContext(SongContext);
   const audioRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const playPause = song => {
-    const songId = song.songid;
-    if(currentSong?.songid === songId){
-      setIsPlaying(!isPlaying);
-    } else {
-      setCurrentSong(song);
-      setIsPlaying(!isPlaying);
-    }
-  }
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -38,10 +27,8 @@ useEffect(() => {
   }
 }, [isPlaying, currentSong]);
 
-
 useEffect(() => {
   const audio = audioRef.current;
-
   const updateTime = () => {
     setCurrentTime(audio.currentTime);
     console.log(currentTime);
@@ -49,12 +36,10 @@ useEffect(() => {
 
   const updateDuration = () => {
     setDuration(audio.duration);
-    
   };
 
   audio.addEventListener('timeupdate', updateTime);
   audio.addEventListener('loadedmetadata', updateDuration);
-
   return () => {
     audio.removeEventListener('timeupdate', updateTime);
     audio.removeEventListener('loadedmetadata', updateDuration);
@@ -80,6 +65,16 @@ const prevSong = () => {
       } else {
           setCurrentSong(allSongs[currentIndex - 1]);
       }
+  }
+}
+
+const playPause = song => {
+  const songId = song.songid;
+  if(currentSong?.songid === songId){
+    setIsPlaying(!isPlaying);
+  } else {
+    setCurrentSong(song);
+    setIsPlaying(!isPlaying);
   }
 }
 

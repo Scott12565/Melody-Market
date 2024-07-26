@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/firebaseContext";
 import { Link, Redirect } from "react-router-dom";
-import Loader from "../components/Loaders"; // Import the Loader component
+import Loader from "../components/Loaders";
+import { Helmet } from "react-helmet-async";
 
 const SignIn = ({ closeSignIn }) => {
     const { currentUser, setCurrentUser, error } = useContext(AuthContext);
@@ -24,12 +25,17 @@ const SignIn = ({ closeSignIn }) => {
             console.log(error);
             setErrorMessage("Failed to sign in. Please check your credentials and try again.");
         } finally {
-            setLoading(false); // Set loading to false after the process is complete
+            setLoading(false);
         }
     };
 
     return (
         <>
+            <Helmet >
+                <title>deephouse spacen - SingIn</title>
+                <meta name="description" content="Sign In to your deephouse space using your account and purchase your favorite song now" />
+                <meta name="keywords" content="" />
+            </Helmet>
             {loading && <Loader />} {/* Show the loader if loading is true */}
             <div className="flex flex-col fixed top-20 left-0 z-[110] bg-gray-800 opacity-95 w-full h-screen overflow-y-hidden overscroll-y-none">
                 <div className="form-group bg-black shadow-lg rounded-2xl w-[95%] mt-12 mx-auto md:w-[65%] lg:w-[35%] md:mt-14 lg:mt-24">
