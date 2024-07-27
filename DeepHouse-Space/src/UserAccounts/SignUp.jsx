@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/firebaseContext";
 import { Link, Redirect } from "react-router-dom";
 import Loader from "../components/Loaders";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = ({ closeSignUp }) => {
     const { currentUser, setCurrentUser, error } = useContext(AuthContext);
@@ -38,6 +39,15 @@ const SignUp = ({ closeSignUp }) => {
 
     return (
         <>
+            <Helmet>
+                <title>DeepHouse Space - Sign Up</title>
+                <meta name="description" content="Sign up for DeepHouse Space account to start purchasing and enjoying your favorite deep house tracks. Join our community of music lovers today!" />
+                <meta name="keywords" content="deep house music, deephouse space, sign up, register, deep house space, music store" />
+                <meta property="og:title" content="DeepHouse Space - Sign Up" />
+                <meta property="og:description" content="Sign up for DeepHouse Space account to start purchasing and enjoying your favorite deep house tracks. Join our community of music lovers today!" />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://www.deephousespace.com/signup" />
+            </Helmet>
             {loading && <Loader />} {/* Show the loader if loading is true */}
             <div className="flex flex-col fixed top-20 left-0 z-[110] bg-gray-800 opacity-95 w-full h-screen overflow-y-hidden overscroll-y-none">
                 <div className="form-group bg-black shadow-lg rounded-2xl w-[95%] mt-12 mx-auto md:w-[65%] lg:w-[35%] md:mt-14 lg:mt-24">

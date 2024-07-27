@@ -1,12 +1,13 @@
 {
   "projects": {
-    "default": "auth-demo-8d963"
+    "default": "music-store-5302d",
+    "music-store": "music-store-5302d"
   },
   "targets": {
-    "auth-demo-8d963": {
+    "music-store-5302d": {
       "hosting": {
         "user": [
-          "deephouse-space"
+          "deephousespace"
         ]
       }
     }
