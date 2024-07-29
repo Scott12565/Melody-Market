@@ -38,7 +38,7 @@ const SignIn = ({ closeSignIn }) => {
             <meta property="og:title" content="DeepHouse Space - Sign In" />
             <meta property="og:description" content="Sign in to DeepHouse Space to purchase your favorite deep house tracks. Secure and easy login for music enthusiasts." />
             <meta property="og:type" content="website" />
-            <meta property="og:url" content="https://www.deephousespace.com/signin" />
+            <meta property="og:url" content="https://deephousespace.web.app/signin" />
             </Helmet>
             {loading && <Loader />} {/* Show the loader if loading is true */}
             <div className="flex flex-col fixed top-20 left-0 z-[110] bg-gray-800 opacity-95 w-full h-screen overflow-y-hidden overscroll-y-none">

@@ -11,7 +11,7 @@ const Collections = () => {
                 <meta property="og:title" content="DeepHouse Space - Collections" />
                 <meta property="og:description" content="Explore and manage your music collections with ease. Find your favorite tracks and albums in one place on DeepHouse Space." />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://deephousespace.com/collections" />
+                <meta property="og:url" content="https://deephousespace.web.app/collections" />
                 
             </Helmet>
             <CartPage />

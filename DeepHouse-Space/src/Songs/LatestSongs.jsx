@@ -20,7 +20,7 @@ const LatestSongs = () => {
                 <meta property="og:title" content="DeepHouse Space - Latest Songs" />
                 <meta property="og:description" content="Get our latest deep house track now. It's simple and fast!" />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://www.deephousespace.com/latest" />
+                <meta property="og:url" content="https://deephousespace.web.app/latest" />
             </Helmet>
             <div className="my-1">
                 <div className="flex justify-between py-9 px-7">

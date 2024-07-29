@@ -16,7 +16,7 @@ const TopSongs = () => {
                 <meta property="og:title" content="DeepHouse Space - Top Songs" />
                 <meta property="og:description" content="Discover the top deep house tracks on DeepHouse Space. Explore the best songs in our top song collection and find your next favorite track!" />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://www.deephousespace.com/topsongs" />
+                <meta property="og:url" content="https://deephousespace.web.app/topsongs" />
          </Helmet>
           <div className=" h-full">
               <h3 className="text-gray-300 text-lg font-medium  my-5 mx-5 md:my-9 lg:text-xl">

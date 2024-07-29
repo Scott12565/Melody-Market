@@ -32,7 +32,7 @@ const PlayList = () => {
                 <meta property="og:title" content="DeepHouse Space - My Playlist" />
                 <meta property="og:description" content="View and manage your playlist with your favorite deep house tracks. Add, remove, or play songs from your playlist." />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://yourdomain.com/playlist" />
+                <meta property="og:url" content="https://deephousespace.web.app/playlist" />
             </Helmet>
             <div className="playlist">
                 <div className="text-gray-300 text-lg font-medium my-1 mx-4 p-2 md:my-9 flex justify-between items-center md:text-xl lg:my-5 lg:mx-5">

@@ -16,7 +16,7 @@ const  AllSongs = () => {
                 <meta property="og:title" content="DeepHouse Space - All Songs" />
                 <meta property="og:description" content="Explore all the songs available on DeepHouse Space. Discover your next favorite deep house track from our extensive collection!" />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://www.deephousespace.com/allsongs" />
+                <meta property="og:url" content="https://deephousespace.web.app/allsongs" />
             </Helmet>
             <div className="text-white text-2xl py-5 px-4 flex flex-col my-2 lg:py-10">
                 <div className="flex justify-between">

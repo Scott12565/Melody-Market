@@ -46,7 +46,7 @@ const SignUp = ({ closeSignUp }) => {
                 <meta property="og:title" content="DeepHouse Space - Sign Up" />
                 <meta property="og:description" content="Sign up for DeepHouse Space account to start purchasing and enjoying your favorite deep house tracks. Join our community of music lovers today!" />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://www.deephousespace.com/signup" />
+                <meta property="og:url" content="https://deephousespace.web.app/signup" />
             </Helmet>
             {loading && <Loader />} {/* Show the loader if loading is true */}
             <div className="flex flex-col fixed top-20 left-0 z-[110] bg-gray-800 opacity-95 w-full h-screen overflow-y-hidden overscroll-y-none">
