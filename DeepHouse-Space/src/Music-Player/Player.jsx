@@ -45,7 +45,7 @@ const Player = () => {
         {!isCollapsed && (
           <div className="flex flex-col md:flex-row justify-start items-start w-full">
             <div className="flex justify-start items-center w-full space-x-4 py-1 md:w-2/6">
-              <img src={currentSong?.ImgUrl} alt="" className="hidden w-24 h-24 rounded-lg md:w-[110px] md:h-[90px] md:block" />
+              <img src={currentSong?.ImgUrl} loading="lazy" alt="" className="hidden w-24 h-24 rounded-lg md:w-[110px] md:h-[90px] md:block" />
               <div className="song-titles flex items-center justify-between w-full md:flex-col md:items-start">
                 <h1 className="text-[17px] font-semibold text-gray-300 md:text-[16px] lg:text-[20px]">{currentSong?.SongTitle}</h1>
                 <h3 className="text-[17px] font-medium text-gray-300 md:text-[14px] lg:text-[18px]">{currentSong?.Artist}</h3>

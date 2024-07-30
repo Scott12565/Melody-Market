@@ -51,7 +51,7 @@ const CartPage = () => {
                     musicItems?.map((song, index) => (
                         <div key={song?.songid} className="flex flex-1 justify-start items-center bg-blue-20 w-[98%] mx-auto space-x-2.5 text-gray-300 border-b py-4 transition-all transform scale-95 hover:scale-100 cursor-pointer md:space-x-3.5 ">
                             <span className="text-2xl">{index + 1}.</span>
-                            <img src={song?.ImgUrl} alt={`cover image for ${song.SongTitle} by ${song.Artist} song`} className="hidden md:block w-[150px] rounded-sm" />
+                            <img src={song?.ImgUrl} loading="lazy" alt={`cover image for ${song.SongTitle} by ${song.Artist} song`} className="hidden md:block w-[150px] rounded-sm" />
                             <div className="flex items-center justify-start w-full ">
                                 <div className="flex flex-1 items-center justify-between py-2 px-1.5">
                                     <div>

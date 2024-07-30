@@ -34,7 +34,7 @@ const TopSong = ({ topSong, index }) => {
             <span className="text-lg text-white font-medium">
                 {index + 1}.
             </span>
-            <img src={topSong.ImgUrl} alt={`cover image for ${topSong.SongTitle} by ${topSong.Artist} song`} className="w-[95px] rounded-sm" />
+            <img src={topSong.ImgUrl} loading="lazy" alt={`cover image for ${topSong.SongTitle} by ${topSong.Artist} song`} className="w-[95px] rounded-sm" />
             <div className="flex justify-between items-start text-gray-300 text-sm space-y-2 lg:flex-col w-full">
                 <div>
                     <h4 className="text-[16px] font-medium">{topSong.SongTitle}</h4>

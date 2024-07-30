@@ -41,7 +41,7 @@ const Song = ({ song }) => {
                 <div className="absolute top-1 right-1 text-sm bg-yellow-300 text-gray-600 p-1 rounded-sm">
                     {song.Price}
                 </div>
-                <img src={song?.ImgUrl} alt={`cover image for ${song?.SongTitle} by: ${song.Artist} song`} className="h-full bg-orange-400 rounded-lg" />
+                <img src={song?.ImgUrl} loading="lazy" alt={`cover image for ${song?.SongTitle} by: ${song.Artist} song`} className="h-full bg-orange-400 rounded-lg" />
 
                 <div className="transition-transform ease-in-out duration-300 transform scale-0 bg-blue-900 text-gray-100 opacity-50 w-full h-full flex space-x-5 justify-center items-center absolute top-0 left-0 rounded-lg group-hover:scale-100">
                     <h1 className="text-yellow-200 hover:text-yellow-100">
