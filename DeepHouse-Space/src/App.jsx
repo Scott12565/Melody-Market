@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Suspense, lazy, useContext } from "react";
-import AuthContextProvider from "./context/firebaseContext";
 import CartContextProvider from "./context/CartContext";
 import MusicPlayerContextProvider from "./context/musicPlayerContext";
 import PlayListContextProvider from "./context/PlayListContext";
@@ -9,6 +8,8 @@ import Navbar from "./components/Shared/Header/Navbar";
 import Player from "./Music-Player/Player";
 import Loaders from "./components/Loaders";
 import { SongContext } from "./context/songContext";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import { AuthContext } from "./context/firebaseContext";
 
 const Home = lazy(() => import("./Pages/Homepage"));
 const SignIn = lazy(() => import("./UserAccounts/SignIn"));
@@ -21,9 +22,9 @@ const Collections = lazy(() => import("./Pages/Colections"));
 
 function App() {
   const { showSideBar } = useContext(SongContext);
+  const { currentUser } = useContext(AuthContext)
   
   return (
-    <AuthContextProvider>
       <PlayListContextProvider >
         <CartContextProvider>
           <MusicPlayerContextProvider>
@@ -44,15 +45,9 @@ function App() {
                         <Route path="/" exact>
                           <Home />
                         </Route>
-                        <Route path="/allsongs">
-                          <AllSongs />
-                        </Route>
-                        <Route path="/collection">
-                          <Collections />
-                        </Route>
-                        <Route path="/playlist" >
-                          <PlayList />
-                        </Route>
+                        <ProtectedRoutes path="/allsongs" component={AllSongs} currentUser={currentUser} />
+                        <ProtectedRoutes path="/collection" component={Collections} currentUser={currentUser} />
+                        <ProtectedRoutes path="/playlist" component={PlayList} currentUser={currentUser} />
                         <Route path="/signin">
                           <SignIn />
                         </Route>
@@ -79,7 +74,7 @@ function App() {
         </CartContextProvider>
       </PlayListContextProvider>
      
-    </AuthContextProvider>
+    
   );
 }
 

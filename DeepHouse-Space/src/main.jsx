@@ -3,13 +3,16 @@ import App from './App.jsx';
 import './index.css';
 import SongcontextProvider from './context/songContext';
 import { HelmetProvider } from 'react-helmet-async';
+import AuthContextProvider from './context/firebaseContext.jsx';
 
 ReactDOM.render(
   <React.StrictMode>
     <HelmetProvider >
-    <SongcontextProvider>
-      <App />
-    </SongcontextProvider>
+      <AuthContextProvider>
+        <SongcontextProvider>
+          <App />
+        </SongcontextProvider>
+      </AuthContextProvider>
     </HelmetProvider>
   </React.StrictMode>,
   document.getElementById('root')
