@@ -10,6 +10,7 @@ import Loaders from "./components/Loaders";
 import { SongContext } from "./context/songContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import { AuthContext } from "./context/firebaseContext";
+import CheckPurchaseProvider from "./context/downloadContext";
 
 const Home = lazy(() => import("./Pages/Homepage"));
 const SignIn = lazy(() => import("./UserAccounts/SignIn"));
@@ -28,6 +29,8 @@ function App() {
       <PlayListContextProvider >
         <CartContextProvider>
           <MusicPlayerContextProvider>
+          <CheckPurchaseProvider >
+
           
             <Router>
             <Suspense fallback={<Loaders />} >
@@ -65,11 +68,10 @@ function App() {
                   </div>
                 </div>
                 <Player />
-                
               </div>
             </Suspense>
             </Router>
-
+            </CheckPurchaseProvider>
           </MusicPlayerContextProvider>
         </CartContextProvider>
       </PlayListContextProvider>

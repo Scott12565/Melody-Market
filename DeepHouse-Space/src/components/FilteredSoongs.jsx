@@ -1,15 +1,20 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LuPause, LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
 import { MdDeleteSweep, MdOutlineFileDownload } from "react-icons/md";
 import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
 import { SongContext } from "../context/songContext";
+import { checkPurchaseContext } from "../context/downloadContext";
+import { AuthContext } from "../context/firebaseContext";
 
 const FilteredSongs = () => {
     const { filteredSongs } = useContext(SongContext);
+    const { hasPurchased, checkPurchase } = useContext(checkPurchaseContext);
+    const [song, setSong] = useState(null);
     const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
+    const { currentUser } = useContext(AuthContext);
 
     const isInCart = (song) => {
         return musicItems.some((songItem) => songItem.songid === song.songid);
@@ -18,6 +23,10 @@ const FilteredSongs = () => {
     const handlePlayPause = (song) => {
         playPause(song);
     };
+
+    useEffect(() => {
+        checkPurchase(song?.songid)
+    }, currentUser, song?.songid);
 
     const handleCart = async () => {
         const { addSongToCarto, removeSongFromCart } = await import('../index');
@@ -28,12 +37,22 @@ const FilteredSongs = () => {
         }
     };
 
-    const handleDownload = async (downloadLink) => {
-        try {
-            const { downloadSong } = await import('../index');
-            downloadSong(downloadLink);
-        } catch (error) {
-            console.log(error.message);
+    const handleDownload = async (downloadLink, song) => {
+        setSong(song);
+        if(currentUser) {
+            if (hasPurchased || song.isFree) {
+                // console.log(hasPurchased)
+                try {
+                    const { downloadSong } = await import('../index');
+                    downloadSong(downloadLink);
+                } catch (error) {
+                    console.log(error.message);
+                }
+            } else {
+                alert("You need to purchase this song before downloading.");
+            }
+        } else {
+            alert('sign up before you can download this free track!')
         }
     }
 
@@ -94,7 +113,7 @@ const FilteredSongs = () => {
                                 )}
                             </h1>
                             <h1>
-                                <MdOutlineFileDownload size={22} onClick={() => handleDownload(song.SongUrl)} />
+                                <MdOutlineFileDownload size={22} onClick={() => handleDownload(song.SongUrl, song)} />
                             </h1>
                         </div>
                     </div>

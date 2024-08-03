@@ -4,10 +4,14 @@ import { BsCart3 } from "react-icons/bs";
 import { MdDeleteSweep, MdOutlineFileDownload } from "react-icons/md";
 import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
+import { checkPurchaseContext } from "../context/downloadContext";
+import { AuthContext } from "../context/firebaseContext";
 
 const Song = ({ song }) => {
+    const { currentUser } = useContext(AuthContext);
     const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
+    const { checkPurchase, hasPurchased } = useContext(checkPurchaseContext);
     const [isInCart, setIsInCart] = useState(false);
 
     useEffect(() => {
@@ -26,15 +30,28 @@ const Song = ({ song }) => {
         }
     };
 
+    useEffect(() => {
+        checkPurchase(song.songid);
+    }, [currentUser, song.songid]);
+
     const handleDownload = async (downloadLink) => {
-        try {
-            const { downloadSong} = await import('../index');
-            downloadSong(downloadLink);
-        } catch (error) {
-            console.log(error.message);
+        if(currentUser) {
+            if (hasPurchased || song.isFree) {
+                // console.log(hasPurchased)
+                try {
+                    const { downloadSong } = await import('../index');
+                    downloadSong(downloadLink);
+                } catch (error) {
+                    console.log(error.message);
+                }
+            } else {
+                alert("You need to purchase this song before downloading.");
+            }
+        } else {
+            alert('sign up before you can download this free track!')
         }
-    }
-   
+    };
+
     return (
         <div className="song-card flex w-[99%] mx-auto my-1 shadow-md pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-52 bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
             <div className="hidden song-img w-[95%] mx-auto rounded-lg relative group md:block relative">

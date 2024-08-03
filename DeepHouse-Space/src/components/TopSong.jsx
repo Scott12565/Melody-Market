@@ -5,9 +5,13 @@ import { MdDeleteSweep, MdOutlineFileDownload } from "react-icons/md";
 import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
 import { SongContext } from "../context/songContext";
+import { AuthContext } from "../context/firebaseContext";
+import { checkPurchaseContext } from "../context/downloadContext";
 
 const TopSong = ({ topSong, index }) => {
-    const { handleDownload } = useContext(SongContext);
+    // const { handleDownload } = useContext(SongContext);
+    const { currentUser } = useContext(AuthContext);
+    const { checkPurchase, hasPurchased } = useContext(checkPurchaseContext);
     const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying} = useContext(musicPlayerContext);
     const [isInCart, setIsInCart] = useState(false);
@@ -28,6 +32,23 @@ const TopSong = ({ topSong, index }) => {
             removeSongFromCart(song.songid);
         }
     };
+
+    useEffect(() => {
+        checkPurchase(topSong.songid);
+    }, [currentUser, topSong.songid])
+
+    const handleDownload = async (downloadLink) => {
+        if(currentUser) {
+            if(hasPurchased || topSong.isFree){
+                try {
+                    const { downloadSong } = await import('../index');
+                    downloadSong(downloadLink);
+                } catch (err) {
+                    console.log(err.message);
+                }
+            }
+        }
+    }
 
     return (
         <div className="flex flex-1 justify-start items-center w-[97%] mx-auto space-x-3.5 text-gray-300 border-b py-2 md:w-[90%]">
