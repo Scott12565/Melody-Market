@@ -11,12 +11,18 @@ const Song = ({ song }) => {
     const { currentUser } = useContext(AuthContext);
     const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
-    const { checkPurchase, hasPurchased } = useContext(checkPurchaseContext);
+    const { checkPurchase, purchaseSong } = useContext(checkPurchaseContext);
     const [isInCart, setIsInCart] = useState(false);
+    const [hasPurchased, setHasPurchased] = useState(false);
 
     useEffect(() => {
         setIsInCart(musicItems.some(songItem => songItem.songid === song.songid));
     }, [musicItems, song.songid]);
+
+    useEffect(() => {
+        setHasPurchased(checkPurchase(song.songid));
+    }, [checkPurchase, song.songid]);
+
     const handlePlayPause = () => {
         playPause(song);
     };
@@ -30,14 +36,9 @@ const Song = ({ song }) => {
         }
     };
 
-    useEffect(() => {
-        checkPurchase(song.songid);
-    }, [currentUser, song.songid]);
-
     const handleDownload = async (downloadLink) => {
-        if(currentUser) {
+        if (currentUser) {
             if (hasPurchased || song.isFree) {
-                // console.log(hasPurchased)
                 try {
                     const { downloadSong } = await import('../index');
                     downloadSong(downloadLink);
@@ -48,7 +49,20 @@ const Song = ({ song }) => {
                 alert("You need to purchase this song before downloading.");
             }
         } else {
-            alert('sign up before you can download this free track!')
+            alert('Sign up before you can download this free track!');
+        }
+    };
+
+    const handlePurchase = async () => {
+        if (!hasPurchased && !song.isFree) {
+            try {
+                await purchaseSong(song.songid);
+                setHasPurchased(true); // Update local state immediately after purchase
+            } catch (err) {
+                alert(err.message);
+            }
+        } else {
+            console.log('Purchase unsuccessful');
         }
     };
 
@@ -90,7 +104,13 @@ const Song = ({ song }) => {
                 <span className="hidden text-[16px] px-1 text-gray-300 font-200 md:block">
                     {song?.releaseDate}
                 </span>
-
+                {
+                    !hasPurchased && !song.isFree && (
+                        <button onClick={handlePurchase} className="text-green-600 hover:text-green-600 bg-yellow-300 p-1 py-0.5  rounded-md ">
+                            Buy
+                        </button>
+                    )
+                }
                 <div className=" text-gray-100 flex space-x-2 justify-center items-center text-[25px] md:hidden">
                     <h1 className="text-yellow-200 hover:text-yellow-100">
                         {currentSong?.songid === song.songid && isPlaying ? (
