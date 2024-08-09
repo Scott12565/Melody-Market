@@ -66,7 +66,7 @@ const SignIn = ({ closeSignIn }) => {
                             value={password} 
                             onChange={e => setPassword(e.target.value)}
                         />
-                        <Link to="/passwordreset" className="block text-end text-blue-600 py-3 pt-0 text-lg hover:underline">Forgot password?</Link>
+                        <Link to="/resetpassword" className="block text-end text-blue-600 py-3 pt-0 text-lg hover:underline">Forgot password?</Link>
                         <button className="btn cursor-pointer hover:bg-gray-500 hover:text-gray-100 font-semibold mb-2">Sign In</button>
                     </form>
                     {currentUser && <Redirect to="/" />}

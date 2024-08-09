@@ -24,8 +24,12 @@ const CartContextProvider = ({ children }) => {
         }
     }, [auth.currentUser?.uid]);
 
+    const calculateTotalAmount = () => {
+        return musicItems?.reduce((total, item) => total + item.Price, 0);
+    };
+    
     return (
-        <cartContext.Provider value={{ musicItems}}>
+        <cartContext.Provider value={{ musicItems, calculateTotalAmount}}>
             {children}
         </cartContext.Provider>
     );

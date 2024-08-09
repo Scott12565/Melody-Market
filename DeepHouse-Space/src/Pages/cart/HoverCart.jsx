@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cartContext } from "../../context/CartContext";
+import { formatCurrency } from "../../utils/currencyformater";
 
 const HoverCart = () => {
-
-    const { musicItems } = useContext(cartContext);
+    const { musicItems, calculateTotalAmount } = useContext(cartContext);
     
     return ( 
         <div className="my-1 text-lg flex flex-col">
@@ -16,7 +16,7 @@ const HoverCart = () => {
                 </h2>
                 <h2 className="flex justify-between items-center">
                     <p>Total Amount</p>
-                    <span>R130.75</span>
+                    <span>{formatCurrency(calculateTotalAmount())}</span>
                 </h2>
                 <div className="space-y-3 py-4">
                 <Link to="/collection" className="block text-center transition-all duration-500 transform scale-95 text-[1.1rem] w-full text-gray-900 bg-gray-300 rounded-md mx-auto py-1 px-1.5 hover:bg-slate-400 hover:scale-100">

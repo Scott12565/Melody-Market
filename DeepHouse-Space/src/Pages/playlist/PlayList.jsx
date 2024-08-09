@@ -4,6 +4,7 @@ import { MdDeleteSweep } from "react-icons/md";
 import { musicPlayerContext } from "../../context/musicPlayerContext";
 import { playlistContext } from "../../context/PlayListContext";
 import { Helmet } from "react-helmet-async";
+import { formatCurrency } from "../../utils/currencyformater";
 
 const PlayList = () => {
     const { playlist } = useContext(playlistContext);
@@ -62,7 +63,7 @@ const PlayList = () => {
 
                                         <div className="flex flex-col text-[1rem]">
                                             <p>{song?.Genre}</p>
-                                            <p>{song?.Price}</p>
+                                            <p className="text-yellow-500">{formatCurrency(song?.Price)}</p>
                                         </div>
 
                                         <div className="flex items-start space-x-1">

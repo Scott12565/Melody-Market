@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useLocation } from "react-router-dom";
 import { Suspense, lazy, useContext } from "react";
 import CartContextProvider from "./context/CartContext";
 import MusicPlayerContextProvider from "./context/musicPlayerContext";
@@ -23,60 +23,58 @@ const Collections = lazy(() => import("./Pages/Colections"));
 
 function App() {
   const { showSideBar } = useContext(SongContext);
-  const { currentUser } = useContext(AuthContext)
-  
+  const { currentUser } = useContext(AuthContext);
+
   return (
-      <PlayListContextProvider >
+    <Router>
+      <PlayListContextProvider>
         <CartContextProvider>
           <MusicPlayerContextProvider>
-          <CheckPurchaseProvider >
+            <CheckPurchaseProvider>
+              <Suspense fallback={<Loaders />}>
+                <div className="App flex flex-col">
+                  <Navbar />
 
-          
-            <Router>
-            <Suspense fallback={<Loaders />} >
-              <div className="App flex flex-col">
-                <Navbar />
-                
-                <div className="flex flex-1 h-[calc(100vh - 80px)] gap-5">
-                  <div className={`sidebar fixed top-0 left-0 z-50 h-full transition-all duration-200 ease-in-out transform ${showSideBar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} lg:static lg:h-[auto]`}>
-                    <SideBar />
-                  </div>
-                  
-                  <div className="flex flex-col-reverse w-full gap-5 lg:flex-row">
-                    <div className="w-[90%] mx-auto lg:w-[73%]">
-                      <Switch>
-                        <Route path="/" exact>
-                          <Home />
-                        </Route>
-                        <ProtectedRoutes path="/allsongs" component={AllSongs} currentUser={currentUser} />
-                        <ProtectedRoutes path="/collection" component={Collections} currentUser={currentUser} />
-                        <ProtectedRoutes path="/playlist" component={PlayList} currentUser={currentUser} />
-                        <Route path="/signin">
-                          <SignIn />
-                        </Route>
-                        <Route path="/signup">
-                          <SignUp />
-                        </Route>
-                        <Route path="/resetpassword">
-                          <PasswordReset />
-                        </Route>
-                      </Switch>
+                  <div className="flex flex-1 h-[calc(100vh - 80px)] gap-5">
+                    <div className={`sidebar fixed top-0 left-0 z-50 h-full transition-all duration-200 ease-in-out transform ${showSideBar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} lg:static lg:h-[auto]`}>
+                      <SideBar />
                     </div>
-                    <div className="w-[90%] mx-auto lg:w-[40%] xl:w-[27%]">
-                      <TopSongs />
+
+                    <div className="flex flex-col-reverse w-full gap-5 lg:flex-row">
+                      <div className="w-[90%] mx-auto lg:w-[73%]">
+                        <Switch>
+                          <Route path="/" exact>
+                            <Home />
+                          </Route>
+                          <ProtectedRoutes path="/allsongs" component={AllSongs} currentUser={currentUser} />
+                          <ProtectedRoutes path="/collection" component={Collections} currentUser={currentUser} />
+                          <ProtectedRoutes path="/playlist" component={PlayList} currentUser={currentUser} />
+                          <Route path="/signin">
+                            <SignIn />
+                          </Route>
+                          <Route path="/signup">
+                            <SignUp />
+                          </Route>
+                          <Route path="/resetpassword">
+                            <PasswordReset />
+                          </Route>
+                        </Switch>
+                      </div>
+                      <div className="w-[90%] mx-auto lg:w-[40%] xl:w-[27%]">
+                        {
+                          (location.pathname !== "/collection" && location.pathname !== "/playlist") && (<TopSongs />)
+                        }
+                      </div>
                     </div>
                   </div>
+                  <Player />
                 </div>
-                <Player />
-              </div>
-            </Suspense>
-            </Router>
+              </Suspense>
             </CheckPurchaseProvider>
           </MusicPlayerContextProvider>
         </CartContextProvider>
       </PlayListContextProvider>
-     
-    
+    </Router>
   );
 }
 

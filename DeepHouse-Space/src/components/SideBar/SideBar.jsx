@@ -8,7 +8,7 @@ const SideBar = () => {
     return ( 
         <div className="w-[250px] md:w-[300px] lg:w-[225px]  flex flex-col justify-start items-start  text-gray-300 bg-blue-400 opacity-[98] h-full">
 
-            <div id="brand" className="w-full flex justify-between items-center py-2 my-1 pl-1.5 lg:hidden ">
+            <div id="brand" className="w-full flex justify-between items-center py-1 my-1 pl-1.5 lg:hidden ">
                 {/* Brand name */}
                 <h3 className="flex items-center">
                     <Link to="/" className="md:text-[18px] font-semibold text-yellow-300 "> DeepHouse Space </Link>

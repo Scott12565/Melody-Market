@@ -1,7 +1,11 @@
 import { Helmet } from "react-helmet-async";
+import { cartContext } from "../context/CartContext";
 import CartPage from "./cart/CartPage";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const Collections = () => {
+    const { musicItems } = useContext(cartContext);
     return ( 
         <>
             <Helmet >
@@ -14,7 +18,21 @@ const Collections = () => {
                 <meta property="og:url" content="https://deephousespace.web.app/collections" />
                 
             </Helmet>
-            <CartPage />
+            <div>
+                <div className="text-gray-300 text-lg font-medium my-1 mx-4 p-2 md:my-9 flex justify-between items-center md:text-xl lg:my-5 lg:mx-5">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl">Collction Cart</h3>
+                    <Link to="/checkout" className="transition-all duration-300 transform scale-95 text-lg text-gray-900 bg-gray-300 rounded-md py-1.5 px-2 hover:bg-slate-400 hover:scale-100 md:text-[1.4rem]">
+                        <button>CheckOut</button>
+                    </Link>
+                </div>
+
+                {
+                musicItems.map((song, index) => (
+                    <CartPage key={song.songid} song={song} index={index} />
+                ))
+            }
+            </div>
+            
         </>
      );
 }

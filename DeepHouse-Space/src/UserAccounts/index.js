@@ -3,56 +3,54 @@ import {
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword,
     signOut, 
-    sendPasswordResetEmail 
+    sendPasswordResetEmail, 
+    sendEmailVerification
 } from "firebase/auth"; 
  
     // Sign Up
-    const signUp = (email, password, setCurrentUser) => {
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
+    const signUp = async (email, password, setCurrentUser) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
+            await sendEmailVerification(user);
+            alert('Please verify your account before you continue!')
             setCurrentUser(user);
-          }).catch((error) => {
-            const errorMessage = error.message;
-            setError('Email already exist, use different email', errorMessage);
-          });
+        } catch (err) {
+            alert(err.message);
+        }
     };
 
     // Sign In
-    const signIn = (setCurrentUser, email, password) => {
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+    const signIn = async (setCurrentUser, email, password) => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
             const user = userCredential.user;
-            setCurrentUser(user);
-        })
-        .catch((error) => {
-            let errorMessage = error.message;
-            errorMessage = 'Invalid Email or Password!'
-            console.log(errorMessage)
-        });
+            if(!user.emailVerified){
+                setCurrentUser(user);
+                alert('Please verify your email');
+            }
+        } catch (err) {
+            console.log('Invalid Email or Password');
+        }
     };
 
     // Sign Out
-    const userSignOut = (setCurrentUser) => {
-        signOut(auth)
-        .then(() => {
-            setCurrentUser(null);
-            console.log("Successfully signed out");
-        }).catch((error) => {
-            console.log("Failed to sign out: ", error);
-        });
+    const userSignOut = async (setCurrentUser) => {
+        try {
+            await signOut(auth)
+        } catch (err) {
+            alert(err.message);
+        }
     };
 
     // resetEmail
-    const passwordReset = email => {
-        sendPasswordResetEmail(auth, email)
-        .then(() => {
+    const passwordReset = async email => {
+        try {
+            await sendPasswordResetEmail(auth, email)
             console.log('email sent');
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        });
+        } catch (error) {
+            alert('Check your email inbox for password reset link');
+        } 
     }
 
     export { signUp, signIn, userSignOut, passwordReset }

@@ -21,7 +21,9 @@ const Home = () => {
         </Helmet>
         <section className="pb-5">
             { filteredSongs?.length > 0 ? (
-                <FilteredSongs />
+                filteredSongs.map(filteredSong => (
+                    <FilteredSongs song={filteredSong} />
+                ))
             ) : (
                 <>
                     <div className="hidden lg:block">

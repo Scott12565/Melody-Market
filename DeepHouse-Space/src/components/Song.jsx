@@ -6,6 +6,7 @@ import { cartContext } from "../context/CartContext";
 import { musicPlayerContext } from "../context/musicPlayerContext";
 import { checkPurchaseContext } from "../context/downloadContext";
 import { AuthContext } from "../context/firebaseContext";
+import { formatCurrency } from "../utils/currencyformater";
 
 const Song = ({ song }) => {
     const { currentUser } = useContext(AuthContext);
@@ -57,7 +58,7 @@ const Song = ({ song }) => {
         if (!hasPurchased && !song.isFree) {
             try {
                 await purchaseSong(song.songid);
-                setHasPurchased(true); // Update local state immediately after purchase
+                setHasPurchased(true);
             } catch (err) {
                 alert(err.message);
             }
@@ -70,7 +71,7 @@ const Song = ({ song }) => {
         <div className="song-card flex w-[99%] mx-auto my-1 shadow-md pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-52 bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
             <div className="hidden song-img w-[95%] mx-auto rounded-lg relative group md:block relative">
                 <div className="absolute top-1 right-1 text-sm bg-yellow-300 text-gray-600 p-1 rounded-sm">
-                    {song.Price}
+                    {formatCurrency(song.Price)}
                 </div>
                 <img src={song?.ImgUrl} loading="lazy" alt={`cover image for ${song?.SongTitle} by: ${song.Artist} song`} className="h-full bg-orange-400 rounded-lg" />
 
@@ -100,13 +101,13 @@ const Song = ({ song }) => {
                     <h1 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.SongTitle}</h1>
                     <h2 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.Artist}</h2>
                 </div>
-                <h3 className="px-1.5 text-gray-300 font-200 text-[14px]">{song?.Genre}</h3>
-                <span className="hidden text-[16px] px-1 text-gray-300 font-200 md:block">
+                <h3 className="px-1.5 text-gray-300 font-200 text-[15px]">{song?.Genre}</h3>
+                <span className="hidden text-[15px] px-1 text-gray-300 font-200 md:block">
                     {song?.releaseDate}
                 </span>
                 {
                     !hasPurchased && !song.isFree && (
-                        <button onClick={handlePurchase} className="text-green-600 hover:text-green-600 bg-yellow-300 p-1 py-0.5  rounded-md ">
+                        <button onClick={handlePurchase} className="text-green-600 hover:text-green-600 bg-yellow-300 px-1.5 py-0 my-2 rounded-md ">
                             Buy
                         </button>
                     )
