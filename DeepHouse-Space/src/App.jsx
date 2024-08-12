@@ -60,7 +60,8 @@ function App() {
                           </Route>
                         </Switch>
                       </div>
-                      <div className="w-[90%] mx-auto lg:w-[40%] xl:w-[27%]">
+                      
+                      <div className="w-[90%] mx-auto lg:w-[40%] xl:w-[27%] ">
                         {
                           (location.pathname !== "/collection" && location.pathname !== "/playlist") && (<TopSongs />)
                         }

@@ -66,7 +66,7 @@ const PlayList = () => {
                                             <p className="text-yellow-500">{formatCurrency(song?.Price)}</p>
                                         </div>
 
-                                        <div className="flex items-start space-x-1">
+                                        <div className="flex items-center space-x-1">
                                             <h1 className="text-yellow-200 hover:text-yellow-100">
                                                 {currentSong?.songid === song.songid && isPlaying ? (
                                                     <LuPause size={22} onClick={() => handlePlayPause(song)} className="cursor-pointer" />

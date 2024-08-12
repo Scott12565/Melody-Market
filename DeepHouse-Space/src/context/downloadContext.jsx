@@ -33,7 +33,6 @@ const CheckPurchaseProvider = ({children}) => {
     };
 
     const purchaseSong = async (songid) => {
-        if (currentUser) {
             const docRef = doc(db, `users/${currentUser.uid}`);
             try {
                 await updateDoc(docRef, {
@@ -44,10 +43,7 @@ const CheckPurchaseProvider = ({children}) => {
             } catch (err) {
                 console.log(err.message);
             }
-        } else {
-            alert('You need to log in before purchasing this song');
         }
-    };
 
     return (
         <checkPurchaseContext.Provider value={{ checkPurchase, purchaseSong }}>

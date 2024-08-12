@@ -57,7 +57,7 @@ const Navbar = () => {
     return (
         <>
             {/* header */}
-            <header className="px-2.5 bg-gray-800 flex justify-between items-center mx-auto h-20 w-full sticky top-0 z-50 lg:z-[100]">
+            <header className="px-2.5 bg-[#0E1411] flex justify-between items-center mx-auto h-20 w-full sticky top-0 z-50 lg:z-[100]">
                 {error && <div>{error}</div>}
                 <div className="flex justify-between items-center py-5 w-full md:w-[93%] md:mx-auto lg:w-10/12 lg:mx-auto">
                     <div id="brand" className="hidden lg:block p1 md:pl-1.5 lg:p-2">

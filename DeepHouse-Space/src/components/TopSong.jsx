@@ -66,17 +66,17 @@ const TopSong = ({ topSong, index }) => {
                         {currentSong?.songid === topSong.songid && isPlaying ? (
                             <LuPause size={23} onClick={handlePlayPause} className="cursor-pointer" />
                         ) : (
-                            <LuPlay size={23} onClick={handlePlayPause} className="cursor-pointer" />
+                            <LuPlay size={23} onClick={handlePlayPause} className="cursor-pointer text-[#F9E165]" />
                         )}
                     </span>
                     <span className="">
                         {isInCart ? (
-                            <MdDeleteSweep size={23} onClick={() => handleCart(topSong)} className="cursor-pointer" />
+                            <MdDeleteSweep size={23} onClick={() => handleCart(topSong)} className="cursor-pointer text-red-600" />
                         ) : (
-                            <BsCart3 size={23} onClick={() => handleCart(topSong)} className="cursor-pointer" />
+                            <BsCart3 size={23} onClick={() => handleCart(topSong)} className="cursor-pointer text-[#F9E165] " />
                         )}
                     </span>
-                    <span className=""onClick={() => handleDownload(topSong.SongUrl)} >
+                    <span className="text-[#F9E165]" onClick={() => handleDownload(topSong.SongUrl)} >
                         <MdOutlineFileDownload size={23} />
                     </span>
                 </div>

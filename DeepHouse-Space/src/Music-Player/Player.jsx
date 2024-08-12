@@ -4,6 +4,7 @@ import { LuPause, LuPlay } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
 import { MdPlaylistAdd, MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { TbPlayerTrackNext, TbPlayerTrackPrev } from "react-icons/tb";
+import { formatCurrency } from "../utils/currencyformater";
 
 const Player = () => {
   const {
@@ -37,7 +38,7 @@ const Player = () => {
   };
 
   return (
-    <div className={`fixed bottom-0 left-0 z-50 w-screen p-1 px-3 bg-gray-700 opacity-[75] transition-all duration-300 ease-in-out ${isCollapsed ? 'h-12' : 'h-auto'} ${currentSong ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+    <div className={`fixed bottom-0 left-0 z-50 w-screen p-1 px-3 bg-[#0E1411] opacity-[75] transition-all duration-300 ease-in-out ${isCollapsed ? 'h-12' : 'h-auto'} ${currentSong ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
       <div className="flex justify-between items-center w-full">
         <button onClick={toggleCollapse} className="text-gray-300">
           {isCollapsed ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
@@ -60,21 +61,21 @@ const Player = () => {
                     <TbPlayerTrackPrev />
                   </button>
                   <button onClick={handlePlayPause} className="text-[29px] text-gray-300 cursor-pointer md:text-[34px] lg:text-[39px]">
-                    {isPlaying ? <LuPause /> : <LuPlay />}
+                    {isPlaying ? <LuPause /> : <LuPlay className="text-[#f9e165]"/>}
                   </button>
                   <button onClick={nextSong} className="text-[24px] text-gray-300 cursor-pointer md:text-[27px] lg:text-[35px]">
                     <TbPlayerTrackNext />
                   </button>
                 </div>
-                <div className="bg-blue-400 text-center rounded-lg p-2 sm:p-4 flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 md:hidden">
+                <div className="bg-[#F9E165] text-center rounded-lg p-2 sm:p-4 flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 md:hidden">
                   <div className="cart-buttons flex items-center space-x-2 sm:space-x-4">
-                    <button className="text-[24px] text-gray-300 md:text-[35px]">
+                    <button className="text-[24px] text-gray-800 md:text-[35px]">
                       <MdPlaylistAdd />
                     </button>
-                    <button className="text-[24px] text-gray-300 md:text-[35px]">
+                    <button className="text-[24px] text-gray-800 md:text-[35px]">
                       <BsCart3 />
                     </button>
-                    <span className="text-[18px] text-gray-300 md:text-[20px]">Price</span>
+                    <span className="text-[16px] text-gray-300 bg-gray-800 md:text-[20px]">{formatCurrency(currentSong?.Price)}</span>
                   </div>
                 </div>
               </div>
@@ -94,7 +95,7 @@ const Player = () => {
                     padding: 0
                   }}
                 />
-                <div className="bg-blue-200 h-[3px] w-full absolute bottom-2 left-0 rounded-full" />
+                <div className="bg-[#8C4096] h-[3px] w-full absolute bottom-2 left-0 rounded-full" />
                 <div
                   className="bg-black h-[3px] absolute bottom-2 left-0 rounded-2xl"
                   style={{
@@ -104,15 +105,15 @@ const Player = () => {
                 />
               </div>
             </div>
-            <div className="hidden bg-blue-400 text-center rounded-lg p-2 flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 md:block">
-              <div className="cart-buttons flex items-center space-x-2 md:space-x-4">
-                <button className="text-[24px] text-gray-300 md:text-[27px]">
+            <div className="hidden bg-[#F9E165] text-center rounded-lg p-2 pt-2 flex flex-col sm:flex-row items-center justify-between space-y-2 md:space-y-5 md:block">
+              <div className="cart-buttons flex items-center space-x-2 md:space-x-3">
+                <button className="text-[24px] text-gray-800 md:text-[27px]">
                   <MdPlaylistAdd />
                 </button>
-                <button className="text-[24px] text-gray-300 md:text-[27px]">
+                <button className="text-[24px] text-gray-800 md:text-[27px]">
                   <BsCart3 />
                 </button>
-                <span className="text-[18px] text-gray-300 bg-gray-800 opacity-95 p-1 md:text-[19px]">{currentSong?.Price}</span>
+                <span className="text-[18px] text-gray-300 bg-gray-800 opacity-95 p-1 md:text-[19px]">{formatCurrency(currentSong?.Price)}</span>
               </div>
             </div>
           </div>

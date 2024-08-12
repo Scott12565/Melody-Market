@@ -13,6 +13,11 @@ body{
     font-family: 'Roboto', sans-serif;
     
 }
+.sidebar{
+    background: #F9E165;
+    color: #0E1411;
+    
+}
 /* 
 .form-group{
     opacity: 1;
@@ -39,11 +44,7 @@ body{
 }
 
 .hover{
-    @apply text-gray-300 hover:bg-slate-800 md:hover:rounded-lg py-4 p-2 md:p-1.5 text-sm font-medium lg:text-lg 
-}
-
-.create-btn{
-
+    @apply text-[#0E1411] hover:bg-slate-800 md:hover:rounded-lg p-2 py-3  md:p-1.5 text-sm font-medium lg:text-lg hover:text-gray-300
 }
 
 .input-field, .btn{
@@ -72,19 +73,6 @@ label {
     @apply text-gray-300 text-lg
 }
 
-.hover-cart{
-
-}
-
-.cart-hover{
-
-}
-
-
-.audio-player{
-    /* width: 250px; */
-}
-
 .song-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -98,10 +86,6 @@ label {
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
-}
-
-.song-card:hover {
-    transform: scale(1.02);
 }
 
 .song-img {

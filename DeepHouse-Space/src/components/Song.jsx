@@ -55,20 +55,23 @@ const Song = ({ song }) => {
     };
 
     const handlePurchase = async () => {
-        if (!hasPurchased && !song.isFree) {
-            try {
-                await purchaseSong(song.songid);
-                setHasPurchased(true);
-            } catch (err) {
-                alert(err.message);
+        if(currentUser){
+            if (!hasPurchased && !song.isFree) {
+                try {
+                    await purchaseSong(song.songid);
+                    setHasPurchased(true);
+                } catch (err) {
+                    console.log('Purchase unsuccessful');    
+                }
+                return;
             }
-        } else {
-            console.log('Purchase unsuccessful');
+        } else{
+            alert('please log in before purchasing this song!');
         }
     };
 
     return (
-        <div className="song-card flex w-[99%] mx-auto my-1 shadow-md pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-52 bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
+        <div className="song-card flex w-[99%] mx-auto my-1 shadow-md pt-2 transition-transform ease-in-out duration-500 transform border-b cursor-pointer md:flex-col md:w-[20rem] lg:w-[18.5rem] bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
             <div className="hidden song-img w-[95%] mx-auto rounded-lg relative group md:block relative">
                 <div className="absolute top-1 right-1 text-sm bg-yellow-300 text-gray-600 p-1 rounded-sm">
                     {formatCurrency(song.Price)}
@@ -98,8 +101,8 @@ const Song = ({ song }) => {
 
             <div className="card-body flex justify-between items-center w-full my-2 py-0 px-1.5 text-[16px] mx-auto md:w-[95%] md:block md:py-1.5">
                 <div>
-                    <h1 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.SongTitle}</h1>
-                    <h2 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.Artist}</h2>
+                    <h1 className="px-1 text-gray-300 font-200 text-sm md:text-2xl">{song?.SongTitle}</h1>
+                    <h2 className="px-1 text-gray-300 font-200 text-[17px] md:text-lg">{song?.Artist}</h2>
                 </div>
                 <h3 className="px-1.5 text-gray-300 font-200 text-[15px]">{song?.Genre}</h3>
                 <span className="hidden text-[15px] px-1 text-gray-300 font-200 md:block">
@@ -107,9 +110,9 @@ const Song = ({ song }) => {
                 </span>
                 {
                     !hasPurchased && !song.isFree && (
-                        <button onClick={handlePurchase} className="text-green-600 hover:text-green-600 bg-yellow-300 px-1.5 py-0 my-2 rounded-md ">
+                        <a href="google.com" target="_blank" onClick={handlePurchase} className="text-green-600 hover:text-green-600 bg-yellow-300 p-2 text-lg my-2 rounded-md ">
                             Buy
-                        </button>
+                        </a>
                     )
                 }
                 <div className=" text-gray-100 flex space-x-2 justify-center items-center text-[25px] md:hidden">

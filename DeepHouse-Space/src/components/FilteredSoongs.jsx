@@ -68,7 +68,7 @@ const FilteredSongs = ({ song }) => {
 
     return (
         <div className=" flex flex-wrap justify-center">
-                <div className="song-card flex w-[99%] mx-auto my-1 shadow-transparent pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-52 md:bg-gray-600 md:border-0 md:shadow-2xl md:rounded-lg">
+                <div className="song-card flex w-[99%] mx-auto my-1 shadow-transparent pt-2 transition-transform ease-in-out duration-500 transform scale-100 border-b hover:scale-105 hover:cursor-pointer md:flex-col md:w-[20rem] md:bg-gray-600 md:border-0 md:shadow-2xl md:rounded-lg">
                     <div className="hidden song-img w-95 mx-auto rounded-lg relative group md:block relative">
                         <div className="absolute top-1 right-1 text-sm bg-yellow-300 text-gray-800 p-1 rounded-md">
                             {formatCurrency(song.Price)}
@@ -98,7 +98,7 @@ const FilteredSongs = ({ song }) => {
 
                     <div className="card-body flex justify-between items-center w-full my-2 py-0 px-1.5 text-17 mx-auto md:w-[95%] md:block md:py-1.5 space-x-2">
                         <div>
-                            <h1 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.SongTitle}</h1>
+                            <h1 className="px-1 text-gray-300 font-200 md:text-2xl">{song?.SongTitle}</h1>
                             <h2 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.Artist}</h2>
                         </div>
                         <h3 className=" text-gray-300 font-200 text-[15px]">{song?.Genre}</h3>
@@ -107,9 +107,9 @@ const FilteredSongs = ({ song }) => {
                         </span>
                         {
                             !hasPurchased && !song.isFree && (
-                                <button onClick={handlePurchase} className="text-green-600 hover:text-green-800 bg-yellow-300 p-1 py-0.5 cursor-pointer my-2 rounded-md ">
-                                    Buy
-                                </button>
+                                <a href="google.com" target="_blank" onClick={handlePurchase} className="text-green-600 hover:text-green-600 bg-yellow-300 p-2 text-lg my-10 rounded-md ">
+                            Buy
+                        </a>
                             )
                         }
                         <div className=" text-gray-100 flex space-x-2 justify-center items-center text-25 md:hidden">
