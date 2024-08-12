@@ -15,7 +15,6 @@ const SideBar = () => {
                 }
             }
         };
-
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [handleSideBar, showSideBar]);
@@ -23,9 +22,7 @@ const SideBar = () => {
     return (
         <div
             ref={sidebarRef}
-            className={`sidebar w-[250px] md:w-[300px] lg:w-[225px] fixed top-0 left-0 z-50 h-full bg-white transition-transform duration-300 ease-in-out ${
-                showSideBar ? 'translate-x-0' : '-translate-x-full'
-            }`}
+            className={`sidebar w-[250px] md:w-[300px] lg:w-[225px] fixed top-0 left-0 z-50 h-full bg-white transition-transform duration-300 ease-in-out ${showSideBar ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:h-auto lg:flex lg:flex-col lg:items-start`}
         >
             <div id="brand" className="w-full flex justify-between items-center py-1 my-1 pl-1.5 lg:hidden">
                 {/* Brand name */}
@@ -53,7 +50,7 @@ const SideBar = () => {
                     </div>
                 </div>
 
-                <Link to="createplaylist" className="my-5 mx-1.5 p-1.5 lg:p-2 bg-yellow-300 text-gray-900 text-sm rounded-lg border-0 hover:bg-yellow-500 hover:text-gray-100 font-semibold lg:font-semibold lg:text-lg" onClick={handleSideBar}>
+                <Link to="/createplaylist" className="my-5 mx-1.5 p-1.5 lg:p-2 bg-yellow-300 text-gray-900 text-sm rounded-lg border-0 hover:bg-yellow-500 hover:text-gray-100 font-semibold lg:font-semibold lg:text-lg" onClick={handleSideBar}>
                     <button>Create PlayList</button>
                 </Link>
             </div>

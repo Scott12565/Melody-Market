@@ -1,26 +1,27 @@
-import { useContext, useState } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../context/firebaseContext";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Loader from "../components/Loaders";
 import { Helmet } from "react-helmet-async";
+import { IoCloseOutline } from "react-icons/io5";
 
-const SignIn = ({ closeSignIn }) => {
+const SignIn = () => {
     const { currentUser, setCurrentUser, error } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [loading, setLoading] = useState(false); // Add loading state
+    const [loading, setLoading] = useState(false);
+    const history = useHistory();
 
     const handleSignIn = async (e) => {
         e.preventDefault();
         
-        setLoading(true); // Set loading to true before starting the sign-in process
+        setLoading(true);
     
         try {
             setErrorMessage('');
             const { signIn } = await import('../UserAccounts/index');
             await signIn(setCurrentUser, email, password);
-            closeSignIn();
         } catch (error) {
             console.log(error);
             setErrorMessage("Failed to sign in. Please check your credentials and try again.");
@@ -29,21 +30,28 @@ const SignIn = ({ closeSignIn }) => {
         }
     };
 
+    const handleClose = () => {
+        history.push('/'); // Redirect to home page
+    };
+
     return (
         <>
-            <Helmet >
-            <title>DeepHouse Space - Sign In</title>
-            <meta name="description" content="Sign in to DeepHouse Space to purchase your favorite deep house tracks. Secure and easy login for music enthusiasts!" />
-            <meta name="keywords" content="deep house music, deephouse space, login, sign in, deep house space, music store" />
-            <meta property="og:title" content="DeepHouse Space - Sign In" />
-            <meta property="og:description" content="Sign in to DeepHouse Space to purchase your favorite deep house tracks. Secure and easy login for music enthusiasts." />
-            <meta property="og:type" content="website" />
-            <meta property="og:url" content="https://deephousespace.web.app/signin" />
+            <Helmet>
+                <title>DeepHouse Space - Sign In</title>
+                <meta name="description" content="Sign in to DeepHouse Space to purchase your favorite deep house tracks. Secure and easy login for music enthusiasts!" />
+                <meta name="keywords" content="deep house music, deephouse space, login, sign in, deep house space, music store" />
+                <meta property="og:title" content="DeepHouse Space - Sign In" />
+                <meta property="og:description" content="Sign in to DeepHouse Space to purchase your favorite deep house tracks. Secure and easy login for music enthusiasts." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://deephousespace.web.app/signin" />
             </Helmet>
-            {loading && <Loader />} {/* Show the loader if loading is true */}
+            {loading && <Loader />}
             <div className="flex flex-col fixed top-20 left-0 z-[110] bg-gray-800 opacity-95 w-full h-screen overflow-y-hidden overscroll-y-none">
                 <div className="form-group bg-black shadow-lg rounded-2xl w-[95%] mt-12 mx-auto md:w-[65%] lg:w-[35%] md:mt-14 lg:mt-24">
-                    <h1 className="text-2xl font-semibold text-gray-300 text-start py-3 pb-0 pt-6 px-9">Sign In</h1>
+                    <div className="flex justify-between items-center px-6 py-3">
+                        <h1 className="text-2xl font-semibold text-gray-300">Sign In</h1>
+                        <IoCloseOutline size={30} onClick={handleClose} className="text-white cursor-pointer" />
+                    </div>
                     <form className="form-control w-[90%] mx-auto my-3 mb-0 px-4 py-3 pb-1" onSubmit={handleSignIn}>
                         {error && (
                             <div className="text-red-400 text-[1rem] py-[1px] w-[98%] mx-auto my-1">{error}</div>
