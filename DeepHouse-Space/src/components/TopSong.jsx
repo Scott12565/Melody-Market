@@ -7,6 +7,7 @@ import { musicPlayerContext } from "../context/musicPlayerContext";
 import { SongContext } from "../context/songContext";
 import { AuthContext } from "../context/firebaseContext";
 import { checkPurchaseContext } from "../context/downloadContext";
+import { formatCurrency } from "../utils/currencyformater";
 
 const TopSong = ({ topSong, index }) => {
     // const { handleDownload } = useContext(SongContext);
@@ -55,12 +56,15 @@ const TopSong = ({ topSong, index }) => {
             <span className="text-lg text-white font-medium">
                 {index + 1}.
             </span>
-            <img src={topSong.ImgUrl} loading="lazy" alt={`cover image for ${topSong.SongTitle} by ${topSong.Artist} song`} className="w-[95px] rounded-sm" />
-            <div className="flex justify-between items-start text-gray-300 text-sm space-y-2 lg:flex-col w-full">
-                <div>
+            <img src={topSong.ImgUrl} loading="lazy" alt={`cover image for ${topSong.SongTitle} by ${topSong.Artist} song`} className="hidden md:block w-[95px] rounded-sm" />
+            <div className="flex justify-between items-start text-gray-300 text-sm space-y-3 lg:flex-col space-y-1 w-full">
+                <div className="space-y-1">
                     <h4 className="text-[16px] font-medium">{topSong.SongTitle}</h4>
                     <p>{topSong.Artist}</p>
                 </div>
+
+                <p className="text-[#0E1411] bg-[#F9E165] cursor-pointer p-1 rounded-md">{formatCurrency(topSong?.Price)}</p>
+
                 <div className="flex justify-start items-center space-x-2">
                     <span className="">
                         {currentSong?.songid === topSong.songid && isPlaying ? (

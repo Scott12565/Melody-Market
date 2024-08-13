@@ -25,12 +25,14 @@ const Collections = () => {
                         <button>CheckOut</button>
                     </Link>
                 </div>
-
-                {
+                <div className="flex flex-col justify-start items-start w-[100%] mx-auto py-1.5 gap-y-5 border-l lg:border-none">
+                   {
                 musicItems.map((song, index) => (
                     <CartPage key={song.songid} song={song} index={index} />
                 ))
-            }
+            } 
+                </div>
+                
             </div>
             
         </>

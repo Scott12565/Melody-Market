@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/firebaseContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import Loader from "../components/Loaders";
 import { Helmet } from "react-helmet-async";
 import { IoCloseOutline } from "react-icons/io5";

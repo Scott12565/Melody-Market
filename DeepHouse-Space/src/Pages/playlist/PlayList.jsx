@@ -62,8 +62,8 @@ const PlayList = () => {
                                         </div>
 
                                         <div className="flex flex-col text-[1rem]">
-                                            <p>{song?.Genre}</p>
-                                            <p className="text-yellow-500">{formatCurrency(song?.Price)}</p>
+                                            <p className="hidden md:block">{song?.Genre}</p>
+                                            <p className="text-[#0E1411] bg-[#F9E165] cursor-pointer p-1 rounded-md">{formatCurrency(song?.Price)}</p>
                                         </div>
 
                                         <div className="flex items-center space-x-1">

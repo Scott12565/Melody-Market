@@ -101,18 +101,19 @@ const FilteredSongs = ({ song }) => {
                             <h1 className="px-1 text-gray-300 font-200 md:text-2xl">{song?.SongTitle}</h1>
                             <h2 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.Artist}</h2>
                         </div>
-                        <h3 className=" text-gray-300 font-200 text-[15px]">{song?.Genre}</h3>
+                        <h3 className=" hidden md:block px-1.5 text-gray-300 font-200 text-[15px]">{song?.Genre}</h3>
                         <span className="hidden text-[15px] px-0 text-gray-300 font-200 md:block">
                             {song?.releaseDate}
                         </span>
-                        {
-                            !hasPurchased && !song.isFree && (
-                                <a href="google.com" target="_blank" onClick={handlePurchase} className="text-green-600 hover:text-green-600 bg-yellow-300 p-2 text-lg my-10 rounded-md ">
-                            Buy
-                        </a>
-                            )
-                        }
+                        
                         <div className=" text-gray-100 flex space-x-2 justify-center items-center text-25 md:hidden">
+                            {
+                                !hasPurchased && !song.isFree && (
+                                    <a href="google.com" target="_blank" onClick={handlePurchase} className="text-green-600 text-[15px] hover:text-green-600 bg-yellow-300 py-[1px] px-1.5 md:p-2 md:text-lg my-2 rounded-md ">
+                                Buy
+                            </a>
+                                )
+                            }
                             <h1 className="text-yellow-200 hover:text-yellow-100">
                                 {currentSong?.songid === song.songid && isPlaying ? (
                                     <LuPause size={20} onClick={() => handlePlayPause(song)} className="cursor-pointer" />

@@ -71,7 +71,7 @@ const Song = ({ song }) => {
     };
 
     return (
-        <div className="song-card flex w-[99%] mx-auto my-1 shadow-md pt-2 transition-transform ease-in-out duration-500 transform border-b cursor-pointer md:flex-col md:w-[20rem] lg:w-[18.5rem] bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
+        <div className=" song-card flex w-[99%] mx-auto my-1 shadow-md pt-2 transition-transform ease-in-out duration-500 transform border-b cursor-pointer md:flex-col md:w-[20rem] lg:w-[18.5rem] bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
             <div className="hidden song-img w-[95%] mx-auto rounded-lg relative group md:block relative">
                 <div className="absolute top-1 right-1 text-sm bg-yellow-300 text-gray-600 p-1 rounded-sm">
                     {formatCurrency(song.Price)}
@@ -101,21 +101,24 @@ const Song = ({ song }) => {
 
             <div className="card-body flex justify-between items-center w-full my-2 py-0 px-1.5 text-[16px] mx-auto md:w-[95%] md:block md:py-1.5">
                 <div>
-                    <h1 className="px-1 text-gray-300 font-200 text-sm md:text-2xl">{song?.SongTitle}</h1>
-                    <h2 className="px-1 text-gray-300 font-200 text-[17px] md:text-lg">{song?.Artist}</h2>
+                    <h1 className="px-1 text-gray-300 font-200 md:text-2xl">{song?.SongTitle}</h1>
+                    <h2 className="px-1 text-gray-300 font-200 text-sm md:text-lg">{song?.Artist}</h2>
                 </div>
-                <h3 className="px-1.5 text-gray-300 font-200 text-[15px]">{song?.Genre}</h3>
+                <h3 className=" hidden md:block px-1.5 text-gray-300 font-200 text-[15px]">{song?.Genre}</h3>
                 <span className="hidden text-[15px] px-1 text-gray-300 font-200 md:block">
                     {song?.releaseDate}
                 </span>
+                <span>
                 {
                     !hasPurchased && !song.isFree && (
-                        <a href="google.com" target="_blank" onClick={handlePurchase} className="text-green-600 hover:text-green-600 bg-yellow-300 p-2 text-lg my-2 rounded-md ">
+                        <button onClick={handlePurchase} className="text-green-600 text-[15px] hover:text-green-600 bg-yellow-300 py-[1px] px-1.5 md:p-2 md:text-lg my- md:block rounded-md ">
                             Buy
-                        </a>
+                        </button>
                     )
                 }
-                <div className=" text-gray-100 flex space-x-2 justify-center items-center text-[25px] md:hidden">
+                </span>
+                <div className=" text-gray-100 flex space-x-2 justify-center items-center text-25 md:hidden">
+                
                     <h1 className="text-yellow-200 hover:text-yellow-100">
                         {currentSong?.songid === song.songid && isPlaying ? (
                             <LuPause size={20} onClick={handlePlayPause} className="cursor-pointer" />
