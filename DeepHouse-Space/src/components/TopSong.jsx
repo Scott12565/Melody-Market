@@ -10,7 +10,6 @@ import { checkPurchaseContext } from "../context/downloadContext";
 import { formatCurrency } from "../utils/currencyformater";
 
 const TopSong = ({ topSong, index }) => {
-    // const { handleDownload } = useContext(SongContext);
     const { currentUser } = useContext(AuthContext);
     const { checkPurchase, hasPurchased } = useContext(checkPurchaseContext);
     const { musicItems } = useContext(cartContext);
@@ -63,9 +62,8 @@ const TopSong = ({ topSong, index }) => {
                     <p>{topSong.Artist}</p>
                 </div>
 
-                <p className="text-[#0E1411] bg-[#F9E165] cursor-pointer p-1 rounded-md">{formatCurrency(topSong?.Price)}</p>
-
                 <div className="flex justify-start items-center space-x-2">
+                    <p className="text-[#0E1411] bg-[#F9E165] cursor-pointer p-1 rounded-md">{formatCurrency(topSong?.Price)}</p>
                     <span className="">
                         {currentSong?.songid === topSong.songid && isPlaying ? (
                             <LuPause size={23} onClick={handlePlayPause} className="cursor-pointer" />

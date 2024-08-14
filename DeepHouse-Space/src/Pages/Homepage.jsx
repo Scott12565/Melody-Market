@@ -21,9 +21,13 @@ const Home = () => {
         </Helmet>
         <section className="pb-5">
             { filteredSongs?.length > 0 ? (
-                filteredSongs.map(filteredSong => (
-                    <FilteredSongs song={filteredSong} />
-                ))
+                <div className="bg-yellow-300 flex flex-wrap px-3 justify-between gap-2 py-1 md:flex-row">
+                {    filteredSongs.map(filteredSong => (
+                        <div key={filteredSong.songid} className=" ">
+                            <FilteredSongs song={filteredSong} />
+                        </div>
+                    ))}
+                </div>
             ) : (
                 <>
                     <div className="hidden lg:block">

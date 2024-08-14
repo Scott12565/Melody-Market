@@ -22,7 +22,7 @@ const SideBar = () => {
     return (
         <div
             ref={sidebarRef}
-            className={`sidebar w-[250px] md:w-[300px] lg:w-[225px] fixed top-0 left-0 z-50 h-full bg-white transition-transform duration-300 ease-in-out ${showSideBar ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:h-auto lg:flex lg:flex-col lg:items-start`}
+            className={`sidebar w-[250px] md:w-[300px] lg:w-[210px] fixed top-0 left-0 z-50 h-full bg-white transition-transform duration-300 ease-in-out ${showSideBar ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:h-auto lg:flex lg:flex-col lg:items-start`}
         >
             <div id="brand" className="w-full flex justify-between items-center py-1 my-1 pl-1.5 lg:hidden">
                 {/* Brand name */}
