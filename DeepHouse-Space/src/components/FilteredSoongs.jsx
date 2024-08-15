@@ -70,7 +70,7 @@ const FilteredSongs = ({ song }) => {
         <div className=" flex flex-wrap justify-center">
                 <div className="song-card flex w-[95%] mx-auto my-1 shadow-transparent pt-2 transition-transform ease-in-out duration-500 transform border-b hover:cursor-pointer md:flex-col md:w-[20rem] lg:w-[18.5rem] md:bg-gray-600 md:border-0 md:shadow-2xl md:rounded-lg">
                     <div className="hidden song-img w-[95] mx-auto rounded-lg relative group md:block relative px-2">
-                        <div className="absolute top-1 right-1 text-sm bg-yellow-300 text-gray-800 p-1 rounded-md">
+                        <div className="absolute top-1 right-1 text-sm text-gray-800 p-1 rounded-md">
                             {formatCurrency(song.Price)}
                         </div>
                         <img src={song?.ImgUrl} alt={`song ${song?.songid}`} className="h-full  bg-orange-400 rounded-lg" />
