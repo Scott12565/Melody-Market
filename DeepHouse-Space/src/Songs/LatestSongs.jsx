@@ -14,7 +14,7 @@ const LatestSongs = () => {
     useEffect(() => {
         const slideInterval = setInterval(() => {
             setCurrentSlide(prevSlide => (prevSlide + 1) % latestSongs.length);
-        }, 70000); // Slide every 10 seconds
+        }, 4000); // Slide every 10 seconds
 
         return () => clearInterval(slideInterval); // Clean up on unmount
     }, [latestSongs]);
