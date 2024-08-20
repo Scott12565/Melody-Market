@@ -51,7 +51,8 @@ const LatestSongs = () => {
                         <h3 className="cursor-pointer text-yellow-300 transition-transform duration-1000 ease-in-out hover:text-yellow-400 hover:scale-110">
                             <LuPlay size={35} />
                         </h3>
-                        <h3 className="cursor-pointer text-yellow-300 transition-transform duration-1000 ease-in-out hover:text-yellow-400 hover:scale-110">
+                        <h3 className="cursor-pointer text-yellow-300 transition-transform duration-1000 ease-in-out hover:text-yellow-400 hover:scale-110">+.
+                            
                             <RiPlayListLine size={35} />
                         </h3>
                         <h3 className="cursor-pointer text-yellow-300 transition-transform duration-1000 ease-in-out hover:text-yellow-400 hover:scale-110">

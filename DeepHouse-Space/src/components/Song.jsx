@@ -7,12 +7,14 @@ import { musicPlayerContext } from "../context/musicPlayerContext";
 import { checkPurchaseContext } from "../context/downloadContext";
 import { AuthContext } from "../context/firebaseContext";
 import { formatCurrency } from "../utils/currencyformater";
+import { messageContext } from "../context/messageContext";
 
 const Song = ({ song }) => {
     const { currentUser } = useContext(AuthContext);
     const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
     const { checkPurchase, purchaseSong } = useContext(checkPurchaseContext);
+    const { displayMessage } = useContext(messageContext);
     const [isInCart, setIsInCart] = useState(false);
     const [hasPurchased, setHasPurchased] = useState(false);
 
@@ -44,13 +46,13 @@ const Song = ({ song }) => {
                     const { downloadSong } = await import('../index');
                     downloadSong(downloadLink);
                 } catch (error) {
-                    console.log(error.message);
+                    displayMessage('error', error.message)
                 }
             } else {
-                alert("You need to purchase this song before downloading.");
+                displayMessage('error', 'You need to purchase this song before downloading.');
             }
         } else {
-            alert('Sign up before you can download this free track!');
+            displayMessage('error', 'Sign up before you can download this track!')
         }
     };
 
@@ -61,12 +63,12 @@ const Song = ({ song }) => {
                     await purchaseSong(song.songid);
                     setHasPurchased(true);
                 } catch (err) {
-                    console.log('Purchase unsuccessful');    
+                    displayMessage('error', 'Purchase unsuccessful, try again!')   
                 }
                 return;
             }
         } else{
-            alert('please log in before purchasing this song!');
+            displayMessage('error', 'please log in before purchasing this song!')
         }
     };
 
