@@ -31,9 +31,15 @@ const Song = ({ song }) => {
     };
 
     const handleCart = async () => {
+        if (!currentUser) {
+            displayMessage('error', 'Please log in before adding songs to the cart.');
+            return;
+        }
+        
         const { addSongToCarto, removeSongFromCart } = await import('../Pages/cart/index');
         if (!isInCart) {
             addSongToCarto(song);
+            displayMessage('success', 'Song added to cart')
         } else {
             removeSongFromCart(song.songid);
         }
@@ -45,6 +51,7 @@ const Song = ({ song }) => {
                 try {
                     const { downloadSong } = await import('../index');
                     downloadSong(downloadLink);
+                    displayMessage('success', 'download started...')
                 } catch (error) {
                     displayMessage('error', error.message)
                 }
@@ -52,7 +59,7 @@ const Song = ({ song }) => {
                 displayMessage('error', 'You need to purchase this song before downloading.');
             }
         } else {
-            displayMessage('error', 'Sign up before you can download this track!')
+            displayMessage('error', 'Sign up before downloading this track!')
         }
     };
 
@@ -62,6 +69,7 @@ const Song = ({ song }) => {
                 try {
                     await purchaseSong(song.songid);
                     setHasPurchased(true);
+                    displayMessage('success', 'Purchased Succefully!')
                 } catch (err) {
                     displayMessage('error', 'Purchase unsuccessful, try again!')   
                 }
@@ -75,6 +83,11 @@ const Song = ({ song }) => {
     return (
         <div className=" song-card flex w-[99%] mx-auto my-1 shadow-md pt-2 transition-transform ease-in-out duration-500 transform border-b cursor-pointer md:flex-col md:w-[20rem] lg:w-[18.5rem] bg-gray-600 md:border-0 md:shadow-xl md:rounded-lg">
             <div className="hidden song-img w-[95%] mx-auto rounded-lg relative group md:block relative">
+                <div className="absolute top-1 left-1 text-sm bg-yellow-300 text-gray-600 p-1 rounded-sm">
+                    {
+                        song.isFree ? 'Free' : 'Exclusive'
+                    }
+                </div>
                 <div className="absolute top-1 right-1 text-sm bg-yellow-300 text-gray-600 p-1 rounded-sm">
                     {formatCurrency(song.Price)}
                 </div>
@@ -136,7 +149,7 @@ const Song = ({ song }) => {
                         )}
                     </h1>
                     <h1>
-                        <MdOutlineFileDownload size={22} onClick={() => handleDownload(song.SongUrl)} />
+                        <MdOutlineFileDownload className="cursor-pointer" size={22} onClick={() => handleDownload(song.SongUrl)} />
                     </h1>
                 </div>
             </div>

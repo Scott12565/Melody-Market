@@ -39,7 +39,6 @@ const CheckPurchaseProvider = ({children}) => {
                     purchasedSongs: arrayUnion(songid)
                 });
                 setPurchasedSongs(prev => [...prev, songid]);
-                alert('Song purchased successfully');
             } catch (err) {
                 console.log(err.message);
             }

@@ -7,12 +7,14 @@ import { musicPlayerContext } from "../context/musicPlayerContext";
 import { checkPurchaseContext } from "../context/downloadContext";
 import { AuthContext } from "../context/firebaseContext";
 import { formatCurrency } from "../utils/currencyformater";
+import { messageContext } from "../context/messageContext";
 
 const FilteredSongs = ({ song }) => {
     const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
     const { currentUser } = useContext(AuthContext);
     const { checkPurchase, purchaseSong } = useContext(checkPurchaseContext);
+    const { displayMessage } = useContext(messageContext)
     const [hasPurchased, setHasPurchased] = useState(false);
 
     const isInCart = (song) => {
@@ -43,28 +45,32 @@ const FilteredSongs = ({ song }) => {
                     const { downloadSong } = await import('../index');
                     downloadSong(downloadLink);
                 } catch (error) {
-                    console.log(error.message);
+                    displayMessage('error', error.message)
                 }
             } else {
-                alert("You need to purchase this song before downloading.");
+                displayMessage('error', 'You need to purchase this song before downloading.');
             }
         } else {
-            alert('Sign up before you can download this free track!');
+            displayMessage('error', 'Sign up before you can download this track!')
         }
     };
 
     const handlePurchase = async () => {
-        if (!hasPurchased && !song.isFree) {
-            try {
-                await purchaseSong(song.songid);
-                setHasPurchased(true);
-            } catch (err) {
-                alert(err.message);
+        if(currentUser){
+            if (!hasPurchased && !song.isFree) {
+                try {
+                    await purchaseSong(song.songid);
+                    setHasPurchased(true);
+                } catch (err) {
+                    displayMessage('error', 'Purchase unsuccessful, try again!')   
+                }
+                return;
             }
-        } else {
-            console.log('Purchase unsuccessful');
+        } else{
+            displayMessage('error', 'please log in before purchasing this song!')
         }
     };
+
 
     return (
         <div className=" flex flex-wrap justify-center">

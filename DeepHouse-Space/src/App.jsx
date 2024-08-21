@@ -13,6 +13,7 @@ import { AuthContext } from "./context/firebaseContext";
 import CheckPurchaseProvider from "./context/downloadContext";
 import MessageProvider from "./context/messageContext";
 import Messages from "./components/Message";
+import EmailVerification from "./UserAccounts/EmailVerification";
 
 const Home = lazy(() => import("./Pages/Homepage"));
 const SignIn = lazy(() => import("./UserAccounts/SignIn"));
@@ -51,7 +52,9 @@ function App() {
                             <Route path="/" exact>
                               <Home />
                             </Route>
-                            <ProtectedRoutes path="/allsongs" component={AllSongs} currentUser={currentUser} />
+                            <Route path="/allsongs" >
+                              <AllSongs />
+                            </Route>
                             <ProtectedRoutes path="/collection" component={Collections} currentUser={currentUser} />
                             <ProtectedRoutes path="/playlist" component={PlayList} currentUser={currentUser} />
                             <Route path="/signin">
@@ -60,6 +63,7 @@ function App() {
                             <Route path="/signup">
                               <SignUp />
                             </Route>
+                            <Route path="/verify-email" component={EmailVerification} />
                             <Route path="/resetpassword">
                               <PasswordReset />
                             </Route>

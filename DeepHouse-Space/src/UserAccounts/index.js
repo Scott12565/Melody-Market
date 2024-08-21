@@ -12,27 +12,39 @@ import {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
+    
+            // Send verification email
             await sendEmailVerification(user);
-            alert('Please verify your account before you continue!')
-            setCurrentUser(user);
+    
+            alert('A verification email has been sent to your inbox. Please verify your account before continuing!');
+    
+            // Optionally sign the user out if they're logged in by default
+            await signOut(auth);
         } catch (err) {
             alert(err.message);
         }
     };
+    
 
     // Sign In
-    const signIn = async (setCurrentUser, email, password) => {
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password)
-            const user = userCredential.user;
-            if(!user.emailVerified){
-                setCurrentUser(user);
-                alert('Please verify your email');
-            }
-        } catch (err) {
-            console.log('Invalid Email or Password');
+    // Sign In
+const signIn = async (setCurrentUser, email, password) => {
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        if (!user.emailVerified) {
+            setCurrentUser(null); // Clear the user if not verified
+            throw new Error('Please verify your email before signing in.');
         }
-    };
+
+        setCurrentUser(user);
+    } catch (err) {
+        throw new Error(err.message);
+    }
+};
+
+    
 
     // Sign Out
     const userSignOut = async (setCurrentUser) => {

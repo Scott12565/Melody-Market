@@ -33,7 +33,7 @@ const Home = () => {
                     <div className="hidden lg:block">
                         <LatestSongs />
                     </div>
-                    <div>
+                    <div >
                         <AllSongs />
                     </div>
                 </>

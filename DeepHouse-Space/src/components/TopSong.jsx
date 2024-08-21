@@ -7,6 +7,7 @@ import { musicPlayerContext } from "../context/musicPlayerContext";
 import { SongContext } from "../context/songContext";
 import { AuthContext } from "../context/firebaseContext";
 import { checkPurchaseContext } from "../context/downloadContext";
+import { messageContext } from "../context/messageContext";
 import { formatCurrency } from "../utils/currencyformater";
 
 const TopSong = ({ topSong, index }) => {
@@ -14,6 +15,7 @@ const TopSong = ({ topSong, index }) => {
     const { checkPurchase, hasPurchased } = useContext(checkPurchaseContext);
     const { musicItems } = useContext(cartContext);
     const { currentSong, playPause, isPlaying} = useContext(musicPlayerContext);
+    const { displayMessage } = useContext(messageContext)
     const [isInCart, setIsInCart] = useState(false);
 
     useEffect(() => {
@@ -25,6 +27,11 @@ const TopSong = ({ topSong, index }) => {
     };
 
     const handleCart = async (song) => {
+        if (!currentUser) {
+            displayMessage('error', 'Please log in before adding songs to the cart.');
+            return;
+        }
+
         const { addSongToCarto, removeSongFromCart } = await import('../Pages/cart/index');
         if (!isInCart) {
             addSongToCarto(song);
@@ -38,17 +45,21 @@ const TopSong = ({ topSong, index }) => {
     }, [currentUser, topSong.songid])
 
     const handleDownload = async (downloadLink) => {
-        if(currentUser) {
-            if(hasPurchased || topSong.isFree){
+        if (currentUser) {
+            if (hasPurchased || song.isFree) {
                 try {
                     const { downloadSong } = await import('../index');
                     downloadSong(downloadLink);
-                } catch (err) {
-                    console.log(err.message);
+                } catch (error) {
+                    displayMessage('error', error.message);
                 }
+            } else {
+                displayMessage('error', 'You need to purchase this song before downloading.');
             }
+        } else {
+            displayMessage('error', 'Sign up before downloading this track!')
         }
-    }
+    };
 
     return (
         <div className="flex flex-1 justify-start items-center w-[97%] mx-auto space-x-3.5 text-gray-300 border-b py-2 md:w-[90%]">
@@ -78,7 +89,7 @@ const TopSong = ({ topSong, index }) => {
                             <BsCart3 size={23} onClick={() => handleCart(topSong)} className="cursor-pointer text-[#F9E165] " />
                         )}
                     </span>
-                    <span className="text-[#F9E165]" onClick={() => handleDownload(topSong.SongUrl)} >
+                    <span className="text-[#F9E165] cursor-pointer" onClick={() => handleDownload(topSong.SongUrl)} >
                         <MdOutlineFileDownload size={23} />
                     </span>
                 </div>

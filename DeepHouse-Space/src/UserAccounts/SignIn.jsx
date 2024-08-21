@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/firebaseContext";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
 import Loader from "../components/Loaders";
 import { Helmet } from "react-helmet-async";
 import { IoCloseOutline } from "react-icons/io5";
@@ -12,10 +12,18 @@ const SignIn = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const successMessage = queryParams.get('verified') === 'true' ? 'Your email has been verified. Please sign in.' : '';
+
+    useEffect(() => {
+        if (currentUser) {
+            history.push('/'); // Redirect to home page if already signed in
+        }
+    }, [currentUser, history]);
 
     const handleSignIn = async (e) => {
         e.preventDefault();
-        
         setLoading(true);
     
         try {
@@ -24,7 +32,7 @@ const SignIn = () => {
             await signIn(setCurrentUser, email, password);
         } catch (error) {
             console.log(error);
-            setErrorMessage("Failed to sign in. Please check your credentials and try again.");
+            setErrorMessage(error.message || "Failed to sign in. Please check your credentials and try again.");
         } finally {
             setLoading(false);
         }
@@ -38,12 +46,7 @@ const SignIn = () => {
         <>
             <Helmet>
                 <title>DeepHouse Space - Sign In</title>
-                <meta name="description" content="Sign in to DeepHouse Space to purchase your favorite deep house tracks. Secure and easy login for music enthusiasts!" />
-                <meta name="keywords" content="deep house music, deephouse space, login, sign in, deep house space, music store" />
-                <meta property="og:title" content="DeepHouse Space - Sign In" />
-                <meta property="og:description" content="Sign in to DeepHouse Space to purchase your favorite deep house tracks. Secure and easy login for music enthusiasts." />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://deephousespace.web.app/signin" />
+                <meta name="description" content="Sign in to DeepHouse Space to purchase your favorite deep house tracks." />
             </Helmet>
             {loading && <Loader />}
             <div className="flex flex-col fixed top-20 left-0 z-[110] bg-gray-800 opacity-95 w-full h-screen overflow-y-hidden overscroll-y-none">
@@ -53,8 +56,15 @@ const SignIn = () => {
                         <IoCloseOutline size={30} onClick={handleClose} className="text-white cursor-pointer" />
                     </div>
                     <form className="form-control w-[90%] mx-auto my-3 mb-0 px-4 py-3 pb-1" onSubmit={handleSignIn}>
-                        {error && (
-                            <div className="text-red-400 text-[1rem] py-[1px] w-[98%] mx-auto my-1">{error}</div>
+                        {errorMessage && (
+                            <div className="text-red-400 text-[1rem] py-[1px] w-[98%] mx-auto my-1">
+                                {errorMessage}
+                            </div>
+                        )}
+                        {successMessage && (
+                            <div className="text-green-400 text-[1rem] py-[1px] w-[98%] mx-auto my-1">
+                                {successMessage}
+                            </div>
                         )}
                         <label htmlFor="email">Email</label>
                         <input 
@@ -75,9 +85,10 @@ const SignIn = () => {
                             onChange={e => setPassword(e.target.value)}
                         />
                         <Link to="/resetpassword" className="block text-end text-blue-600 py-3 pt-0 text-lg hover:underline">Forgot password?</Link>
-                        <button className="btn cursor-pointer hover:bg-gray-500 hover:text-gray-100 font-semibold mb-2">Sign In</button>
+                        <button className="btn cursor-pointer hover:bg-gray-500 hover:text-gray-100 font-semibold mb-2">
+                            Sign In
+                        </button>
                     </form>
-                    {currentUser && <Redirect to="/" />}
                     <p className="text-gray-300 text-center text-[16px] py-2 pb-4">
                         Don't have an account? 
                         <Link to="/signup" className="text-blue-500 hover:underline"> Sign Up</Link>
