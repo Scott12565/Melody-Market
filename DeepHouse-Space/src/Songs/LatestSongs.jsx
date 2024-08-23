@@ -22,19 +22,25 @@ const LatestSongs = () => {
     const { playlist } = useContext(playlistContext);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [song, setSong] = useState(null);
+    const [playlistState, setPlaylistState] = useState({}); // Object to track each song's playlist status
     const [isInCart, setIsInCart] = useState(false);
 
     useEffect(() => {
-        setIsInCart(musicItems?.some(songItem => songItem.songid === song?.songid) )
+        setIsInCart(musicItems?.some(songItem => songItem.songid === song?.songid));
     }, [musicItems, song?.songid]);
 
-    useEffect(() => {
-        const slideInterval = setInterval(() => {
-            setCurrentSlide(prevSlide => (prevSlide + 1) % latestSongs.length);
-        }, 4000); // Slide every 10 seconds
+    // Function to check if a song is in the playlist and update the state for the specific song
+    const checkIfInPlaylist = (song) => {
+        setPlaylistState((prevState) => ({
+            ...prevState,
+            [song.songid]: playlist.some(playlistSong => playlistSong.songid === song.songid),
+        }));
+    };
 
-        return () => clearInterval(slideInterval); // Clean up on unmount
-    }, [latestSongs]);
+    // On initial load, check the playlist status for all songs
+    useEffect(() => {
+        latestSongs.forEach(checkIfInPlaylist);
+    }, [latestSongs, playlist]);
 
     const handleNext = () => {
         setCurrentSlide((prevSlide) => (prevSlide + 1) % latestSongs.length);
@@ -54,7 +60,7 @@ const LatestSongs = () => {
         const { addSongToCarto, removeSongFromCart } = await import('../Pages/cart/index');
         if (!isInCart) {
             addSongToCarto(song);
-            displayMessage('success', 'Song added to cart')
+            displayMessage('success', 'Song added to cart');
         } else {
             removeSongFromCart(song.songid);
         }
@@ -64,27 +70,26 @@ const LatestSongs = () => {
         playPause(song);
     };
 
-    const isSongInPlaylist = (songId) => {
-        return playlist.some(song => song.songid === songId);
+    const handlePlaylist = async (song) => {
+        try {
+            const { addToPlayList, removeFromPlayList } = await import('../Pages/playlist/index');
+            if (playlistState[song.songid]) {
+                await removeFromPlayList(song.songid);
+                displayMessage('success', 'Song removed from playlist');
+            } else {
+                await addToPlayList(song);
+                displayMessage('success', 'Song added to playlist');
+            }
+
+            // Update the playlist state for the specific song
+            setPlaylistState((prevState) => ({
+                ...prevState,
+                [song.songid]: !playlistState[song.songid],
+            }));
+        } catch (err) {
+            console.log('Failed to add song to playlist! please try again.');
+        }
     };
-
-    const handleAddToPlayList = async (song) => {
-        try {
-            const { addToPlayList } = await import('../Pages/playlist/index')
-            addToPlayList(song)
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-
-    const handleRemoveFromPlayList = async (songid) => {
-        try {
-            const { removeFromPlayList } = await import("../Pages/playlist/index");
-            removeFromPlayList(songid)
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
 
     return ( 
         <>
@@ -126,17 +131,14 @@ const LatestSongs = () => {
                                             <LuPause size={35} onClick={() => handlePlayPause(song)} />
                                         ) : (
                                             <LuPlay size={35} onClick={() => handlePlayPause(song)} />
-                                        )
-                                    }
+                                        )}
                                     </h3>
                                     <h3 className="cursor-pointer text-yellow-300 transition-transform duration-1000 ease-in-out hover:text-yellow-400 hover:scale-110">
-                                        {
-                                            isSongInPlaylist(song.songid) ? (
-                                                <MdPlaylistRemove size={23} onClick={() => handleRemoveFromPlayList(song.songid)} className="text-red-600" />
-                                            ) : (
-                                                <MdPlaylistAdd size={23} onClick={() => handleAddToPlayList(song)} className="text-yellow-200 hover:text-yellow-100" />
-                                            )
-                                        }
+                                        {playlistState[song.songid] ? (
+                                            <MdPlaylistRemove size={35} onClick={() => handlePlaylist(song)} className="text-red-600" />
+                                        ) : (
+                                            <MdPlaylistAdd size={35} onClick={() => handlePlaylist(song)} className="text-yellow-200 hover:text-yellow-100" />
+                                        )}
                                     </h3>
                                     <h3 className="cursor-pointer text-yellow-300 transition-transform duration-1000 ease-in-out hover:text-yellow-400 hover:scale-110">
                                         {isInCart ? (

@@ -13,6 +13,15 @@ const CartPage = ({ song, index }) => {
         playPause(song);
     };
 
+    const handleRemoveFromCart = async (songid) => {
+        try {
+            const { removeSongFromCart } = await import('../cart/index');
+            removeSongFromCart(songid)
+        } catch (err) {
+            console.log(arr.message);
+        }
+    }
+
     const isSongInPlaylist = (songId) => {
         return playlist.some(song => song.songid === songId);
     };
@@ -74,7 +83,7 @@ const CartPage = ({ song, index }) => {
                                         <LuPlay size={26} onClick={() => handlePlayPause(song)} className="cursor-pointer" />
                                     )}
                                 </h1>
-                                <h1 className="cursor-pointer" onClick={() => handleRemoveFromPlayList(song.songid)}>
+                                <h1 className="cursor-pointer" onClick={() => handleRemoveFromCart(song.songid)}>
                                     <MdDeleteSweep size={23} className="text-red-600" />
                                 </h1>
                             </div>

@@ -5,10 +5,12 @@ import { musicPlayerContext } from "../../context/musicPlayerContext";
 import { playlistContext } from "../../context/PlayListContext";
 import { Helmet } from "react-helmet-async";
 import { formatCurrency } from "../../utils/currencyformater";
+import { messageContext } from "../../context/messageContext";
 
 const PlayList = () => {
     const { playlist } = useContext(playlistContext);
     const { currentSong, playPause, isPlaying } = useContext(musicPlayerContext);
+    const { displayMessage } = useContext(messageContext);
 
     const handlePlayPause = (song) => {
         playPause(song);
@@ -19,8 +21,9 @@ const PlayList = () => {
             // Adjust the path to the correct relative path
             const { removeFromPlayList } = await import('./index');
             removeFromPlayList(songid);
+            displayMessage('success', 'Song removed from playlist');
         } catch (err) {
-            console.log(err.message);
+            console.log('Failed to romeve song from playlist! please try agin.');
         }
     }
 
