@@ -23,6 +23,7 @@ const AllSongs = lazy(() => import("./Songs/AllSongs"));
 const TopSongs = lazy(() => import("./Songs/TopSongs"));
 const PlayList = lazy(() => import("./Pages/playlist/PlayList"));
 const Collections = lazy(() => import("./Pages/Colections"));
+const CheckoutPage = lazy(() => import("./Pages/CheckoutPage"))
 // const Messages = lazy(() => import("./components/Message"));
 
 function App() {
@@ -54,6 +55,9 @@ function App() {
                             </Route>
                             <Route path="/allsongs" >
                               <AllSongs />
+                            </Route>
+                            <Route path="/checkout">
+                              <CheckoutPage />
                             </Route>
                             <ProtectedRoutes path="/collection" component={Collections} currentUser={currentUser} />
                             <ProtectedRoutes path="/playlist" component={PlayList} currentUser={currentUser} />

@@ -6,6 +6,7 @@ export const cartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
     const [musicItems, setMusicItems] = useState([]);
+    const [selectedSong, setSelectedSong] = useState(null);
 
     useEffect(() => {
         const userId = auth.currentUser?.uid;
@@ -29,7 +30,7 @@ const CartContextProvider = ({ children }) => {
     };
     
     return (
-        <cartContext.Provider value={{ musicItems, calculateTotalAmount}}>
+        <cartContext.Provider value={{ musicItems, calculateTotalAmount, selectedSong, setSelectedSong}}>
             {children}
         </cartContext.Provider>
     );
