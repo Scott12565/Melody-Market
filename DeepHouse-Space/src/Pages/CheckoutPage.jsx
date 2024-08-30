@@ -1,34 +1,30 @@
 import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import Loader from "../components/Loaders";
 import { Helmet } from "react-helmet-async";
 import { IoCloseOutline } from "react-icons/io5";
 import { cartContext } from "../context/CartContext";
+import { formatCurrency } from "../utils/currencyformater";
+import Loader from "../components/Loaders";
 
 const Checkout = () => {
-    const { selectedSong } = useContext(cartContext);
+    const { selectedSong, musicItems, setSelectedSong } = useContext(cartContext); // Access selectedSong and musicItems
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const history = useHistory();
 
-    console.log(selectedSong)
     useEffect(() => {
-        if (!selectedSong || selectedSong.length === 0) {
-            console.log(selectedSong)
-            // history.push('/'); // Redirect if no songs are selected
+        // Redirect if no song is selected and the cart is empty
+        if (!selectedSong && musicItems.length === 0) {
+            history.push('/');
         }
-    }, [selectedSong, history]);
+    }, [selectedSong, musicItems, history]);
 
     const handleProceedToPay = async () => {
-        // setLoading(true);
+        setLoading(true);
         try {
-            // Implement logic to redirect to PayGate checkout form here.
-            // Example: Redirect to PayGate with necessary parameters.
-            const redirectUrl = `https://google.com`;
+            const redirectUrl = `https://google.com`; // Replace with actual payment URL
             window.location.href = redirectUrl;
-            // Redirect to PayGate checkout page or open it in a new tab
         } catch (error) {
-            console.log(error);
             setErrorMessage("Failed to proceed with payment. Please try again.");
         } finally {
             setLoading(false);
@@ -36,7 +32,12 @@ const Checkout = () => {
     };
 
     const handleCancel = () => {
-        history.push('/'); // Redirect to home page
+        if(selectedSong){
+            setSelectedSong(null)
+            history.push('/')
+        } else {
+            history.push('/');
+        } // Redirect to home page
     };
 
     return (
@@ -45,35 +46,57 @@ const Checkout = () => {
                 <title>DeepHouse Space - Confirm Purchase</title>
                 <meta name="description" content="Review your selected songs before proceeding to payment." />
             </Helmet>
-    
-            <div className="flex flex-col fixed top-20 left-0 z-[110] bg-gray-800 opacity-95 w-full h-screen overflow-y-hidden overscroll-y-none">
-                <div className="form-group bg-black shadow-lg rounded-2xl w-[95%] mt-12 mx-auto md:w-[65%] lg:w-[35%] md:mt-14 lg:mt-24">
-                    <div className="flex justify-between items-center px-6 py-3">
+
+            <div className="fixed top-20 left-0 z-[110] bg-gray-800 opacity-95 w-full h-screen overflow-y-hidden overscroll-y-none">
+                <div className="w-[95%] mt-12 mx-auto md:w-[80%] lg:w-[60%] bg-black shadow-lg rounded-lg p-5">
+                    <div className="flex justify-between items-center">
                         <h1 className="text-2xl font-semibold text-gray-300">Confirm Your Purchase</h1>
                         <IoCloseOutline size={30} onClick={handleCancel} className="text-white cursor-pointer" />
                     </div>
-                    <div className="form-control w-[90%] mx-auto my-3 mb-0 px-4 py-3 pb-1">
-                        {errorMessage && (
-                            <div className="text-red-400 text-[1rem] py-[1px] w-[98%] mx-auto my-1">
-                                {errorMessage}
+
+                    {errorMessage && (
+                        <div className="text-red-400 text-sm py-2">
+                            {errorMessage}
+                        </div>
+                    )}
+
+                    <h2 className="text-lg font-semibold text-gray-300 mt-4">Selected Songs</h2>
+                    <ul className="space-y-4 my-4">
+                        {selectedSong ? (
+                            // If selectedSong is defined, show it
+                            <div className="flex justify-between items-center bg-blue-20 p-4 text-gray-300 border-b transition-all transform hover:scale-100">
+                                <img src={selectedSong?.ImgUrl} alt={`Cover of ${selectedSong?.SongTitle}`} className="w-[80px] h-[80px] rounded-sm" />
+                                <div className="flex-1 ml-4">
+                                    <h3 className="text-lg">{selectedSong?.SongTitle}</h3>
+                                    <p className="text-sm text-gray-400">{selectedSong?.Artist}</p>
+                                </div>
+                                <div className="text-lg">
+                                    {formatCurrency(selectedSong?.Price)}
+                                </div>
                             </div>
+                        ) : (
+                            // If no selectedSong, show cart items
+                            musicItems.map((song) => (
+                                <div key={song.id} className="flex justify-between items-center bg-blue-20 p-4 text-gray-300 border-b transition-all transform hover:scale-100">
+                                    <img src={song?.ImgUrl} alt={`Cover of ${song?.SongTitle}`} className="w-[80px] h-[80px] rounded-sm" />
+                                    <div className="flex-1 ml-4">
+                                        <h3 className="text-lg">{song?.SongTitle}</h3>
+                                        <p className="text-sm text-gray-400">{song?.Artist}</p>
+                                    </div>
+                                    <div className="text-lg">
+                                        {formatCurrency(song?.Price)}
+                                    </div>
+                                </div>
+                            ))
                         )}
+                    </ul>
 
-                        <h2 className="text-lg font-semibold text-gray-300 mb-4">Selected Songs</h2>
-                        <ul className="list-disc pl-5 mb-4">
-                            
-                                <li className="text-gray-300 mb-2">
-                                    {selectedSong?.SongTitle} - ${selectedSong?.Price}
-                                </li>
-                        </ul>
-
-                        <button 
-                            onClick={handleProceedToPay}
-                            className="btn cursor-pointer hover:bg-gray-500 hover:text-gray-100 font-semibold mt-4"
-                        >
-                            Proceed to Pay
-                        </button>
-                    </div>
+                    <button 
+                        onClick={handleProceedToPay}
+                        className="w-full bg-yellow-500 text-black p-3 rounded-md font-semibold mt-4 hover:bg-yellow-600"
+                    >
+                        {loading ? <Loader /> : "Proceed to Pay"}
+                    </button>
                 </div>
             </div>
         </>

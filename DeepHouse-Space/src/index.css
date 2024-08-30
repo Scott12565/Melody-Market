@@ -16,6 +16,7 @@ body{
 .sidebar{
     background: #F9E165;
     color: #0E1411;
+    z-index: 500;
     
 }
 

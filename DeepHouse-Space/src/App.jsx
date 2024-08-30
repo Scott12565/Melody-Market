@@ -43,7 +43,7 @@ function App() {
                     <Messages />
                     <Navbar />
                     <div className="flex flex-1 h-[calc(100vh - 80px)] gap-5">
-                      <div className={`sidebar fixed top-0 left-0 z-50 h-full transition-all duration-200 ease-in-out transform ${showSideBar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} lg:static lg:h-[auto]`}>
+                      <div className={`sidebar fixed top-0 left-0 z-[100] h-full transition-all duration-200 ease-in-out transform ${showSideBar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} lg:static lg:h-[auto]`}>
                         <SideBar />
                       </div>
 

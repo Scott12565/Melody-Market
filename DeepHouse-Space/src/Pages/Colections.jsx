@@ -3,9 +3,14 @@ import { cartContext } from "../context/CartContext";
 import CartPage from "./cart/CartPage";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 const Collections = () => {
     const { musicItems } = useContext(cartContext);
+    const history = useHistory();
+    const handleCartCheckout = () => {
+        history.push('/checkout');  
+    };
     return ( 
         <>
             <Helmet >
@@ -22,7 +27,7 @@ const Collections = () => {
                 <div className="text-gray-300 text-lg font-medium my-1 mx-4 p-2 md:my-9 flex justify-between items-center md:text-xl lg:my-5 lg:mx-5">
                     <h3 className="text-xl md:text-2xl lg:text-3xl">Collction Cart</h3>
                     <Link to="/checkout" className="transition-all duration-300 transform scale-95 text-lg text-gray-900 bg-gray-300 rounded-md py-1.5 px-2 hover:bg-slate-400 hover:scale-100 md:text-[1.4rem]">
-                        <button>CheckOut</button>
+                        <button onClick={handleCartCheckout}>CheckOut</button>
                     </Link>
                 </div>
                 <div className="flex flex-col justify-start items-start w-[100%] mx-auto py-1.5 gap-y-5 border-l lg:border-none">
