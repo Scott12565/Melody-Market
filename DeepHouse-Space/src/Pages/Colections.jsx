@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom";
 const Collections = () => {
     const { musicItems } = useContext(cartContext);
     const history = useHistory();
+    
     const handleCartCheckout = () => {
         history.push('/checkout');  
     };
